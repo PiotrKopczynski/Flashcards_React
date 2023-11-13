@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.EntityFrameworkCore;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("AuthDbContextConnection") ?? throw new InvalidOperationException("Connection string 'AuthDbContextConnection' not found.");
@@ -35,6 +36,11 @@ builder.Services.AddAuthentication(options =>
         };
     });
 
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false) // Register the Identity services.
+    .AddEntityFrameworkStores<AuthDbContext>();
+
+builder.Services.Configure<DataProtectionTokenProviderOptions>(o => o.TokenLifespan = TimeSpan.FromDays(1));
+
 builder.Services.AddControllers();
 //builder.Services.AddEndpointsApiExplorer(); maybe needed
 
@@ -42,6 +48,10 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<IDeckRepository, DeckRepository>();
 builder.Services.AddScoped<IFlashcardRepository, FlashcardRepository>();
 
+/*builder.Services.AddCors(options => options.AddPolicy("Frontend", policy =>
+{
+    policy.WithOrigins("https://localhost:44424/").AllowAnyMethod().AllowAnyHeader();
+}));*/
 
 var app = builder.Build();
 
@@ -64,6 +74,7 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+//app.UseCors("FrontEnd");
 
 app.MapControllerRoute(
     name: "default",
