@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Flashcards_React.Controllers
 {
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
@@ -21,7 +20,9 @@ namespace Flashcards_React.Controllers
             _logger = logger;
         }
 
+        [Authorize]
         [HttpGet]
+        [Route("Get")]
         public IEnumerable<WeatherForecast> Get()
         {
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast

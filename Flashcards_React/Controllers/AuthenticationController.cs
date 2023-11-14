@@ -11,6 +11,7 @@ using System.Security.Claims;
 using System.Text.Encodings.Web;
 using System.Net.Mail;
 using System.Net;
+using Flashcards_React.DAL;
 
 namespace Flashcards_React.Controllers
 {
@@ -21,12 +22,17 @@ namespace Flashcards_React.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IConfiguration _configuration;
         private readonly ILogger<AuthenticationController> _logger;
+        private readonly IRefreshTokenRepository _refreshTokenRepository;
+        private readonly TokenValidationParameters _tokenValidationParameters;
 
-        public AuthenticationController(UserManager<IdentityUser> userManager, IConfiguration configuration, ILogger<AuthenticationController> logger)
+        public AuthenticationController(UserManager<IdentityUser> userManager, IConfiguration configuration,
+            ILogger<AuthenticationController> logger, IRefreshTokenRepository refreshTokenRepository, TokenValidationParameters tokenValidationParameters)
         {
             _userManager = userManager;
             _configuration = configuration;
             _logger = logger;
+            _refreshTokenRepository = refreshTokenRepository;
+            _tokenValidationParameters = tokenValidationParameters;
         }
 
         [HttpPost]
@@ -55,7 +61,7 @@ namespace Flashcards_React.Controllers
                 var newFlashcardsUser = new IdentityUser()
                 {
                     Email = registerDTO.Email,
-                    UserName = registerDTO.Email,
+                    UserName = registerDTO.UserName,
                     EmailConfirmed = false
                 };
 
@@ -63,23 +69,11 @@ namespace Flashcards_React.Controllers
 
                 if (created.Succeeded)
                 {
-                    // Generate a token.
-                    /*var token = GenerateJwtToken(newFlashcardsUser); 
-                    return Ok(new AuthResult()
-                    {
-                        Result = true,
-                        Token = token
-                    });*/
-
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(newFlashcardsUser);
 
                     var callbackUrl = Request.Scheme + "://" + Request.Host + Url.Action("ConfirmEmail", "Authentication", new { flashcardsUserId = newFlashcardsUser.Id, code = code});
 
-                    /*var callbackUrl = Url.Page(
-                        "/api/Authentication/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { userId = newFlashcardsUser, code = code },
-                        protocol: Request.Scheme);*/
+                    //callbackUrl = HtmlEncoder.Default.Encode(callbackUrl); DECODING OF THIS DOES NOT WORK FOR SOME REASON.
 
                     var emailBody = $"Please confirm your account by <a href='{callbackUrl}'>clicking here</a>.";
 
@@ -197,13 +191,9 @@ namespace Flashcards_React.Controllers
                     });
                 }
 
-                var jwtToken = GenerateJwtToken(existingFlashcardsUser);
+                var jwtToken = await GenerateJwtToken(existingFlashcardsUser);
 
-                return Ok(new AuthResult()
-                {
-                    Token = jwtToken,
-                    Result = true
-                });
+                return Ok(jwtToken);
             }
 
             _logger.LogError("[AuthenticationController] User login failed for the payload: {loginDTO}", loginDTO);
@@ -217,13 +207,171 @@ namespace Flashcards_React.Controllers
             });
         }
 
-        private string GenerateJwtToken(IdentityUser flashcardsUser)
+        [Route("RefreshToken")]
+        [HttpPost]
+        public async Task<IActionResult> RefreshToken([FromBody] TokenRequestDTO tokenRequestDTO)
+        {
+            if(ModelState.IsValid)
+            {
+                var result = await VerifyAndGenerateToken(tokenRequestDTO);
+
+                if (result == null)
+                {
+                    return BadRequest(new AuthResult()
+                    {
+                        Result = false,
+                        Errors = new List<string>()
+                        {
+                            "Invalid tokens"
+                        }
+                    });
+                }
+                return Ok(result);
+            }
+
+            return BadRequest(new AuthResult()
+            {
+                Result = false,
+                Errors = new List<string>()
+                {
+                    "Invalid parameters"
+                }
+            });
+        }
+
+        private async Task<AuthResult?> VerifyAndGenerateToken(TokenRequestDTO tokenRequestDTO)
         {
             var jwtTokenHandler = new JwtSecurityTokenHandler();
 
-            //var key = Encoding.UTF8.GetBytes(_configuration.GetSection("JwtService:Secret").Value); // Get the secret key as an array of bytes
+            var invalidTokensResult = new AuthResult() // Declare this as a variable to reduce repeating code.
+            {
+                Result = false,
+                Errors = new List<string>()
+                        {
+                            "Invalid tokens"
+                        }
+            };
+            var expiredTokensResult = new AuthResult() // Declare this as a variable to reduce repeating code.
+            {
+                Result = false,
+                Errors = new List<string>()
+                        {
+                            "Expired token"
+                        }
+            };
 
-            var key = Encoding.UTF8.GetBytes(_configuration["JwtConfig:Secret"]);
+            try
+            {
+                _tokenValidationParameters.ValidateLifetime = false; // For testing
+
+                var tokenInVerification = jwtTokenHandler.ValidateToken(tokenRequestDTO.Token, _tokenValidationParameters, out var validatedToken);
+
+
+                if (validatedToken is JwtSecurityToken jwtSecurityToken)
+                {
+                    // Check if the token use the same encryption algorithm.
+                    var result = jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha512, StringComparison.InvariantCultureIgnoreCase);
+
+                    if (!result)
+                    {
+                        return null;
+                    }
+                }
+
+                
+
+                /* YOU DO NOT NEED TO CHECK THE EXPIRE DATE ON THE JWT TOKEN, INSTEAD YOU CHECK IF THE REFRESH TOKEN IS EXPIRED DOWN BELOW.
+                // In the case that the JwtToken has not expirad maybe can return that a refresh is not needed.
+                var utcExpiryDate = long.Parse(tokenInVerification.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Exp).Value);
+
+
+                var expiryDate = UnixTimeStampToDateTime(utcExpiryDate);
+
+                if (expiryDate < DateTime.UtcNow) // Check if the token is expired.
+                {
+                    return expiredTokensResult;
+                }*/
+
+                var storedToken = await _refreshTokenRepository.FindByToken(tokenRequestDTO);
+
+
+                if (storedToken == null)
+                {
+                    return invalidTokensResult;
+                }
+                if (storedToken.IsUsed) {
+                    return invalidTokensResult;
+                }
+                if (storedToken.IsRevoked)
+                {
+                    return invalidTokensResult;
+                }
+
+                string? jti = null;
+                var jtiClaim = tokenInVerification.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Jti);
+
+                if (jtiClaim != null) // If check to avoid null reference when calling .Value
+                {
+                    jti = jtiClaim.Value;
+                }
+                else
+                {
+                    return invalidTokensResult;
+                }
+
+                if(storedToken.JwtId != jti)
+                {
+                    return invalidTokensResult;
+                }
+                if(storedToken.ExpiryDate < DateTime.UtcNow)
+                {
+                    return expiredTokensResult;
+                }
+
+                storedToken.IsUsed = true;
+                await _refreshTokenRepository.Update(storedToken);
+
+                var tokenOwner = await _userManager.FindByIdAsync(storedToken.FlashcardsUserId);
+                if (tokenOwner == null)
+                {
+                    return new AuthResult()
+                    {
+                        Result = false,
+                        Errors = new List<string>()
+                {
+                    "Token owner was not found"
+                }
+                    };
+                }
+                return await GenerateJwtToken(tokenOwner);
+            }
+            catch (Exception)
+            {
+                return new AuthResult()
+                {
+                    Result = false,
+                    Errors = new List<string>()
+                {
+                    "Server error"
+                }
+                };
+            }
+        }
+
+        /* THIS FUNCTION IS POSSIBLY NOT NEEDED.
+        private static DateTime UnixTimeStampToDateTime(long unixTimeStamp)
+        {
+            var dateTimeVal = new DateTime(1970, 1, 1, 0, 0 ,0, 0, DateTimeKind.Utc); // UTC is every single second from 1 january 1970.
+            return dateTimeVal.AddSeconds(unixTimeStamp).ToUniversalTime();
+        }*/
+
+
+        private async Task<AuthResult> GenerateJwtToken(IdentityUser flashcardsUser)
+            // This function creates a new JWT token and a RefreshToken for the flashcardsUser.
+        {
+            var jwtTokenHandler = new JwtSecurityTokenHandler();
+
+            var key = Encoding.UTF8.GetBytes(_configuration["JwtConfig:Secret"] ?? ""); // Get the secret key as an array of bytes
 
             var tokenDescriptor = new SecurityTokenDescriptor() // Token descriptor that allows configure what the payload data of the jwt token will be.
             {
@@ -235,15 +383,43 @@ namespace Flashcards_React.Controllers
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()), // Unique token reference.
                     new Claim(JwtRegisteredClaimNames.Iat, DateTime.Now.ToUniversalTime().ToString()), // Creates a unique id that will be specific for the token and the user.
                 }),
-
-                Expires = DateTime.Now.AddHours(1), // The token is valid for 1 hour.
+                
+                Expires = DateTime.UtcNow.Add(TimeSpan.Parse(_configuration["JwtConfig:ExpiryTimeFrame"] ?? "00:01:00")), // Check the JwtConfig:ExpiryTimeFrame in appsettings.
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha512) // The credentials use our secret key and the HMAC-Sha256 Algorithm for encryption.
             };
 
             // Create the actual token using the token descriptor.
             var token = jwtTokenHandler.CreateToken(tokenDescriptor);
-            return jwtTokenHandler.WriteToken(token); // Writes the token to a string.
+            var jwtToken = jwtTokenHandler.WriteToken(token); // Writes the token to a string.
+
+            var refreshToken = new RefreshToken()
+            {
+                JwtId = token.Id,
+                Token = RandomStringGeneration(20), // Generate Refresh Token using 20 random characters.
+                AddedDate = DateTime.UtcNow,
+                ExpiryDate = DateTime.UtcNow.AddMonths(6),
+                IsRevoked = false,
+                IsUsed = false,
+                FlashcardsUserId = flashcardsUser.Id,
+            };
+
+            await _refreshTokenRepository.Create(refreshToken);
+
+            return new AuthResult()
+            {
+                Token = jwtToken,
+                RefreshToken = refreshToken.Token,
+                Result = true
+            };
         }
+
+        private string RandomStringGeneration(int length)
+        {
+            var random = new Random();
+            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890abcdefghijklmnopqrstuvwxyz_";
+            return new string(Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
 
         private bool SendEmail(string email, string subject, string confirmLink)
         // Function that uses the SMTP protocol for sending a email-confirmation.
