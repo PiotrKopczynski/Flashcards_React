@@ -98,8 +98,8 @@ namespace Flashcards_React.DAL
             {
                 // Converting the searchString and the Title to lowercase such that the search is case-insesitive.
                 searchString = searchString.ToLower();
-                //return await _db.Decks.Where(deck => (deck.FlashcardsUserId == "demo" || deck.FlashcardsUserId == flashcardsUserId)
-                return await _db.Decks.Where(deck => (deck.FlashcardsUserId == flashcardsUserId)
+                return await _db.Decks.Where(deck => (deck.FlashcardsUserId == "demo" || deck.FlashcardsUserId == flashcardsUserId)
+                //return await _db.Decks.Where(deck => (deck.FlashcardsUserId == flashcardsUserId)
                 && deck.Title.ToLower().Contains(searchString)).ToListAsync();
             }
             catch (Exception e)
