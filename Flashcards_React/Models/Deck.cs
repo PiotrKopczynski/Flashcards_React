@@ -11,7 +11,7 @@ namespace Flashcards_React.Models
         [StringLength(300)]
         public string? Description { get; set; }
         //navigation property
-        [JsonIgnore]
+        [JsonIgnore] // This is needed such that the endpoint does not try to send the list of Flashcards through a request as well.
         public virtual List<Flashcard>? Flashcards { get; set; } //Virtual keyword used for lazy loading
         //navigation property
         public string FlashcardsUserId { get; set; } = string.Empty;

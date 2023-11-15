@@ -400,7 +400,7 @@ namespace Flashcards_React.Controllers
                 ExpiryDate = DateTime.UtcNow.AddMonths(6),
                 IsRevoked = false,
                 IsUsed = false,
-                FlashcardsUserId = flashcardsUser.Id,
+                FlashcardsUserId = flashcardsUser.Id ?? "",
             };
 
             await _refreshTokenRepository.Create(refreshToken);

@@ -1,4 +1,5 @@
 ﻿using Flashcards_React.DAL;
+using Flashcards_React.DTO;
 using Flashcards_React.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -49,8 +50,67 @@ namespace Flashcards_React.Controllers
                     return new List<Deck>(); ;
                 }
             }
-
             return decks;
+        }
+
+        [HttpPost]
+        [Route("CreateDeck")]
+        public async Task<IActionResult> CreateDeck([FromBody] CreateDeckDTO deckDTO)
+        {      
+            if (ModelState.IsValid) // Server side validation.
+            {
+                var deck = new Deck()
+                {
+                    Title = deckDTO.Title,
+                    Description = deckDTO.Description,
+                };
+                deck.FlashcardsUserId = _userManager.GetUserId(User) ?? ""; // If the flashcardsUserId cannot be retrieved, set it to "".
+                bool returnOk = await _deckRepository.Create(deck);
+                if (returnOk)
+                {
+                    return Ok("Success");
+                }
+            }
+            _logger.LogWarning("[DeckController] Deck creation failed for the deckDTO: {deckDTO}", deckDTO);
+            return BadRequest("Deck creation failed");
+        }
+
+        [HttpPatch]
+        [Route("UpdateDeck")]
+        public async Task<IActionResult> UpdateDeck([FromBody]  UpdateDeckDTO deckDTO)
+        {
+            if (ModelState.IsValid) // Server side validation.
+            {
+                var existingDeck = await _deckRepository.GetDeckById(deckDTO.DeckId);
+                if (existingDeck == null)
+                {
+                    return NotFound("Deck not found");
+                }
+
+                existingDeck.Title = deckDTO.Title;
+                existingDeck.Description = deckDTO.Description;
+
+                bool returnOk = await _deckRepository.Update(existingDeck);
+                if (returnOk)
+                {
+                    return Ok("Success");
+                }
+            }
+            _logger.LogWarning("[DeckController] Deck update failed for the deckDTO: {deckDTO}", deckDTO);
+            return BadRequest("Deck update failed");
+        }
+
+        [HttpDelete]
+        [Route("DeleteDeck")]
+        public async Task<IActionResult> DeleteDeck(int id)
+        {
+            bool returnOk = await _deckRepository.Delete(id);
+            if (!returnOk)
+            {
+                _logger.LogError("[DeckController] Deck deletion failed for the DeckId {@id}", id);
+                return BadRequest("Deck deletion failed"+ id);
+            }
+            return Ok("Success");
         }
     }
 }
