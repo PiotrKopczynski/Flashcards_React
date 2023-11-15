@@ -3,8 +3,11 @@ using Flashcards_React.DTO;
 using Flashcards_React.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System;
 
 namespace Flashcards_React.Controllers
 {
@@ -17,7 +20,9 @@ namespace Flashcards_React.Controllers
         private readonly ILogger<DeckController> _logger;
         private readonly UserManager<IdentityUser> _userManager;
 
-        public DeckController(IDeckRepository deckRepository, ILogger<DeckController> logger, UserManager<IdentityUser> userManager)
+        public DeckController(IDeckRepository deckRepository,
+            ILogger<DeckController> logger, 
+            UserManager<IdentityUser> userManager)
         {
             _deckRepository = deckRepository;
             _logger = logger;
@@ -26,9 +31,8 @@ namespace Flashcards_React.Controllers
 
         [HttpGet]
         [Route("BrowseDecks")]
-        public async Task<IEnumerable<Deck>> BrowseDecks(string? searchString) // Double check that you can pass parameters like this through link.
-        // The BrowseDecks View function allows the use to browse through the existing decks, create new decks and
-        // search for specific decks using searchString. In addition, pagination functonality is implemented using the PaginatedList<> class.
+        public async Task<IActionResult> BrowseDecks(string? searchString)
+        // Function that retrieves a list of Decks from the database. The Decks can be filtered using the optional searchString parameter.
         {
             var flashcardsUserId = _userManager.GetUserId(this.User) ?? ""; // If the flashcardsUserId cannot be retrieved, set it to "".
             IEnumerable<Deck>? decks; // Initiate the deck list.
@@ -38,7 +42,7 @@ namespace Flashcards_React.Controllers
                 if (decks == null)
                 {
                     _logger.LogError("[DeckController] Deck list not found while executing _deckRepository.GetAll()");
-                    return new List<Deck>();
+                    return NotFound("Deck list not found");
                 }
             }
             else
@@ -47,10 +51,10 @@ namespace Flashcards_React.Controllers
                 if (decks == null)
                 {
                     _logger.LogError("[DeckController] Deck list not found while executing _deckRepository.SearchDecksByTitle()");
-                    return new List<Deck>(); ;
+                    return NotFound("Deck list not found");
                 }
             }
-            return decks;
+            return Ok(decks);
         }
 
         [HttpPost]
@@ -108,7 +112,7 @@ namespace Flashcards_React.Controllers
             if (!returnOk)
             {
                 _logger.LogError("[DeckController] Deck deletion failed for the DeckId {@id}", id);
-                return BadRequest("Deck deletion failed"+ id);
+                return BadRequest("Deck deletion failed");
             }
             return Ok("Success");
         }
