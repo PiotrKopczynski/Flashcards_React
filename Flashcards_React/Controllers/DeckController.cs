@@ -23,8 +23,8 @@ namespace Flashcards_React.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet]
-        [Route("BrowseDecks")]
+        [HttpGet("searchString:string")]
+        [Route("browsedecks")]
         public async Task<IEnumerable<Deck>> BrowseDecks(string searchString) // Double check that you can pass parameters like this through link.
         // The BrowseDecks View function allows the use to browse through the existing decks, create new decks and
         // search for specific decks using searchString. In addition, pagination functonality is implemented using the PaginatedList<> class.
