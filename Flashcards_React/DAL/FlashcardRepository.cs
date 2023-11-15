@@ -35,7 +35,7 @@ namespace Flashcards_React.DAL
             }
             catch (Exception e)
             {
-                _logger.LogError("[FlashcardRepository] FindAsync() failed when GetFlashcardById() was called for FlashcardId {FlashcardId} error message:{Message}", new { id, e.Message });
+                _logger.LogError("[FlashcardRepository] FindAsync() failed when GetFlashcardById() was called for FlashcardId {FlashcardId} error message:{Message}", id, e.Message);
                 return null;
             }
         }
@@ -53,7 +53,7 @@ namespace Flashcards_React.DAL
             }
             catch (Exception e)
             {
-                _logger.LogError("[FlashcardRepository] Where() failed when GetFlashcardsByDeckId() was called for DeckId {deckId}, error message: {Message}", new { deckId, e.Message });
+                _logger.LogError("[FlashcardRepository] Where() failed when GetFlashcardsByDeckId() was called for DeckId {deckId}, error message: {Message}", deckId, e.Message);
                 return null;
             }
         }
@@ -68,7 +68,7 @@ namespace Flashcards_React.DAL
             }
             catch (Exception e)
             {
-                _logger.LogError("[FlashcardRepository] Add() failed for flashcard {flashcard}, error message:{Message}", new { flashcard, e.Message });
+                _logger.LogError("[FlashcardRepository] Add() failed for flashcard {flashcard}, error message:{Message}", flashcard, e.Message);
                 return false;
             }
         }
@@ -83,7 +83,7 @@ namespace Flashcards_React.DAL
             }
             catch (Exception e)
             {
-                _logger.LogError("[FlashcardRepository] Update() failed when updating the FlashcardId {FlashcardId}, error message:{Message}", new { flashcard.FlashcardId, e.Message });
+                _logger.LogError("[FlashcardRepository] Update() failed when updating the FlashcardId {FlashcardId}, error message:{Message}", flashcard.FlashcardId, e.Message);
                 return false;
             }
         }
@@ -104,7 +104,7 @@ namespace Flashcards_React.DAL
             }
             catch (Exception e)
             {
-                _logger.LogError("[FlashcardRepository] Remove() failed for the FlashcardId {id}, error message:{Message}", new { id, e.Message });
+                _logger.LogError("[FlashcardRepository] Remove() failed for the FlashcardId {id}, error message:{Message}", id, e.Message);
                 return false;
             }
         }

@@ -25,7 +25,7 @@ namespace Flashcards_React.DAL
 			}
 			catch (Exception e)
 			{
-				_logger.LogError("[RefreshTokenRepository] Add() failed for RefreshToken: {refreshToken}, error message:{Message}", new { refreshToken, e.Message });
+				_logger.LogError("[RefreshTokenRepository] Add() failed for RefreshToken: {refreshToken}, error message:{Message}", refreshToken, e.Message );
 				return false;
 			}
         }
@@ -38,7 +38,7 @@ namespace Flashcards_React.DAL
 			}
 			catch (Exception e)
 			{
-                _logger.LogError("[RefreshTokenRepository] FirstOrDefaultAsync() failed when searching for the RefreshToken: {RefreshToken}, error message: {Message}", new { tokenRequestDTO.RefreshToken, e.Message });
+                _logger.LogError("[RefreshTokenRepository] FirstOrDefaultAsync() failed when searching for the RefreshToken: {RefreshToken}, error message: {Message}", tokenRequestDTO.RefreshToken, e.Message );
                 return null;
             }
         }
@@ -53,7 +53,7 @@ namespace Flashcards_React.DAL
 			}
 			catch (Exception e)
 			{
-                _logger.LogError("[RefreshTokenRepository] Update() failed when updating the RefreshToken {RefreshToken}, error message:{Message}", new { refreshToken, e.Message });
+                _logger.LogError("[RefreshTokenRepository] Update() failed when updating the RefreshToken {RefreshToken}, error message:{Message}",  refreshToken, e.Message);
                 return false;
             }
         }

@@ -378,8 +378,8 @@ namespace Flashcards_React.Controllers
                 Subject = new ClaimsIdentity(new [] // List of claims.
                 {
                     new Claim("Id", flashcardsUser.Id),
-                    new Claim(JwtRegisteredClaimNames.Sub, flashcardsUser.Email ?? ""),
-                    new Claim(JwtRegisteredClaimNames.Email, flashcardsUser.Email ?? ""),
+                    new Claim(JwtRegisteredClaimNames.Sub, flashcardsUser.Id ?? ""),
+                    new Claim(JwtRegisteredClaimNames.Email, flashcardsUser.Id ?? ""),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()), // Unique token reference.
                     new Claim(JwtRegisteredClaimNames.Iat, DateTime.Now.ToUniversalTime().ToString()), // Creates a unique id that will be specific for the token and the user.
                 }),
