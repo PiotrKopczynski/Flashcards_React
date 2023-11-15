@@ -22,7 +22,7 @@ namespace Flashcards_React.DAL
             }
             catch (Exception e)
             {
-                _logger.LogError("[FlashcardRepository] ToListAsync() failed when GetAll() was called, error message:{@e.Message}", e.Message);
+                _logger.LogError("[FlashcardRepository] ToListAsync() failed when GetAll() was called, error message:{Message}", e.Message);
                 return null;
             }
         }
@@ -35,7 +35,7 @@ namespace Flashcards_React.DAL
             }
             catch (Exception e)
             {
-                _logger.LogError("[FlashcardRepository] FindAsync() failed when GetFlashcardById() was called for FlashcardId {@id} error message:{@e.Message}", id, e.Message);
+                _logger.LogError("[FlashcardRepository] FindAsync() failed when GetFlashcardById() was called for FlashcardId {FlashcardId} error message:{Message}", new { id, e.Message });
                 return null;
             }
         }
@@ -53,7 +53,7 @@ namespace Flashcards_React.DAL
             }
             catch (Exception e)
             {
-                _logger.LogError("[FlashcardRepository] Where() failed when GetFlashcardsByDeckId() was called for DeckId {@deckId}, error message: {@e}", deckId, e.Message);
+                _logger.LogError("[FlashcardRepository] Where() failed when GetFlashcardsByDeckId() was called for DeckId {deckId}, error message: {Message}", new { deckId, e.Message });
                 return null;
             }
         }
@@ -68,7 +68,7 @@ namespace Flashcards_React.DAL
             }
             catch (Exception e)
             {
-                _logger.LogError("[FlashcardRepository] Add() failed for flashcard {@flashcard}, error message:{@e.Message}", flashcard, e.Message);
+                _logger.LogError("[FlashcardRepository] Add() failed for flashcard {flashcard}, error message:{Message}", new { flashcard, e.Message });
                 return false;
             }
         }
@@ -83,7 +83,7 @@ namespace Flashcards_React.DAL
             }
             catch (Exception e)
             {
-                _logger.LogError("[FlashcardRepository] Update() failed when updating the FlashcardId {@flashcard.FlashcardId}, error message:{@e.Message}", flashcard.FlashcardId, e.Message);
+                _logger.LogError("[FlashcardRepository] Update() failed when updating the FlashcardId {FlashcardId}, error message:{Message}", new { flashcard.FlashcardId, e.Message });
                 return false;
             }
         }
@@ -95,7 +95,7 @@ namespace Flashcards_React.DAL
                 var flashcard = await _db.Flashcards.FindAsync(id);
                 if (flashcard == null)
                 {
-                    _logger.LogError("[FlashcardRepository] flashcard not found for the FlashcardId {@id}", id);
+                    _logger.LogError("[FlashcardRepository] flashcard not found for the FlashcardId {id}", id);
                     return false;
                 }
                 _db.Flashcards.Remove(flashcard);
@@ -104,7 +104,7 @@ namespace Flashcards_React.DAL
             }
             catch (Exception e)
             {
-                _logger.LogError("[FlashcardRepository] Remove() failed for the FlashcardId {@id}, error message:{@e.Message}", id, e.Message);
+                _logger.LogError("[FlashcardRepository] Remove() failed for the FlashcardId {id}, error message:{Message}", new { id, e.Message });
                 return false;
             }
         }

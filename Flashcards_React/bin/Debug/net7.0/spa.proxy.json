@@ -1,0 +1,8 @@
+{
+"SpaProxyServer": {
+"ServerUrl": "https://localhost:44424",
+"LaunchCommand": "npm start",
+"WorkingDirectory": "C:\\Users\\piotr\\Documents\\Webapplikasjoner\\Flashcards_React\\Flashcards_React\\ClientApp\\",
+"MaxTimeoutInSeconds": "120"
+}
+}

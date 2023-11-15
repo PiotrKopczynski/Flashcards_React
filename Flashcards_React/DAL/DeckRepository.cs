@@ -23,7 +23,7 @@ namespace Flashcards_React.DAL
             }
             catch (Exception e)
             {
-                _logger.LogError("[DeckRepository] Where() failed when GetAll() was called, error message:{@e.Message}", e.Message);
+                _logger.LogError("[DeckRepository] Where() failed when GetAll() was called, error message:{Message}", e.Message);
                 return null;
             }
         }
@@ -36,7 +36,7 @@ namespace Flashcards_React.DAL
             }
             catch (Exception e)
             {
-                _logger.LogError("[DeckRepository] FindAsync() failed when GetDeckById() was called for DeckId {@id} error message:{@e.Message}", id, e.Message);
+                _logger.LogError("[DeckRepository] FindAsync() failed when GetDeckById() was called for DeckId {id} error message:{Message}", new { id, e.Message});
                 return null;
             }
         }
@@ -51,7 +51,7 @@ namespace Flashcards_React.DAL
             }
             catch (Exception e)
             {
-                _logger.LogError("[DeckRepository] Add() failed for deck {@deck}, error message:{@e.Message}", deck, e.Message);
+                _logger.LogError("[DeckRepository] Add() failed for deck {deck}, error message:{Message}", new { deck, e.Message });
                 return false;
             }
         }
@@ -66,7 +66,7 @@ namespace Flashcards_React.DAL
             }
             catch (Exception e)
             {
-                _logger.LogError("[DeckRepository] Update() failed when updating the deck with DeckId {@deck.DeckId}, error message:{@e.Message}", deck.DeckId, e.Message);
+                _logger.LogError("[DeckRepository] Update() failed when updating the deck with DeckId {DeckId}, error message:{Message}", new { deck.DeckId, e.Message });
                 return false;
             }
         }
@@ -78,7 +78,7 @@ namespace Flashcards_React.DAL
                 var deck = await _db.Decks.FindAsync(id);
                 if (deck == null)
                 {
-                    _logger.LogError("[DeckRepository] deck not found for the DeckId {@id}", id);
+                    _logger.LogError("[DeckRepository] deck not found for the DeckId {id}", id);
                     return false;
                 }
                 _db.Decks.Remove(deck);
@@ -87,7 +87,7 @@ namespace Flashcards_React.DAL
             }
             catch (Exception e)
             {
-                _logger.LogError("[DeckRepository] Remove() failed for the DeckId {@id}, error message:{@e.Message}", id, e.Message);
+                _logger.LogError("[DeckRepository] Remove() failed for the DeckId {id}, error message:{Message}", new { id, e.Message });
                 return false;
             }
         }
@@ -98,13 +98,13 @@ namespace Flashcards_React.DAL
             {
                 // Converting the searchString and the Title to lowercase such that the search is case-insesitive.
                 searchString = searchString.ToLower();
-                //return await _db.Decks.Where(deck => (deck.FlashcardsUserId == "demo" || deck.FlashcardsUserId == flashcardsUserId)
-                return await _db.Decks.Where(deck => (deck.FlashcardsUserId == flashcardsUserId)
+                return await _db.Decks.Where(deck => (deck.FlashcardsUserId == "demo" || deck.FlashcardsUserId == flashcardsUserId)
+                //return await _db.Decks.Where(deck => (deck.FlashcardsUserId == flashcardsUserId)
                 && deck.Title.ToLower().Contains(searchString)).ToListAsync();
             }
             catch (Exception e)
             {
-                _logger.LogError("[DeckRepository] SearchDecksByTitle() failed for UserId {@flashcardsUserId} with error message:{@e.Message}", flashcardsUserId, e.Message);
+                _logger.LogError("[DeckRepository] SearchDecksByTitle() failed for UserId {flashcardsUserId} with error message:{Message}", new { flashcardsUserId, e.Message });
                 return null;
             }
         }

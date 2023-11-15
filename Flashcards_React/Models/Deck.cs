@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Flashcards_React.Models
 {
@@ -10,6 +11,7 @@ namespace Flashcards_React.Models
         [StringLength(300)]
         public string? Description { get; set; }
         //navigation property
+        [JsonIgnore]
         public virtual List<Flashcard>? Flashcards { get; set; } //Virtual keyword used for lazy loading
         //navigation property
         public string FlashcardsUserId { get; set; } = string.Empty;

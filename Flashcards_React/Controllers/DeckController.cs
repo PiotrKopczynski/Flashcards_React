@@ -65,15 +65,17 @@ using System.Threading.Tasks;
 
 namespace Flashcards_React.Controllers
 {
+    [Authorize]
+    [Route("api/[controller]")]
     [ApiController]
     [Route("[controller]")]
     public class DeckController : ControllerBase
     {
         private readonly IDeckRepository _deckRepository;
         private readonly ILogger<DeckController> _logger;
-        private readonly UserManager<FlashcardsUser> _userManager;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public DeckController(IDeckRepository deckRepository, ILogger<DeckController> logger, UserManager<FlashcardsUser> userManager)
+        public DeckController(IDeckRepository deckRepository, ILogger<DeckController> logger, UserManager<IdentityUser> userManager)
         {
             _deckRepository = deckRepository;
             _logger = logger;
@@ -81,39 +83,40 @@ namespace Flashcards_React.Controllers
         }
 
         [HttpGet]
-        [Route("browsedecks")]
-        public async Task<ActionResult<IEnumerable<Deck>>> BrowseDecks()
+        [Route("BrowseDecks")]
+        public async Task<IEnumerable<Deck>> BrowseDecks(string searchString) // Double check that you can pass parameters like this through link.
+        // The BrowseDecks View function allows the use to browse through the existing decks, create new decks and
+        // search for specific decks using searchString. In addition, pagination functonality is implemented using the PaginatedList<> class.
         {
-            String searchString = "";
-            
-            try
+            var flashcardsUserId = _userManager.GetUserId(this.User) ?? ""; // If the flashcardsUserId cannot be retrieved, set it to "".
+            Console.WriteLine(flashcardsUserId);
+            IEnumerable<Deck>? decks; // Initiate the deck list.
+            if (string.IsNullOrEmpty(searchString)) // Check whether the user wants to perform a search.
             {
-                var flashcardsUserId = _userManager.GetUserId(this.User) ?? "";
-                IEnumerable<Deck> decks;
-
-                if (string.IsNullOrEmpty(searchString))
+                decks = await _deckRepository.GetAll(flashcardsUserId);
+                if (decks == null)
                 {
-                    decks = await _deckRepository.GetAll(flashcardsUserId);
+                    _logger.LogError("[DeckController] Deck list not found while executing _deckRepository.GetAll()");
+                    return new List<Deck>();
                 }
-                else
-                {
-                    decks = await _deckRepository.SearchDecksByTitle(flashcardsUserId, searchString);
+            }
+            else
+            {
+                decks = await _deckRepository.SearchDecksByTitle(flashcardsUserId, searchString);
                 }
 
                 if (decks == null)
                 {
-                    _logger.LogError("[DeckController] Deck list not found.");
-                    return NotFound("Deck list not found.");
+                    _logger.LogError("[DeckController] Deck list not found while executing _deckRepository.SearchDecksByTitle()");
+                    return new List<Deck>(); ;
                 }
-
-                
-                return Ok(decks);
-            }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "[DeckController] Error while fetching decks.");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
             }
+
+            return decks;
         }
     }
 }
