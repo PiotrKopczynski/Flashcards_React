@@ -1,0 +1,27 @@
+2023-11-15 13:07:12.892 +01:00 [Information] User profile is available. Using '"C:\Users\mahwi\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-11-15 13:07:15.300 +01:00 [Information] Now listening on: "https://localhost:7196"
+2023-11-15 13:07:15.304 +01:00 [Information] Now listening on: "http://localhost:5105"
+2023-11-15 13:07:15.315 +01:00 [Information] Application started. Press Ctrl+C to shut down.
+2023-11-15 13:07:15.320 +01:00 [Information] Hosting environment: "Development"
+2023-11-15 13:07:15.323 +01:00 [Information] Content root path: "E:\git prosjekt\Flashcards_React\Flashcards_React"
+2023-11-15 13:07:16.407 +01:00 [Information] Request starting HTTP/2 GET https://localhost:7196/ - -
+2023-11-15 13:07:20.840 +01:00 [Information] No SPA development server running at https://localhost:44424 found.
+2023-11-15 13:07:21.204 +01:00 [Information] SPA proxy is not ready. Returning temporary landing page.
+2023-11-15 13:07:21.221 +01:00 [Information] Request finished HTTP/2 GET https://localhost:7196/ - - - 200 - text/html 4815.5047ms
+2023-11-15 13:07:24.331 +01:00 [Information] Request starting HTTP/2 GET https://localhost:7196/ - -
+2023-11-15 13:07:34.401 +01:00 [Information] SPA proxy is not ready. Returning temporary landing page.
+2023-11-15 13:07:34.401 +01:00 [Information] Request finished HTTP/2 GET https://localhost:7196/ - - - 200 - text/html 10070.3266ms
+2023-11-15 13:07:36.354 +01:00 [Information] SPA development server running at 'https://localhost:44424'
+2023-11-15 13:07:37.464 +01:00 [Information] Request starting HTTP/2 GET https://localhost:7196/ - -
+2023-11-15 13:07:39.642 +01:00 [Information] SPA proxy is ready. Redirecting to https://localhost:44424.
+2023-11-15 13:07:39.644 +01:00 [Information] Request finished HTTP/2 GET https://localhost:7196/ - - - 302 0 - 2179.5883ms
+2023-11-15 13:07:43.318 +01:00 [Information] Request starting HTTP/1.1 GET https://localhost:44424/api/deck/browsedecks - -
+2023-11-15 13:07:43.452 +01:00 [Information] Authorization failed. "These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user."
+2023-11-15 13:07:43.458 +01:00 [Information] AuthenticationScheme: "Bearer" was challenged.
+2023-11-15 13:07:43.472 +01:00 [Information] Request finished HTTP/1.1 GET https://localhost:44424/api/deck/browsedecks - - - 401 0 - 153.8312ms
+2023-11-15 13:08:04.472 +01:00 [Information] Request starting HTTP/1.1 GET https://localhost:44424/api/deck/browsedecks - -
+2023-11-15 13:08:04.495 +01:00 [Information] Authorization failed. "These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user."
+2023-11-15 13:08:04.495 +01:00 [Information] AuthenticationScheme: "Bearer" was challenged.
+2023-11-15 13:08:04.500 +01:00 [Information] Request finished HTTP/1.1 GET https://localhost:44424/api/deck/browsedecks - - - 401 0 - 28.3336ms

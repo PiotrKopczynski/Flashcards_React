@@ -1,0 +1,26 @@
+2023-11-15 12:28:56.951 +01:00 [Information] User profile is available. Using '"C:\Users\mahwi\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-11-15 12:29:03.541 +01:00 [Information] Now listening on: "https://localhost:7196"
+2023-11-15 12:29:03.548 +01:00 [Information] Now listening on: "http://localhost:5105"
+2023-11-15 12:29:03.557 +01:00 [Information] Application started. Press Ctrl+C to shut down.
+2023-11-15 12:29:03.560 +01:00 [Information] Hosting environment: "Development"
+2023-11-15 12:29:03.563 +01:00 [Information] Content root path: "E:\git prosjekt\Flashcards_React\Flashcards_React"
+2023-11-15 12:29:04.829 +01:00 [Information] Request starting HTTP/2 GET https://localhost:7196/ - -
+2023-11-15 12:29:09.769 +01:00 [Information] No SPA development server running at https://localhost:44424 found.
+2023-11-15 12:29:10.837 +01:00 [Information] SPA proxy is not ready. Returning temporary landing page.
+2023-11-15 12:29:10.898 +01:00 [Information] Request finished HTTP/2 GET https://localhost:7196/ - - - 200 - text/html 6075.0499ms
+2023-11-15 12:29:14.036 +01:00 [Information] Request starting HTTP/2 GET https://localhost:7196/ - -
+2023-11-15 12:29:18.433 +01:00 [Information] SPA proxy is not ready. Returning temporary landing page.
+2023-11-15 12:29:18.435 +01:00 [Information] Request finished HTTP/2 GET https://localhost:7196/ - - - 200 - text/html 4398.5070ms
+2023-11-15 12:29:21.500 +01:00 [Information] Request starting HTTP/2 GET https://localhost:7196/ - -
+2023-11-15 12:29:30.124 +01:00 [Information] SPA development server running at 'https://localhost:44424'
+2023-11-15 12:29:30.128 +01:00 [Information] SPA proxy is ready. Redirecting to https://localhost:44424.
+2023-11-15 12:29:30.129 +01:00 [Information] Request finished HTTP/2 GET https://localhost:7196/ - - - 302 0 - 8628.8432ms
+2023-11-15 12:29:38.737 +01:00 [Information] Request starting HTTP/1.1 GET https://localhost:44424/api/deck/browsedecks - -
+2023-11-15 12:29:38.901 +01:00 [Information] Executing endpoint '"Flashcards_React.Controllers.DeckController.BrowseDecks (Flashcards_React)"'
+2023-11-15 12:29:38.921 +01:00 [Information] Route matched with "{action = \"BrowseDecks\", controller = \"Deck\", page = \"\", area = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Flashcards_React.Models.Deck]] BrowseDecks()" on controller "Flashcards_React.Controllers.DeckController" ("Flashcards_React").
+2023-11-15 12:29:39.072 +01:00 [Information] Executing action method "Flashcards_React.Controllers.DeckController.BrowseDecks (Flashcards_React)" - Validation state: Valid
+2023-11-15 12:29:39.088 +01:00 [Information] Executed action method "Flashcards_React.Controllers.DeckController.BrowseDecks (Flashcards_React)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 1.7143ms.
+2023-11-15 12:29:39.101 +01:00 [Information] Executing "OkObjectResult", writing value of type '"Flashcards_React.Models.Deck[]"'.
+2023-11-15 12:29:39.188 +01:00 [Information] Executed action "Flashcards_React.Controllers.DeckController.BrowseDecks (Flashcards_React)" in 253.6834ms
+2023-11-15 12:29:39.188 +01:00 [Information] Executed endpoint '"Flashcards_React.Controllers.DeckController.BrowseDecks (Flashcards_React)"'
+2023-11-15 12:29:39.192 +01:00 [Information] Request finished HTTP/1.1 GET https://localhost:44424/api/deck/browsedecks - - - 200 - application/json;+charset=utf-8 455.2337ms

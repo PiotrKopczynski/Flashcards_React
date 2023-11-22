@@ -1,0 +1,29 @@
+2023-11-15 10:47:14.863 +01:00 [Information] User profile is available. Using '"C:\Users\mahwi\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-11-15 10:47:25.531 +01:00 [Information] Now listening on: "https://localhost:7196"
+2023-11-15 10:47:25.534 +01:00 [Information] Now listening on: "http://localhost:5105"
+2023-11-15 10:47:25.541 +01:00 [Information] Application started. Press Ctrl+C to shut down.
+2023-11-15 10:47:25.546 +01:00 [Information] Hosting environment: "Development"
+2023-11-15 10:47:25.549 +01:00 [Information] Content root path: "E:\git prosjekt\Flashcards_React\Flashcards_React"
+2023-11-15 10:47:31.603 +01:00 [Information] Request starting HTTP/2 GET https://localhost:7196/ - -
+2023-11-15 10:47:36.704 +01:00 [Information] No SPA development server running at https://localhost:44424 found.
+2023-11-15 10:47:37.772 +01:00 [Information] SPA proxy is not ready. Returning temporary landing page.
+2023-11-15 10:47:37.815 +01:00 [Information] Request finished HTTP/2 GET https://localhost:7196/ - - - 200 - text/html 6216.4039ms
+2023-11-15 10:47:38.015 +01:00 [Information] Request starting HTTP/2 GET https://localhost:7196/favicon.ico - -
+2023-11-15 10:47:39.818 +01:00 [Information] Request finished HTTP/2 GET https://localhost:7196/favicon.ico - - - 404 0 - 1802.8253ms
+2023-11-15 10:47:41.038 +01:00 [Information] Request starting HTTP/2 GET https://localhost:7196/ - -
+2023-11-15 10:47:45.243 +01:00 [Information] SPA proxy is not ready. Returning temporary landing page.
+2023-11-15 10:47:45.248 +01:00 [Information] Request finished HTTP/2 GET https://localhost:7196/ - - - 200 - text/html 4209.6522ms
+2023-11-15 10:47:48.325 +01:00 [Information] Request starting HTTP/2 GET https://localhost:7196/ - -
+2023-11-15 10:47:52.573 +01:00 [Information] SPA proxy is not ready. Returning temporary landing page.
+2023-11-15 10:47:52.574 +01:00 [Information] Request finished HTTP/2 GET https://localhost:7196/ - - - 200 - text/html 4249.5730ms
+2023-11-15 10:47:55.702 +01:00 [Information] Request starting HTTP/2 GET https://localhost:7196/ - -
+2023-11-15 10:48:05.755 +01:00 [Information] SPA proxy is not ready. Returning temporary landing page.
+2023-11-15 10:48:05.756 +01:00 [Information] Request finished HTTP/2 GET https://localhost:7196/ - - - 200 - text/html 10054.2916ms
+2023-11-15 10:48:08.830 +01:00 [Information] Request starting HTTP/2 GET https://localhost:7196/ - -
+2023-11-15 10:48:12.252 +01:00 [Information] SPA development server running at 'https://localhost:44424'
+2023-11-15 10:48:12.257 +01:00 [Information] SPA proxy is ready. Redirecting to https://localhost:44424.
+2023-11-15 10:48:12.258 +01:00 [Information] Request finished HTTP/2 GET https://localhost:7196/ - - - 302 0 - 3427.6503ms
+2023-11-15 10:48:18.124 +01:00 [Information] Request starting HTTP/1.1 GET https://localhost:44424/deck/browsedecks - -
+2023-11-15 10:48:18.134 +01:00 [Information] Executing endpoint '"Fallback {*path:nonfile}"'
+2023-11-15 10:48:18.134 +01:00 [Information] Executed endpoint '"Fallback {*path:nonfile}"'
+2023-11-15 10:48:18.243 +01:00 [Information] Request finished HTTP/1.1 GET https://localhost:44424/deck/browsedecks - - - 404 0 - 118.0737ms
