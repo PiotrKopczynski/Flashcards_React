@@ -20,7 +20,6 @@ namespace Flashcards_React.Controllers
             _logger = logger;
         }
 
-        [Authorize]
         [HttpGet]
         [Route("Get")]
         public IEnumerable<WeatherForecast> Get()

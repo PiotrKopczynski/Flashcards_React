@@ -145,8 +145,8 @@ namespace Flashcards_React.Controllers
             return Ok(status);
         }
 
-        [Route("Login")]
         [HttpPost]
+        [Route("Login")]
         public async Task<IActionResult> Login([FromBody] LoginDTO loginDTO)
         {
             if (ModelState.IsValid)
@@ -207,8 +207,8 @@ namespace Flashcards_React.Controllers
             });
         }
 
-        [Route("RefreshToken")]
         [HttpPost]
+        [Route("RefreshToken")]
         public async Task<IActionResult> RefreshToken([FromBody] TokenRequestDTO tokenRequestDTO)
         {
             if(ModelState.IsValid)

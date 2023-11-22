@@ -1,6 +1,8 @@
 import { Counter } from "./components/Counter";
 import { FetchData } from "./components/FetchData";
-import { Home } from "./components/Home";
+import Home from "./components/Home";
+import Login from "./components/authentication/Login";
+import Register from "./components/authentication/Register";
 import BrowseDecks from "./components/BrowseDecks";
 
 const AppRoutes = [
@@ -19,6 +21,14 @@ const AppRoutes = [
   {
     path: '/browsedecks',
     element: <BrowseDecks />
+  },
+  {
+    path: '/login',
+    element: <Login />
+  },
+  {
+    path: '/register',
+    element: <Register />
   }
 ];
 

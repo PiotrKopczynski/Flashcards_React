@@ -69,12 +69,19 @@ loggerConfiguration.Filter.ByExcluding(e => e.Properties.TryGetValue("SourceCont
 var logger = loggerConfiguration.CreateLogger();
 builder.Logging.AddSerilog(logger);
 
-/*builder.Services.AddCors(options => options.AddPolicy("Frontend", policy =>
+/*builder.Services.AddCors(options =>
 {
-    policy.WithOrigins("https://localhost:44424/").AllowAnyMethod().AllowAnyHeader();
-}));*/
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.WithOrigins("https://localhost:44424")
+               .AllowAnyHeader()
+               .AllowAnyMethod();
+    });
+});*/
 
 var app = builder.Build();
+
+//app.UseCors();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -109,7 +116,6 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
-//app.UseCors("FrontEnd");
 
 app.MapControllerRoute(
     name: "default",
