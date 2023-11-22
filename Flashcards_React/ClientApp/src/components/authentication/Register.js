@@ -1,15 +1,17 @@
 ﻿import { useRef, useState, useEffect } from "react";
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import axios from './api/axios';
+import {Link, useNavigate} from "react-router-dom";
+import axios from '../../api/axios';
 
 const USERNAME_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
-const EMAIL_REGEX = /^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/gm;
+const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 const Register = () => {
     const userRef = useRef();
     const errRef = useRef();
+    const navigate = useNavigate();
 
     const [userName, setUserName] = useState('');
     const [validUserName, setValidUserName] = useState(false);
@@ -35,16 +37,16 @@ const Register = () => {
     }, [])
 
     useEffect(() => { // Check the username
-        setValidUserName(USERNAME_REGEX.test(user));
+        setValidUserName(USERNAME_REGEX.test(userName));
     }, [userName])
 
     useEffect(() => { // Check the email
-        setValidEmail(EMAIL_REGEX.test(user));
+        setValidEmail(EMAIL_REGEX.test(email));
     }, [email])
 
     useEffect(() => { // Check the password
         setValidPwd(PWD_REGEX.test(pwd));
-        setValidMatch(pwd == matchPwd);
+        setValidMatch(pwd === matchPwd);
     }, [pwd, matchPwd])
 
     useEffect(() => { // useEffect for the error message
@@ -62,17 +64,29 @@ const Register = () => {
             return;
         }
         try {
-            const response = await axios.post('api/Authentication/Register', JSON.stringify({ UserName : userName, Email : email, Password : pwd}),
-                {
-                    headers: {'Content-Type' : 'application/json'},
-                    withCredentials: true
+            const response = await fetch('/api/Authentication/Register', {
+                method: 'Post',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ "UserName": userName, "Email": email, "Password": pwd })
                 }
             );
-            setSuccess(true);
-            // clear input fields of the registration form here
+            if (response.ok) {
+                console.log(response.text())
+                setSuccess(true);
+                setUserName('');
+                setEmail('');
+                setPwd('');
+                setMatchPwd('');
+                navigate('/login');
+            }
+            else {
+                setErrMsg("Registration failed");
+                return;
+            }       
         }
         catch (e) {
-            if (!err?.response) {
+            console.log(e)
+            if (!e?.response) {
                 setErrMsg('No Server Response')
             }
             else {
@@ -88,7 +102,7 @@ const Register = () => {
                 <section>
                     <h1>Success!</h1>
                     <p>
-                        <a href="#">Sign In</a>
+                        <Link to="/login">Sign In</Link>
                     </p>
                 </section>
             ) : (
@@ -194,8 +208,7 @@ const Register = () => {
                     <p>
                         Already registered?<br />
                         <span className="line">
-                            {/*put router link here*/}
-                            <a href="#">Sign In</a>
+                            <Link to="/login">Sign In</Link>
                         </span>
                     </p>
                 </section>
