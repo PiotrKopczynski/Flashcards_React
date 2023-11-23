@@ -3,7 +3,7 @@
   const AuthenticatedHome = () => {
     return (
         <div>
-            <p>Authenticated</p>
+            <p>Authenticatedafafas</p>
         </div>
     );
   };

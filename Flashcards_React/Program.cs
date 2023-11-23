@@ -25,7 +25,8 @@ var tokenValidationParameters = new TokenValidationParameters()
     ValidateIssuer = false, // This is set to false for development purposes.
     ValidateAudience = false, // This is set to false for development purposes.
     RequireExpirationTime = true, // JWT tokens have a very short lifespans.
-    ValidateLifetime = true
+    ValidateLifetime = true,
+    ClockSkew = TimeSpan.Zero
 };
 
 builder.Services.AddAuthentication(options =>
@@ -69,19 +70,9 @@ loggerConfiguration.Filter.ByExcluding(e => e.Properties.TryGetValue("SourceCont
 var logger = loggerConfiguration.CreateLogger();
 builder.Logging.AddSerilog(logger);
 
-/*builder.Services.AddCors(options =>
-{
-    options.AddDefaultPolicy(builder =>
-    {
-        builder.WithOrigins("https://localhost:44424")
-               .AllowAnyHeader()
-               .AllowAnyMethod();
-    });
-});*/
 
 var app = builder.Build();
 
-//app.UseCors();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
