@@ -262,10 +262,9 @@ namespace Flashcards_React.Controllers
 
             try
             {
-                _tokenValidationParameters.ValidateLifetime = false; // For testing
-
+                _tokenValidationParameters.ValidateLifetime = false; // Such that the below validation does not fail
                 var tokenInVerification = jwtTokenHandler.ValidateToken(tokenRequestDTO.Token, _tokenValidationParameters, out var validatedToken);
-
+                _tokenValidationParameters.ValidateLifetime = true; // Such that the below validation does not fail
 
                 if (validatedToken is JwtSecurityToken jwtSecurityToken)
                 {
@@ -345,6 +344,10 @@ namespace Flashcards_React.Controllers
                 }
                 return await GenerateJwtToken(tokenOwner);
             }
+            catch (SecurityTokenValidationException)
+            {
+                return invalidTokensResult;
+            }
             catch (Exception)
             {
                 return new AuthResult()
@@ -384,7 +387,7 @@ namespace Flashcards_React.Controllers
                     new Claim(JwtRegisteredClaimNames.Iat, DateTime.Now.ToUniversalTime().ToString()), // Creates a unique id that will be specific for the token and the user.
                 }),
                 
-                Expires = DateTime.UtcNow.Add(TimeSpan.Parse(_configuration["JwtConfig:ExpiryTimeFrame"] ?? "00:01:00")), // Check the JwtConfig:ExpiryTimeFrame in appsettings.
+                Expires = DateTime.Now.Add(TimeSpan.Parse(_configuration["JwtConfig:ExpiryTimeFrame"] ?? "00:01:00")), // Check the JwtConfig:ExpiryTimeFrame in appsettings.
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha512) // The credentials use our secret key and the HMAC-Sha256 Algorithm for encryption.
             };
 

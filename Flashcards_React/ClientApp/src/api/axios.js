@@ -1,13 +1,14 @@
 ﻿import axios from "axios";
 
+
 /*export default axios.create({
     baseURL: 'http://localhost:5105'
 })*/
 
 const api = axios.create({
-    baseURL: 'https://localhost:7196',
-    withCredentials: true
+    baseURL: 'https://localhost:44424',
 })
+
 
 // Add a request interceptor
 api.interceptors.request.use(
@@ -25,6 +26,7 @@ api.interceptors.request.use(
 api.interceptors.response.use(
     (response) => response,
     async (error) => {
+        console.log("The error that axios received:", error);
         const originalRequest = error.config;
         // If the error status is 401 and there is no originalRequest._retry flag,
         // it means the token has expired and it needs to be refreshed
@@ -33,12 +35,15 @@ api.interceptors.response.use(
             originalRequest._retry = true;
 
             try {
-                const refreshToken = localStorage.getItem('refreshToken');
-                const token = localStorage.getItem('token');
-                const response = await axios.post('/api/Authentication/RefreshToken', {"Token":token, "RefreshToken" : refreshToken});
+                const currentRefreshToken = localStorage.getItem('refreshToken');
+                console.log("Axios will run a call to /api/Authentication/RefreshToken");
+                const currentToken = localStorage.getItem('token');
+                const response = await axios.post('/api/Authentication/RefreshToken', { "Token": currentToken, "RefreshToken": currentRefreshToken });
 
-                const newToken = response.data.Token;
-                const newRefreshToken = response.data.TefreshToken;
+                console.log("RefreshToken response: ", response)
+
+                const newToken = response.data.token;
+                const newRefreshToken = response.data.refreshToken;
 
                 localStorage.setItem('token', newToken);
                 localStorage.setItem('refreshToken', newRefreshToken);
@@ -48,10 +53,23 @@ api.interceptors.response.use(
                 return axios(originalRequest);
             }
             catch (e) {
-                // Handle refresh token error or redirect to login
+                console.log("Error after trying to refresh the tokens: ", e);
+                return Promise.reject({ isTokenRefreshError: true });
             }
         }
-        
+        else if (error.response.status === 401 && originalRequest._retry) { // Unauthorized after a RefreshToken request
+            console.log("Unauthorized after a refresh token request. returning isTokenRefreshError.");
+            return Promise.reject({ isTokenRefreshError: true });
+        }        
+        if (error.response.status === 400) { // Refreshing tokens apparently returned an error
+            try {
+                console.log("400 error contents: ", error.response)
+            }
+            catch (e ){
+                console.log("This is from the catch block in the 400 if statement: ", e);
+            }
+        }
+        console.log("Something else happened :(");
         return Promise.reject(error);
     }
 )

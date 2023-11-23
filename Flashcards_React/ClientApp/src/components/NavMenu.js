@@ -108,7 +108,7 @@ const NavMenu = () => {
             <NavItem>
               <NavLink tag={Link} className="text-dark" to="/fetch-data">Fetch data</NavLink>
             </NavItem>
-                      {auth.IsLoggedIn ? (
+                      {auth.isLoggedIn ? (
                       <>
                           <NavItem>
                               <NavLink tag={Link} className="text-dark" to="/browsedecks">Decks</NavLink>
