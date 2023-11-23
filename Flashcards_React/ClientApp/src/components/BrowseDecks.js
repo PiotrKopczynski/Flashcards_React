@@ -40,6 +40,10 @@ const BrowseDecks = () => {
         getDecks();
     }, []);
 
+    const handleUpdateDeckButton = (deck) => {
+        navigate(`/updatedeck/${deck.deckId}`, { state: {deck}});
+    }
+
     return (
         <div>
             <h1>Deck List</h1>
@@ -51,6 +55,9 @@ const BrowseDecks = () => {
                         <div key={deck.deckId} className="card">
                             <h2>{deck.title}</h2>
                             <p>{deck.description}</p>
+                            <button onClick={() => handleUpdateDeckButton(deck)}>
+                                Update Deck
+                            </button>
                         </div>
                     ))}
                 </div>

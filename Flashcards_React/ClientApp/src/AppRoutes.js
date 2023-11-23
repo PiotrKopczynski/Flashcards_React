@@ -4,6 +4,7 @@ import Home from "./components/Home";
 import Login from "./components/authentication/Login";
 import Register from "./components/authentication/Register";
 import BrowseDecks from "./components/BrowseDecks";
+import UpdateDeck from "./components/UpdateDeck";
 
 const AppRoutes = [
   {
@@ -21,6 +22,10 @@ const AppRoutes = [
   {
     path: '/browsedecks',
     element: <BrowseDecks />
+  },
+  {
+    path: '/updatedeck/:deckId',
+    element: <UpdateDeck />
   },
   {
     path: '/login',

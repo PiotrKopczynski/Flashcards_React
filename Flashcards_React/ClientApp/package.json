@@ -54,7 +54,6 @@
     "eject": "react-scripts eject",
     "lint": "eslint ./src/",
     "dev": "npx react-scripts start"
-    
   },
   "eslintConfig": {
     "extends": [
