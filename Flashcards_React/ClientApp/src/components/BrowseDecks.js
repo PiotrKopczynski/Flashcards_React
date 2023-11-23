@@ -1,22 +1,43 @@
-﻿import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import api from '../api/axios';
+import AuthContext from '../context/AuthProvider';
 
 const BrowseDecks = () => {
     const [decks, setDecks] = useState([]);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
+    const { auth, setAuth } = useContext(AuthContext);
 
     useEffect(() => {
+        if (!auth.isLoggedIn) {
+            localStorage.removeItem('token');
+            localStorage.removeItem('refreshToken');
+            navigate('/login');
+        }
         // Fetch decks from the server
-        const searchString = 'your_search_string'; // Replace 'your_search_string' with the actual search string
-        fetch(`api/deck/browsedecks?searchString=${searchString}`)
-            .then(response => response.json())
-            .then(data => {
-                setDecks(data);
+        const getDecks = async () => {
+            try {
+                const searchString = ""; // Replace 'your_search_string' with the actual search string
+                const response = await api.get(`api/Deck/BrowseDecks`);
+
+                if (response.status === 200) {
+                    setDecks(response.data);
+                    setLoading(false);
+                }
+            }
+            catch (e) {
+                console.log("This is from the BrowseDecks catch block:", e);
+                if (e.isTokenRefreshError) { // The refresh of the JWT token failed or the tokens were invalid.
+                    setAuth({ isLoggedIn: false })
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('refreshToken');
+                    navigate('/login');
+                }
                 setLoading(false);
-            })
-            .catch(error => {
-                console.error('Error fetching decks:', error);
-                setLoading(false);
-            });
+            }
+        }
+        getDecks();
     }, []);
 
     return (

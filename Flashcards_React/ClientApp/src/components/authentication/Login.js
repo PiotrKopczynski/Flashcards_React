@@ -1,7 +1,6 @@
 ﻿import { useRef, useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './auth.css'
-//import axios from 'axios';
 import AuthContext from '../../context/AuthProvider';
 
 const Login = () => {
@@ -9,8 +8,6 @@ const Login = () => {
     const emailRef = useRef(); // References for accesibility. Useful for screen readers.
     const errRef = useRef(); // References for accesibility. Useful for screen readers.
     const navigate = useNavigate();
-
-    //const [authenticated, setauthenticated] = useState(localStorage.getItem(localStorage.getItem("authenticated")|| false));
 
     const [email, setEmail] = useState('');
     const [pwd, setPwd] = useState('');
@@ -40,14 +37,19 @@ const Login = () => {
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('refreshToken', data.refreshToken);
                     setAuth({ isLoggedIn: true });
-                    setEmail('')
-                    setPwd('')
+                    setEmail('');
+                    setPwd('');
                     navigate('/');
                 }
                 else {
                     setErrMsg("Login failed");
                     return;
                 }  
+            }
+            if (response.status === 400) {
+                const data = await response.json();
+                setErrMsg(data.errors);
+                return;
             }
         }
         catch (e) {
@@ -73,7 +75,7 @@ const Login = () => {
                     type="text"
                     id="email"
                     ref={emailRef}
-                    autoComplete="off"
+                    autoComplete="on"
                     onChange={(e) => setEmail(e.target.value)}
                     value={email}
                     required
