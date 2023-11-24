@@ -363,3 +363,6 @@ MigrationBackup/
 FodyWeavers.xsd
 
 Flashcards_React.db
+*.db-wal
+Flashcards_React/ClientApp/.env.development.local
+Flashcards_React/Flashcards_React.db-shm
