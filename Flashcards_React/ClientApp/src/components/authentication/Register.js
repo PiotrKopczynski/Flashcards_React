@@ -71,7 +71,7 @@ const Register = () => {
                 }
             );
             if (response.ok) {
-                console.log(response.text())
+                console.log(response.text());
                 setSuccess(true);
                 setUserName('');
                 setEmail('');
