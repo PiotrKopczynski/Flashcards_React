@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\piotr\\Documents\\Webapplikasjoner\\Flashcards_React\\Flashcards_React\\Flashcards_React.csproj": {}
+    "D:\\GitHub\\WebApp\\Flashcards_React\\Flashcards_React\\Flashcards_React.csproj": {}
   },
   "projects": {
-    "C:\\Users\\piotr\\Documents\\Webapplikasjoner\\Flashcards_React\\Flashcards_React\\Flashcards_React.csproj": {
+    "D:\\GitHub\\WebApp\\Flashcards_React\\Flashcards_React\\Flashcards_React.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\piotr\\Documents\\Webapplikasjoner\\Flashcards_React\\Flashcards_React\\Flashcards_React.csproj",
+        "projectUniqueName": "D:\\GitHub\\WebApp\\Flashcards_React\\Flashcards_React\\Flashcards_React.csproj",
         "projectName": "Flashcards_React",
-        "projectPath": "C:\\Users\\piotr\\Documents\\Webapplikasjoner\\Flashcards_React\\Flashcards_React\\Flashcards_React.csproj",
-        "packagesPath": "C:\\Users\\piotr\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\piotr\\Documents\\Webapplikasjoner\\Flashcards_React\\Flashcards_React\\obj\\",
+        "projectPath": "D:\\GitHub\\WebApp\\Flashcards_React\\Flashcards_React\\Flashcards_React.csproj",
+        "packagesPath": "C:\\Users\\Zarmina\\.nuget\\packages\\",
+        "outputPath": "D:\\GitHub\\WebApp\\Flashcards_React\\Flashcards_React\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\piotr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Zarmina\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -108,7 +108,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

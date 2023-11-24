@@ -19,13 +19,15 @@ export class Layout extends Component {
 import React from 'react';
 import { Container } from 'reactstrap';
 import NavMenu from './NavMenu';
+import WaveAnimation from './WaveAnimation';
 
 const Layout = ({ children }) => (
   <div>
-    <NavMenu />
-    <Container tag="main">
-      {children}
-    </Container>
+        <NavMenu />
+        <WaveAnimation/>
+        <Container tag="main">
+            {children}
+        </Container>
   </div>
 );
 
