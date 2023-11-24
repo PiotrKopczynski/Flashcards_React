@@ -363,3 +363,7 @@ MigrationBackup/
 FodyWeavers.xsd
 
 Flashcards_React.db
+/Flashcards_React/obj/Debug/net7.0/Flashcards_React.pdb
+/Flashcards_React/obj/Debug/net7.0/Flashcards_React.dll
+/Flashcards_React/obj/Debug/net7.0/Flashcards_React.assets.cache
+/Flashcards_React/obj/Debug/net7.0/refint/Flashcards_React.dll
