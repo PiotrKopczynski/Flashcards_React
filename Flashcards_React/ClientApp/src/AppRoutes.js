@@ -5,6 +5,9 @@ import Login from "./components/authentication/Login";
 import Register from "./components/authentication/Register";
 import BrowseDecks from "./components/BrowseDecks";
 import UpdateDeck from "./components/UpdateDeck";
+import CreateDeck from "./components/CreateDeck";
+import DeleteDeck from "./components/DeleteDeck";
+
 
 const AppRoutes = [
   {
@@ -26,6 +29,14 @@ const AppRoutes = [
   {
     path: '/updatedeck/:deckId',
     element: <UpdateDeck />
+  },
+  {
+    path: '/createdeck',
+    element: <CreateDeck />
+  },
+  {
+    path: '/deletedeck/:deckId',
+    element: <DeleteDeck />
   },
   {
     path: '/login',

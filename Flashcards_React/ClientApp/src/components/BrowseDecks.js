@@ -43,6 +43,12 @@ const BrowseDecks = () => {
     const handleUpdateDeckButton = (deck) => {
         navigate(`/updatedeck/${deck.deckId}`, { state: {deck}});
     }
+    const handleCreateDeckButton = () => {
+        navigate(`/createdeck`, { state: { } });
+    }
+    const handleDeleteDeckButton = (deck) => {
+        navigate(`/deletedeck/${deck.deckId}`, { state: {deck} });
+    }
 
     return (
         <div>
@@ -58,8 +64,14 @@ const BrowseDecks = () => {
                             <button onClick={() => handleUpdateDeckButton(deck)}>
                                 Update Deck
                             </button>
+                            <button onClick={() => handleDeleteDeckButton(deck)}>
+                                Delete Deck
+                            </button>
                         </div>
                     ))}
+                        <button onClick={() => handleCreateDeckButton()}>
+                            Create Deck
+                        </button>
                 </div>
             )}
         </div>
