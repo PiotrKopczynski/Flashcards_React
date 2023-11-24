@@ -363,3 +363,5 @@ MigrationBackup/
 FodyWeavers.xsd
 
 Flashcards_React.db
+/Flashcards_React/obj/Debug/net7.0/Flashcards_React.AssemblyInfoInputs.cache
+/Flashcards_React/obj/Debug/net7.0/Flashcards_React.assets.cache
