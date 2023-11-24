@@ -365,3 +365,6 @@ FodyWeavers.xsd
 Flashcards_React.db
 /Flashcards_React/obj/Debug/net7.0/Flashcards_React.AssemblyInfoInputs.cache
 /Flashcards_React/obj/Debug/net7.0/Flashcards_React.assets.cache
+/Flashcards_React/obj/Debug/net7.0/Flashcards_React.GeneratedMSBuildEditorConfig.editorconfig
+/Flashcards_React/obj/Debug/net7.0/spa.proxy.json
+/Flashcards_React/obj/Debug/net7.0/Flashcards_React.RazorAssemblyInfo.cache
