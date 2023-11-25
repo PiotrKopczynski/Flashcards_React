@@ -2,6 +2,7 @@
 import { useNavigate } from 'react-router-dom';
 import api from '../api/axios';
 import AuthContext from '../context/AuthProvider';
+import './StyleFile.css'; 
 
 const BrowseDecks = () => {
     const [decks, setDecks] = useState([]);
@@ -50,29 +51,36 @@ const BrowseDecks = () => {
         navigate(`/deletedeck/${deck.deckId}`, { state: {deck} });
     }
 
+
     return (
         <div>
             <h1>Deck List</h1>
             {loading ? (
                 <p>Loading...</p>
             ) : (
-                <div className="deck-container">
-                    {decks.map(deck => (
-                        <div key={deck.deckId} className="card">
-                            <h2>{deck.title}</h2>
-                            <p>{deck.description}</p>
-                            <button onClick={() => handleUpdateDeckButton(deck)}>
-                                Update Deck
-                            </button>
-                            <button onClick={() => handleDeleteDeckButton(deck)}>
-                                Delete Deck
-                            </button>
-                        </div>
-                    ))}
-                        <button onClick={() => handleCreateDeckButton()}>
-                            Create Deck
+                <>
+                    <div className="row row-cols-1 row-cols-md-3 g-4">
+                        {decks.map(deck => (
+                            <div key={deck.deckId} className="col">
+                                <div className="card text-center" style={{ width: '18rem' }}>
+                                    <div className="card-body">
+                                        <h2 className="fs-3 card-title">{deck.title}</h2>
+                                        <p className="card-text">{deck.description}</p>
+                                        <button class="btn btn-secondary mt-2" onClick={() => handleUpdateDeckButton(deck)}>
+                                            <i class="fas fa-pen-to-square"></i>
+                                        </button>
+                                        <button class="btn btn-danger mt-2" onClick={() => handleDeleteDeckButton(deck)}>
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                        <button class="btn btn-outline-primary" onClick={() => handleCreateDeckButton()}>
+                        Create New Deck
                         </button>
-                </div>
+                </>
             )}
         </div>
     );

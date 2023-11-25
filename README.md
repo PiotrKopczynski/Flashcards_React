@@ -36,3 +36,7 @@ npm install --save @fortawesome/react-fontawesome
 2. **Language Flashcards**: If you choose language flashcards, the text-to-speech feature allows you to hear pronunciations in either Norwegian or English. Simply click on the sound sign to have the text read aloud.
 
 3. **Non-Language Flashcards**: For non-language flashcards, you can interact with the content and test your knowledge.
+# Flashcards_React
+
+To use button icons in BrowseDeck: 
+npm install --save @fortawesome/fontawesome-free
