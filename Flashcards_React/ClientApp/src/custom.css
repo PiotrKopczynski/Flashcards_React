@@ -1,4 +1,4 @@
-/* ******************************  DEFAULT DESIGN FOR ALL HTML PAGES ****************************** */
+/* ******************************  DEFAULT DESIGN FOR ALL WHOLE PROJECT ****************************** */
 
 * {
     padding: 0;
@@ -6,10 +6,11 @@
     box-sizing: border-box;
 }
 
-a {
+Link {
     color: #7c116b;
     text-decoration: underline;
 }
+
 
 html {
     font-size: 12px;
@@ -37,13 +38,54 @@ h1 {
     color: #712c66;
 }
 
+/* ********** Targetting Extra Small Devices ********** */
+
+@media (max-width: 576px) {
+
+    /* login form id */
+    #account {
+        max-width: 100%;
+    }
+
+    /* targetting input fields of the form */
+    .form-control {
+        width: 100%;
+    }
+}
+
+/* ********** Targetting Medium Devices ********** */
+
+@media (min-width: 768px) {
+
+    .container {
+        width: 738px;
+    }
+
+    html {
+        font-size: 14px;
+    }
+
+    .section-intro {
+        padding: 60px 5vw;
+    }
+}
+
+/* ********** Targetting Large Devices ********** */
+
+@media (min-width: 992px) {
+
+    .login-form-section {
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+}
+
 body {
     margin: 0;
     padding: 0;
     font-family: 'Prompt',sans-serif;
     color: #712c66;
     background: #FFFAF0;
-    /*****/
     overflow-x: hidden;
     width: 100%;
     min-height: 100vh;
@@ -71,7 +113,21 @@ body {
     padding: 60px 5vw;
 }
 
+/* ********** Cat Animation On Default Landing Page ********** */
 
+.blob-motion {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    position: absolute;
+    transform: translateY(-70%);
+    z-index: 0;
+    margin: 10px;
+}
+
+.blob-content {
+    z-index: 1;
+}
 
 /* For main contents of the html container*/
 .main-content {
@@ -79,34 +135,15 @@ body {
 }
 
 
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-code {
-  color: #E01A76;
-}
-
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
-
 /* Css for the registration form */
 .instructions {
-  font-size: 0.75rem;
-  border-radius: 0.5rem;
-  background: #000;
-  color: #fff;
-  padding: 0.25rem;
-  position: relative;
-  bottom: -10px;
+    font-size: 0.75rem;
+    border-radius: 0.5rem;
+    background: #000;
+    color: #fff;
+    padding: 0.25rem;
+    position: relative;
+    bottom: -10px;
 }
 
 .instructions > svg {
