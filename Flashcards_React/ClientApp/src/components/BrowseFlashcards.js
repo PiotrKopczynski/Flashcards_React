@@ -31,7 +31,7 @@ const BrowseFlashcards = () => {
    
     return (
         <div>
-            <h1>Deck List</h1>
+            <h1>Flashcards</h1>
             {loading?(
                 <p> Loading...</p >
             ) : (
