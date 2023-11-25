@@ -6,7 +6,7 @@
     box-sizing: border-box;
 }
 
-Link {
+a {
     color: #7c116b;
     text-decoration: underline;
 }
@@ -99,6 +99,7 @@ body {
 
 .section-intro {
     position: relative;
+    background-color: #FFFAF0;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
