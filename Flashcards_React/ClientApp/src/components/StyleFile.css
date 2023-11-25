@@ -129,20 +129,13 @@
     color: black;
 }
 
-/*Css fot the pagination menu*/
+/*/////////////////////////////////////////////// Css for the pagination menu ///////////////////////////////////////////////////*/
 nav {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
 }
-
-/*button {
-    margin: 1em;
-    padding: 1em;
-    font: inherit;
-    border-radius: 15px;
-}*/
 
 .nav {
     margin-top: 1rem;
@@ -161,3 +154,75 @@ nav {
         .nav button:focus {
             background-color: yellow;
         }
+
+/*/////////////////////////////////////////////// Css for the pagination SearchBar ///////////////////////////////////////////////////*/
+
+.search {
+    width: 50%;
+    border: 2px solid #000;
+    border-radius: 2em;
+    overflow: hidden;
+    font-size: 1rem;
+    display: flex;
+    flex-flow: row nowrap;
+    margin-bottom: 5vh;
+  }
+  
+  .search:focus-within {
+    box-shadow: 2px 2px 5px #000;
+  }
+  
+  .searchButton,
+  .searchInput {
+    background-color: #fff;
+    border: none;
+    outline: none;
+  }
+
+.searchInput {
+    padding: 2em;
+    margin-left: 1em;
+    margin-top: 0.5em;
+    width: 85%;
+}
+  
+  .searchButton {
+    width: 15%;
+    font-size: 1.5rem;
+    padding-right: 0.5em;
+    color: gray;
+    display: grid;
+    place-content: center;
+  }
+
+  @media (min-width: 576px) {
+    .search {
+      font-size: 1.5rem;
+    }
+  
+    .searchButton {
+      font-size: 2rem;
+    }
+  }
+  
+  @media (min-width: 800px) {
+    .search {
+      width: 75%;
+      font-size: 2rem;
+    }
+  
+    .searchButton {
+      padding-right: 0.5em;
+      font-size: 3rem;
+    }
+  }
+
+/*Container for empty search results text*/
+#emptyResultsContainer {
+    display: flex;
+    font-size: 2em;
+    left: 50%;
+    right: 50%;
+    margin-left: 9em;
+    transform: translate(-50%, -50%);
+}
