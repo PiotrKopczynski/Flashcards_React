@@ -31,7 +31,7 @@ namespace Flashcards_React.Controllers
 
         [HttpGet]
         [Route("BrowseDecks")]
-        public async Task<IActionResult> BrowseDecks(string? searchString)
+        public async Task<IActionResult> BrowseDecks(string? searchString, int? pageNumber)
         // Function that retrieves a list of Decks from the database. The Decks can be filtered using the optional searchString parameter.
         {
             var flashcardsUserId = _userManager.GetUserId(this.User) ?? ""; // If the flashcardsUserId cannot be retrieved, set it to "".
@@ -54,7 +54,20 @@ namespace Flashcards_React.Controllers
                     return NotFound("Deck list not found");
                 }
             }
-            return Ok(decks);
+            var pageSize = 6;
+            // We return the decks through the PaginatedList<> class such that not all decks are sent to the frontend at once.
+            PaginatedList<Deck> paginatedDecks = PaginatedList<Deck>.Create(decks.ToList(), pageNumber ?? 1, pageSize)
+                ?? new PaginatedList<Deck>(new List<Deck>(), 0, 1, 1);
+
+            var response = new
+            {
+                Decks = paginatedDecks,
+                paginatedDecks.TotalPages,
+                paginatedDecks.HasPreviousPage,
+                paginatedDecks.HasNextPage
+            };
+
+            return Ok(response);
         }
 
         [HttpPost]
