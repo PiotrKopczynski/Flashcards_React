@@ -61,10 +61,9 @@ const UpdateDeck = () => {
                     required
                     onChange={(e) => setDescription(e.target.value)}
                 />
-
-                <button type="button" onClick={handleSubmit}>Save</button>
-                <button type="button" onClick={handleCancel}>Cancel</button>
             </form>
+            <button class="btn btn-primary mt-4 m-2" type="button" onClick={handleSubmit}>Save</button>
+            <button class="btn btn-secondary mt-4 m-2" type="button" onClick={handleCancel}>Cancel</button>
             <p>Deck ID: {deck.deckId}</p>
             <p>Title: {deck.title}</p>
             <p>Description: {deck.description}</p>
