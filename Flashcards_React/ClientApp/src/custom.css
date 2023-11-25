@@ -8,9 +8,12 @@
 
 a {
     color: #7c116b;
-    text-decoration: underline;
+    
 }
 
+    a:visited {
+        color: #FFFAF0;
+    }
 
 html {
     font-size: 12px;
@@ -34,9 +37,7 @@ h1 {
     padding: 3px;
 }
 
-.nav-link {
-    color: #712c66;
-}
+
 
 /* ********** Targetting Extra Small Devices ********** */
 
@@ -114,21 +115,7 @@ body {
     padding: 60px 5vw;
 }
 
-/* ********** Cat Animation On Default Landing Page ********** */
 
-.blob-motion {
-    width: 100%;
-    max-width: 800px;
-    height: auto;
-    position: absolute;
-    transform: translateY(-70%);
-    z-index: 0;
-    margin: 10px;
-}
-
-.blob-content {
-    z-index: 1;
-}
 
 /* For main contents of the html container*/
 .main-content {
