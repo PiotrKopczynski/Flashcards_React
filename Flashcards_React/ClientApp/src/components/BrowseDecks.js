@@ -18,7 +18,8 @@ const BrowseDecks = () => {
     // Fetch decks from the server
     const getDecks = async (page) => {
         try {
-            // CHECK HERE THAT PAGE IS NOT LARGER THAN TOTALPAGES
+            page = (page < 0) ? 1 : page;
+            page = (page > totalPages) ? totalPages : page;
             const response = await api.get(`api/Deck/BrowseDecks?pageNumber=${page}`);
 
             if (response.status === 200) {
