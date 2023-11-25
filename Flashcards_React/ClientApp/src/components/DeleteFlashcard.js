@@ -17,9 +17,10 @@ const DeleteFlashcard = () => {
         }
 
         try {
-            const response = await api.post('api/Flashcard/DeleteFlashcardConfirmed', {
-                id: flashcard.flashcardId,
-                deckId: flashcard.deckId
+            const response = await api.delete(`api/Flashcard/DeleteFlashcard/${flashcard.flashcardId}`, {
+                data: {
+                    deckId: flashcard.deckId
+                }
             });
             if (response.status === 200) {
                 console.log("DeleteFlashcard response: ", response.data);
@@ -34,6 +35,7 @@ const DeleteFlashcard = () => {
                 navigate('/login');
             }
         }
+
     };
 
     const handleCancel = () => {
