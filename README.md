@@ -24,7 +24,7 @@
 npm i --save @fortawesome/fontawesome-svg-core
 npm install --save @fortawesome/free-solid-svg-icons
 npm install --save @fortawesome/react-fontawesome
-
+``````
 > [!NOTE]
 > Please log in using the admin account for having access to all functions
 > **Admin email**: admin@example.com
