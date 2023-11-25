@@ -15,6 +15,8 @@ namespace Flashcards_React.DAL
         public DbSet<Flashcard> Flashcards { get; set; }
         // Add Deck entity
         public DbSet<Deck> Decks { get; set; }
+        // Add RefreshToken entity
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -1,0 +1,41 @@
+﻿
+#waves {
+    width: 100%;
+    height: auto;
+}
+
+@keyframes move-up {
+    0% {
+        transform: translateY(2) scale(1);
+    }
+
+    50% {
+        transform: translateY(-5px) scale(1.5);
+    }
+
+    100% {
+        transform: translateY(2) scale(1);
+    }
+}
+
+@keyframes move-down {
+    0% {
+        transform: translateY(0) scale(1);
+    }
+
+    50% {
+        transform: translateY(10px) scale(1.2);
+    }
+
+    100% {
+        transform: translateY(0) scale(1);
+    }
+}
+
+.orange {
+    animation: move-up 22s infinite;
+}
+
+.red {
+    animation: move-down 22s infinite;
+}

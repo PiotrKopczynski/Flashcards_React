@@ -1,18 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Container } from 'reactstrap';
-import { NavMenu } from './NavMenu';
+import NavMenu from './NavMenu';
+import WaveAnimation from './WaveAnimation';
 
-export class Layout extends Component {
-  static displayName = Layout.name;
-
-  render() {
-    return (
-      <div>
+const Layout = ({ children }) => (
+    <div>
         <NavMenu />
+        <WaveAnimation />
         <Container tag="main">
-          {this.props.children}
+            {children}
         </Container>
-      </div>
-    );
-  }
-}
+    </div>
+);
+
+export default Layout;
