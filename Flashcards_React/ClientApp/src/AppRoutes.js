@@ -7,6 +7,7 @@ import BrowseDecks from "./components/BrowseDecks";
 import UpdateDeck from "./components/UpdateDeck";
 import CreateDeck from "./components/CreateDeck";
 import DeleteDeck from "./components/DeleteDeck";
+import BrowseFlashcards from "./components/BrowseFlashcards";
 
 
 const AppRoutes = [
@@ -37,6 +38,10 @@ const AppRoutes = [
   {
     path: '/deletedeck/:deckId',
     element: <DeleteDeck />
+  },
+  {
+    path: '/browseflashcards/:deckId',
+    element: <BrowseFlashcards />
   },
   {
     path: '/login',

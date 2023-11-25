@@ -61,6 +61,9 @@ const BrowseDecks = () => {
     const handleDeleteDeckButton = (deck) => {
         navigate(`/deletedeck/${deck.deckId}`, { state: {deck} });
     }
+    const handleBrowseFlashcardsButton = (deck) => {
+        navigate(`/browseflashcards/${deck.deckId}`, { state: { deck } });
+    }
 
     const pagesArray = Array(totalPages).fill().map((_, index) => index + 1)
 
@@ -94,6 +97,9 @@ const BrowseDecks = () => {
                                     <div className="card-body">
                                         <h2 className="fs-3 card-title">{deck.title}</h2>
                                         <p className="card-text">{deck.description}</p>
+                                        <button class="btn btn-primary mt-2" onClick={() => handleBrowseFlashcardsButton(deck)}>
+                                            <i class="fas fa-arrow-alt-circle-right"></i> View
+                                        </button>
                                         <button class="btn btn-secondary mt-2" onClick={() => handleUpdateDeckButton(deck)}>
                                             <i class="fas fa-pen-to-square"></i>
                                         </button>
