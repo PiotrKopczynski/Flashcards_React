@@ -4,12 +4,14 @@ import NavMenu from './NavMenu';
 import WaveAnimation from './WaveAnimation';
 
 const Layout = ({ children }) => (
-    <div>
+    <div className="main-content">
         <NavMenu />
-        <WaveAnimation />
-        <Container tag="main">
-            {children}
-        </Container>
+        <div className="">
+            <WaveAnimation />
+            <Container tag="main" className="pb-5">
+                {children}
+            </Container>   
+        </div>
     </div>
 );
 
