@@ -28,7 +28,14 @@ const BrowseFlashcards = () => {
         getFlashcards();
     }, []);
 
-   
+
+    const handleCreateFlashcardButton = (deck) => {
+        navigate(`/createflashcard/${deck.deckId}`, { state: { deck } });
+    }
+    const handleBackToDeckButton = () => {
+        navigate(`/browsedecks`);
+    }
+
     return (
         <div>
             <h1>Flashcards</h1>
@@ -49,7 +56,13 @@ const BrowseFlashcards = () => {
                                 </div>
                             </div>
                         ))}
-                    </div>
+                     </div>
+                        <button class="btn btn-primary mx-5 mt-2 mb-5" onClick={() => handleCreateFlashcardButton(deck)}>
+                            Create a Flashcard
+                        </button>
+                        <button class="btn btn-primary mx-5 mt-2 mb-5" onClick={() => handleBackToDeckButton()}>
+                            Back to Decks
+                        </button>
                 </>
             )}
         </div>
