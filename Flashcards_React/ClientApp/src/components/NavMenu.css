@@ -1,18 +1,91 @@
-﻿a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
-}
-
-html {
-  font-size: 14px;
-}
-@media (min-width: 768px) {
+﻿@media (min-width: 768px) {
   html {
     font-size: 16px;
   }
 }
 
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+html {
+  font-size: 14px;
 }
+
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    /*word-break: break-all;*/
+}
+
+/* This code is not working some other file is taking priority over this */
+a {
+    color: #a22c65;
+    text-decoration: underline;
+}
+
+    a:hover {
+        color: #f72e16;
+    }
+
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #e0365d;
+    border-color: #cc3558;
+    /*border-color: #1861ac;*/
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+    color: #495057;
+    background-color: #fff;
+    border-color: #dee2e6 #dee2e6 #fff;
+}
+
+.navbar {
+    background-color: black;
+    z-index: 1;
+    display: flex;
+    /*flex-grow: 1;*/
+    justify-content: center;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.navbar-toggler {
+    background-color: black;
+}
+
+.navbar-toggler-icon {
+    display: inline-block;
+    background-color: transparent;
+    position: relative;
+    width: 1.5em;
+    height: 1.5em;
+    vertical-align: middle;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+}
+
+/*.border-top {
+  border-top: 1px solid #e5e5e5;
+}*/
+
+/*.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}*/
+
+/*.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}*/
+
+
+.btn-primary {
+    color: #fff;
+    /*background-color: #1b6ec2;
+  border-color: #1861ac;*/
+}
+
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
