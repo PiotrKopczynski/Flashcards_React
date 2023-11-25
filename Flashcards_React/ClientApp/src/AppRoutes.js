@@ -8,6 +8,8 @@ import UpdateDeck from "./components/UpdateDeck";
 import CreateDeck from "./components/CreateDeck";
 import DeleteDeck from "./components/DeleteDeck";
 import BrowseFlashcards from "./components/BrowseFlashcards";
+import UpdateFlashcard from "./components/UpdateFlashcard";
+import DeleteFlashcard from "./components/DeleteFlashcard";
 
 
 const AppRoutes = [
@@ -42,7 +44,15 @@ const AppRoutes = [
   {
     path: '/browseflashcards/:deckId',
     element: <BrowseFlashcards />
-  },
+   },
+   {
+     path: '/updateflashcards/:deckId',
+     element: <UpdateFlashcard />
+   },
+   {
+      path: '/deleteflashcards/:deckId',
+      element: <DeleteFlashcard />
+   },
   {
     path: '/login',
     element: <Login />
