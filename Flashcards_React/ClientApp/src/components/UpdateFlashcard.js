@@ -132,8 +132,13 @@ const UpdateFlashcard = () => {
                 </div>
 
                 <div className="form-buttons-container">
-                    <button type="submit" className="btn btn-primary mt-4 m-2">Save Changes</button>
-                    <button type="button" onClick={handleCancel} className="btn btn-secondary mt-4 m-2">Cancel</button>
+                    <button class="btn btn-primary mt-4 m-2" type="button" onClick={handleSubmit}>Save Changes</button>
+                    <button class="btn btn-secondary mt-4 m-2" type="button" onClick={handleCancel}>Cancel</button>
+                    <p>Flashcard ID: {flashcard.FlashcardId}</p>
+                    <p>Deck ID: {flashcard.DeckId}</p>
+                    <p>Question: {flashcard.Question}</p>
+                    <p>Answer: {flashcard.Answer}</p>
+                    <p>Notes: {flashcard.Notes}</p>
                 </div>
             </form>
         </section>
