@@ -33,36 +33,36 @@ const NavMenu = () => {
   );*/
 
   return (
-    <header>
-      <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom" container light>
-        <NavbarBrand tag={Link} to="/">Flashcards_React</NavbarBrand>
+      <header>
+          <Navbar className="navbar-expand-sm navbar-toggleable-sm navbar-dark">
+              <NavbarBrand tag={Link} to="/">
+                  <img src="catIcon.svg" alt="Flashcards Logo" width="20" height="20" />
+                  Flashcards
+              </NavbarBrand>
         <NavbarToggler onClick={toggleNavbar} className="mr-2" />
-        <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!collapsed} navbar>
-          <ul className="navbar-nav flex-grow">
-            <NavItem>
-              <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink tag={Link} className="text-dark" to="/counter">Counter</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink tag={Link} className="text-dark" to="/fetch-data">Fetch data</NavLink>
-            </NavItem>
+              <Collapse isOpen={!collapsed} navbar>
+                  <ul className="navbar-nav flex-grow">
+                      <NavItem>
+                          <NavLink tag={Link} className="text-dark" to="/counter">Counter</NavLink>
+                      </NavItem>
+                      <NavItem>
+                          <NavLink tag={Link} className="text-dark" to="/fetch-data">Fetch data</NavLink>
+                      </NavItem>
                       {auth.isLoggedIn ? (
                       <>
                           <NavItem>
-                              <NavLink tag={Link} className="text-dark" to="/browsedecks">Decks</NavLink>
+                              <NavLink tag={Link} className="text-light" to="/browsedecks">Decks</NavLink>
                           </NavItem>
                           <NavItem>
-                              <NavLink className="text-dark" onClick={handleLogout}>Logout</NavLink>
+                              <NavLink className="text-light" onClick={handleLogout}>Logout</NavLink>
                           </NavItem>
                       </>) : (
               <>
                 <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/register">Register</NavLink>
+                  <NavLink tag={Link} className="text-light" to="/register">Register</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/login">Login</NavLink>
+                  <NavLink tag={Link} className="text-light" to="/login">Login</NavLink>
                 </NavItem>
               </>
             )}
