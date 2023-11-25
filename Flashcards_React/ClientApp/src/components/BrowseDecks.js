@@ -2,13 +2,45 @@
 import { useNavigate } from 'react-router-dom';
 import api from '../api/axios';
 import AuthContext from '../context/AuthProvider';
+import PageButton from './PageButton'
 import './StyleFile.css'; 
 
 const BrowseDecks = () => {
     const [decks, setDecks] = useState([]);
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState();
+    const [hasPreviousPage, setHasPreviousPage] = useState();
+    const [hasNextPage, setHasNextPage] = useState();
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
     const { auth, setAuth } = useContext(AuthContext);
+
+    // Fetch decks from the server
+    const getDecks = async (page) => {
+        try {
+            page = (page < 0) ? 1 : page;
+            page = (page > totalPages) ? totalPages : page;
+            const response = await api.get(`api/Deck/BrowseDecks?pageNumber=${page}`);
+
+            if (response.status === 200) {
+                setDecks(response.data.decks);
+                setTotalPages(response.data.totalPages);
+                setHasPreviousPage(response.data.hasPreviousPage);
+                setHasNextPage(response.data.hasNextPage);
+                setLoading(false);
+            }
+        }
+        catch (e) {
+            console.log("This is from the BrowseDecks catch block:", e);
+            if (e.isTokenRefreshError) { // The refresh of the JWT token failed or the tokens were invalid.
+                setAuth({ isLoggedIn: false })
+                localStorage.removeItem('token');
+                localStorage.removeItem('refreshToken');
+                navigate('/login');
+            }
+            setLoading(false);
+        }
+    }
 
     useEffect(() => {
         if (!auth.isLoggedIn) {
@@ -16,30 +48,9 @@ const BrowseDecks = () => {
             localStorage.removeItem('refreshToken');
             navigate('/login');
         }
-        // Fetch decks from the server
-        const getDecks = async () => {
-            try {
-                const searchString = ""; // Replace 'your_search_string' with the actual search string
-                const response = await api.get(`api/Deck/BrowseDecks`);
-
-                if (response.status === 200) {
-                    setDecks(response.data);
-                    setLoading(false);
-                }
-            }
-            catch (e) {
-                console.log("This is from the BrowseDecks catch block:", e);
-                if (e.isTokenRefreshError) { // The refresh of the JWT token failed or the tokens were invalid.
-                    setAuth({ isLoggedIn: false })
-                    localStorage.removeItem('token');
-                    localStorage.removeItem('refreshToken');
-                    navigate('/login');
-                }
-                setLoading(false);
-            }
-        }
-        getDecks();
-    }, []);
+        
+        getDecks(page);
+    }, [page]);
 
     const handleUpdateDeckButton = (deck) => {
         navigate(`/updatedeck/${deck.deckId}`, { state: {deck}});
@@ -54,6 +65,22 @@ const BrowseDecks = () => {
         navigate(`/browseflashcards/${deck.deckId}`, { state: { deck } });
     }
 
+    const pagesArray = Array(totalPages).fill().map((_, index) => index + 1)
+
+    const lastPage = () => setPage(totalPages)
+
+    const firstPage = () => setPage(1)
+
+    const nav = (
+        <nav className="nav">
+            <button onClick={firstPage} disabled={!hasPreviousPage || page === 1}>&lt;&lt;</button>
+            {/* Removed isPreviousData from PageButton to keep button focus color instead */}
+            {pagesArray.map(pg => <PageButton key={pg} pg={pg} setPage={setPage} />)}
+            <button onClick={lastPage} disabled={!hasNextPage || page === totalPages}>&gt;&gt;</button>
+        </nav>
+    )
+
+
 
     return (
         <div>
@@ -62,6 +89,7 @@ const BrowseDecks = () => {
                 <p>Loading...</p>
             ) : (
                 <>
+                    {nav}
                     <div className="row row-cols-1 row-cols-md-3 g-4">
                         {decks.map(deck => (
                             <div key={deck.deckId} className="col">
