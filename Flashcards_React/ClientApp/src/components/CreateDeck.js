@@ -2,6 +2,8 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import api from '../api/axios';
 import AuthContext from '../context/AuthProvider';
+import './StyleFile.css'; 
+
 
 const CreateDeck = () => {
     const location = useLocation();
@@ -65,9 +67,10 @@ const CreateDeck = () => {
                     onChange={(e) => setDescription(e.target.value)}
                 />
 
-                <button type="button" onClick={handleCreate}>Create</button>
-                <button type="button" onClick={handleCancel}>Cancel</button>
             </form>
+            <button class="btn btn-primary mt-5 m-2" type="button" onClick={handleCreate}>Create</button>
+            <button class="btn btn-secondary mt-5 m-2" type="button" onClick={handleCancel}>Cancel</button>
+
             
         </div>
     );
