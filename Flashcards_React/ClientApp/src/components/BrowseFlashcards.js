@@ -91,9 +91,7 @@ const BrowseFlashcards = () => {
                                     <div className="card text-center" style={{ width: '18rem' }}>
                                         <div className="card-body">
                                             <p className="card-text">Question: {flashcard.question}</p>
-                      
                                             {showContent && <p className="card-text">Answer: {flashcard.answer}</p>}
-                        
                                             {showContent && <p className="card-text">Notes: {flashcard.notes}</p>}
                                             <button className="eye-toggle-button" onClick={toggleContent}>
                                                 <FontAwesomeIcon icon={showContent ? faEyeSlash : faEye} aria-hidden="true" />Show answer
