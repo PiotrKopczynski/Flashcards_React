@@ -198,3 +198,20 @@
         transform: scaleX(0.7);
     }
 }
+
+.cat-bubble:hover {
+    opacity: 0;
+}
+
+    .cat-bubble:hover::before,
+    .cat-bubble:hover::after {
+        opacity: 10;
+        width: 15px;
+        height: 9px;
+        transform: translate(-50%, -50%) rotate(45deg) scale(2);
+    }
+
+    .cat-bubble:hover::after {
+        transform: translate(-50%, -30%) rotate(65deg) scale(2);
+    }
+
