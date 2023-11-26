@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import './CatAnimation.css';
 
 const CatAnimation = () => {
     useEffect(() => {
@@ -17,7 +18,7 @@ const CatAnimation = () => {
     }, []);
 
     return (
-        <svg class="blob-motion"
+        <svg className="blob-motion"
             id="visual-cat"
             viewBox="0 0 800 500"
             version="1.1">

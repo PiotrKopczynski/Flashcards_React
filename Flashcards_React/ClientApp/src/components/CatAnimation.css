@@ -1,0 +1,15 @@
+﻿/* ********** Cat Animation On Default Landing Page ********** */
+
+.blob-motion {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    position: absolute;
+    transform: translateY(-70%);
+    z-index: 0;
+    margin: 10px;
+}
+
+.blob-content {
+    z-index: 1;
+}

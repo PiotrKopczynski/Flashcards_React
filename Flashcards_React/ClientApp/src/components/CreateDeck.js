@@ -16,6 +16,7 @@ const CreateDeck = () => {
 
     const handleCreate = async () => {
         if (!auth.isLoggedIn) {
+            // Navigate unauthenticated users out of the authenticated content
             localStorage.removeItem('token');
             localStorage.removeItem('refreshToken');
             navigate('/login');
@@ -34,6 +35,7 @@ const CreateDeck = () => {
         } catch (e) {
             console.log("This is from the CreateDeck catch block:", e);
             if (e.isTokenRefreshError) {
+                // Navigate users with a invalid token pair out of the authenticated content
                 setAuth({ isLoggedIn: false });
                 localStorage.removeItem('token');
                 localStorage.removeItem('refreshToken');

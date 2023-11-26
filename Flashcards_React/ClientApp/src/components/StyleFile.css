@@ -10,11 +10,11 @@
 
 /* Custom modifications on bootstrap buttons */
 
-.btn-primary {
+.card-body .btn-primary {
     background: linear-gradient(45deg, #6610f2, #4a038e);
 }
 
-    .btn-primary:hover {
+    .card-body .btn-primary:hover {
         border: solid;
         border-width: 1px;
         border-color: #ff95a0;
@@ -35,13 +35,13 @@
     align-items: center;
 }
 
-.btn-secondary {
+.card-body .btn-secondary {
     background: linear-gradient(45deg, #FF0080, #a22c65 );
     /*font-size: 12px;*/
     /*transition: background-color 0.3s ease, transform 0.2s ease;*/
 }
 
-    .btn-secondary:hover {
+    .card-body .btn-secondary:hover {
         border: solid;
         border-width: 1px;
         border-color: #ff95a0;
@@ -54,12 +54,12 @@
         box-shadow: 0 0 0 0.25rem rgba(255, 0, 255, 0.5) !important;
     }
 
-.btn-danger {
+.card-body .btn-danger {
     background: linear-gradient(45deg, #bb2d3b, #ff0018 );
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-    .btn-danger:hover {
+    .card-body .btn-danger:hover {
         background: linear-gradient(45deg, #ff0018, #bb2d3b);
         border-color: #ff95a0;
         transform: scale(1.05);
@@ -242,13 +242,13 @@ nav {
   .search:focus-within {
     box-shadow: 2px 2px 5px #000;
   }
-  
-  .searchButton,
-  .searchInput {
-    background-color: #fff;
+
+.searchButton,
+.searchInput {
+    background-color: #FFFAF0;
     border: none;
     outline: none;
-  }
+}
 
 .searchInput {
     padding: 2em;
