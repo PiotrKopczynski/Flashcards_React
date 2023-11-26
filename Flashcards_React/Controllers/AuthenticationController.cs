@@ -349,19 +349,24 @@ namespace Flashcards_React.Controllers
         private async Task<AuthResult> GenerateJwtToken(IdentityUser flashcardsUser)
             // This function creates a new JWT token and a RefreshToken for the flashcardsUser.
         {
+            // Get the role of the user
+            var roles = await _userManager.GetRolesAsync(flashcardsUser);
+            var role = roles.FirstOrDefault() ?? "user";
+
             var jwtTokenHandler = new JwtSecurityTokenHandler();
 
             var key = Encoding.UTF8.GetBytes(_configuration["JwtConfig:Secret"] ?? ""); // Get the secret key as an array of bytes
 
             var tokenDescriptor = new SecurityTokenDescriptor() // Token descriptor that allows configure what the payload data of the jwt token will be.
             {
-                Subject = new ClaimsIdentity(new [] // List of claims.
+                Subject = new ClaimsIdentity(new[] // List of claims.
                 {
                     new Claim("Id", flashcardsUser.Id),
                     new Claim(JwtRegisteredClaimNames.Sub, flashcardsUser.Id ?? ""),
                     new Claim(JwtRegisteredClaimNames.Email, flashcardsUser.Id ?? ""),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()), // Unique token reference.
                     new Claim(JwtRegisteredClaimNames.Iat, DateTime.Now.ToUniversalTime().ToString()), // Creates a unique id that will be specific for the token and the user.
+                    new Claim(ClaimTypes.Role, role) // Add role to the JWT for correct authorization
                 }),
                 
                 Expires = DateTime.Now.Add(TimeSpan.Parse(_configuration["JwtConfig:ExpiryTimeFrame"] ?? "00:01:00")), // Check the JwtConfig:ExpiryTimeFrame in appsettings.
@@ -389,7 +394,8 @@ namespace Flashcards_React.Controllers
             {
                 Token = jwtToken,
                 RefreshToken = refreshToken.Token,
-                Result = true
+                Result = true,
+                UserRole = role
             };
         }
 

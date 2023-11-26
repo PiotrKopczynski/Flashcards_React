@@ -37,6 +37,11 @@ const NavMenu = () => {
                           <NavItem>
                               <NavLink tag={Link} className="text-light" to="/browsedecks">Decks</NavLink>
                           </NavItem>
+                          {auth.userRole === "admin" && (
+                              <NavItem>
+                                  <NavLink tag={Link} className="text-light" to="/usertable">UserTable</NavLink>
+                              </NavItem>
+                          )}
                           <NavItem>
                               <NavLink className="text-light" onClick={handleLogout}>Logout</NavLink>
                           </NavItem>
@@ -48,8 +53,7 @@ const NavMenu = () => {
                 <NavItem>
                   <NavLink tag={Link} className="text-light" to="/login">Login</NavLink>
                 </NavItem>
-              </>
-            )}
+              </>)}
           </ul>
         </Collapse>
       </Navbar>
