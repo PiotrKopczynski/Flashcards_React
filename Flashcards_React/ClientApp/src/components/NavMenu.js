@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Collapse, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import './NavMenu.css';
-import AuthContext from '../context/AuthProvider'; // Adjust the path accordingly
+import AuthContext from '../context/AuthProvider';
 
 const NavMenu = () => {
   const { auth, setAuth } = useContext(AuthContext);
@@ -21,16 +21,6 @@ const NavMenu = () => {
     navigate('/');
   };
 
- /* const renderAuthenticatedLinks = () => (
-    <>
-      <NavItem>
-        <NavLink tag={Link} className="text-dark" to="/browsedecks">Decks</NavLink>
-      </NavItem>
-      <NavItem>
-        <NavLink className="text-dark" onClick={handleLogout}>Logout</NavLink>
-      </NavItem>
-    </>
-  );*/
 
   return (
       <header>
@@ -47,6 +37,11 @@ const NavMenu = () => {
                           <NavItem>
                               <NavLink tag={Link} className="text-light" to="/browsedecks">Decks</NavLink>
                           </NavItem>
+                          {auth.userRole === "admin" && (
+                              <NavItem>
+                                  <NavLink tag={Link} className="text-light" to="/usertable">UserTable</NavLink>
+                              </NavItem>
+                          )}
                           <NavItem>
                               <NavLink className="text-light" onClick={handleLogout}>Logout</NavLink>
                           </NavItem>
@@ -58,8 +53,7 @@ const NavMenu = () => {
                 <NavItem>
                   <NavLink tag={Link} className="text-light" to="/login">Login</NavLink>
                 </NavItem>
-              </>
-            )}
+              </>)}
           </ul>
         </Collapse>
       </Navbar>
