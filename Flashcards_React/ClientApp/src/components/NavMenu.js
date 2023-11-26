@@ -42,12 +42,6 @@ const NavMenu = () => {
         <NavbarToggler onClick={toggleNavbar} className="mr-2" />
               <Collapse isOpen={!collapsed} navbar>
                   <ul className="navbar-nav flex-grow">
-                      <NavItem>
-                          <NavLink tag={Link} className="text-dark" to="/counter">Counter</NavLink>
-                      </NavItem>
-                      <NavItem>
-                          <NavLink tag={Link} className="text-dark" to="/fetch-data">Fetch data</NavLink>
-                      </NavItem>
                       {auth.isLoggedIn ? (
                       <>
                           <NavItem>
