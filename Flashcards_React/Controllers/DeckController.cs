@@ -12,7 +12,7 @@ using System;
 namespace Flashcards_React.Controllers
 {
     [Authorize]
-    [Route("api/[controller]")]
+    [Route("api/[controller]")] // The square brackets will be filled with the controller name so in this case this will be api/authentication.
     [ApiController]
     public class DeckController : ControllerBase
     {
@@ -55,7 +55,7 @@ namespace Flashcards_React.Controllers
                 }
             }
             var pageSize = 6;
-            // We return the decks through the PaginatedList<> class such that not all decks are sent to the frontend at once.
+            // We return the decks wrapped in the PaginatedList<> class such that not all decks are sent to the frontend at once.
             PaginatedList<Deck> paginatedDecks = PaginatedList<Deck>.Create(decks.ToList(), pageNumber ?? 1, pageSize)
                 ?? new PaginatedList<Deck>(new List<Deck>(), 0, 1, 1);
 

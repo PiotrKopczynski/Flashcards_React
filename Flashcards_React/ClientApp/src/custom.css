@@ -6,12 +6,6 @@
     box-sizing: border-box;
 }
 
-a {
-    color: #7c116b;
-    text-decoration: underline;
-}
-
-
 html {
     font-size: 12px;
     position: relative;
@@ -34,9 +28,6 @@ h1 {
     padding: 3px;
 }
 
-.nav-link {
-    color: #712c66;
-}
 
 /* ********** Targetting Extra Small Devices ********** */
 
@@ -80,6 +71,7 @@ h1 {
     }
 }
 
+/* For main contents of the html container*/
 body {
     margin: 0;
     padding: 0;
@@ -91,7 +83,11 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    /*justify-content: space-between;*/
+
+}
+
+.main-content {
+    flex: 1;
 }
 
 
@@ -112,27 +108,6 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 60px 5vw;
-}
-
-/* ********** Cat Animation On Default Landing Page ********** */
-
-.blob-motion {
-    width: 100%;
-    max-width: 800px;
-    height: auto;
-    position: absolute;
-    transform: translateY(-70%);
-    z-index: 0;
-    margin: 10px;
-}
-
-.blob-content {
-    z-index: 1;
-}
-
-/* For main contents of the html container*/
-.main-content {
-    flex: 1;
 }
 
 
@@ -180,4 +155,78 @@ body {
 
 .line {
   display: inline-block;
+}
+
+
+/* ********** Custom Modifications On Bootstrap Button Classes ********** */
+
+.btn {
+    border-radius: 0.85rem;
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, #543770, #543770);
+    border: none;
+    /*border-color: #543770;*/
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+    .btn-primary:hover {
+        color: #fff;
+        /*border-color: #cc3557;*/
+        border: none;
+        background: linear-gradient(45deg, #a22c65, #cc3557);
+        transform: scale(1.05);
+    }
+
+    .btn-check:focus + .btn-primary, .btn-primary:focus {
+        color: #fff;
+        background-color: #cc3557;
+        /*border-color: #cc3557;*/
+        border: none;
+        box-shadow: 0 0 0 0.25rem rgba(234, 80, 62, 0.5) !important;
+    }
+
+    .btn-check:checked + .btn-primary, .btn-check:active + .btn-primary, .btn-primary:active, .btn-primary.active, .show > .btn-primary.dropdown-toggle {
+        color: #fff;
+        background-color: #543770;
+        border-color: #cc3557;
+    }
+
+.btn-secondary {
+    background: linear-gradient(45deg, #6c757d, #6c757d);
+    /*border-color: #6c757d;*/
+    border: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+    .btn-secondary:hover {
+        color: #fff;
+        /*border-color: #cc3557;*/
+        border: none;
+        background: linear-gradient(45deg, #a22c65, #cc3557);
+        transform: scale(1.05);
+    }
+
+    .btn-check:focus + .btn-secondary, .btn-secondary:focus {
+        color: #fff;
+        background-color: #5c636a;
+        /*border-color: #565e64;*/
+        border: none;
+        box-shadow: 0 0 0 0.25rem rgba(234, 80, 62, 0.5) !important;
+    }
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #fb25c9;
+}
+
+.alert-dismissible .btn-close {
+    position: absolute;
+    padding: 0.5rem 0.5rem;
+}
+
+.btn-close:hover {
+    color: #192040;
+    text-decoration: none;
+    opacity: .75;
 }

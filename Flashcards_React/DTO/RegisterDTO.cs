@@ -4,7 +4,7 @@ namespace Flashcards_React.DTO
 {
     public class RegisterDTO
     {
-        // Add input validation here?
+        // The input validation is configured in Program.cs such that it is handles by the Identity package.
         [Required]
         public required string UserName { get; set; }
         [Required]

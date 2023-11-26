@@ -4,17 +4,6 @@
   }
 }
 
-html {
-  font-size: 14px;
-}
-
-a.navbar-brand {
-    white-space: normal;
-    text-align: center;
-    /*word-break: break-all;*/
-}
-
-/* This code is not working some other file is taking priority over this */
 a {
     color: #a22c65;
     text-decoration: underline;
@@ -24,12 +13,32 @@ a {
         color: #f72e16;
     }
 
+    a.navbar-brand {
+        white-space: normal;
+        text-align: center;
+    }
+
+.navbar-brand:hover, .navbar-brand:focus {
+    color: #fff;
+}
+
+img, svg {
+    vertical-align: middle; 
+}
+
+.navbar > .container, .navbar > .container-fluid, .navbar > .container-sm, .navbar > .container-md, .navbar > .container-lg, .navbar > .container-xl, .navbar > .container-xxl {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: space-between;
+    flex-direction: row;
+    align-items: baseline;
+}
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
     color: #fff;
     background-color: #e0365d;
     border-color: #cc3558;
-    /*border-color: #1861ac;*/
 }
 
 .nav-tabs .nav-link.active,

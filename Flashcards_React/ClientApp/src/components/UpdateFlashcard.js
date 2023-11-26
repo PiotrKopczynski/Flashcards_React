@@ -29,6 +29,7 @@ const UpdateFlashcard = () => {
         e.preventDefault();
 
         if (!auth.isLoggedIn) {
+            // Navigate unauthenticated users out of the authenticated content
             localStorage.removeItem('token');
             localStorage.removeItem('refreshToken');
             navigate('/login');

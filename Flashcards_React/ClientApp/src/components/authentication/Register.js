@@ -2,7 +2,6 @@
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {Link, useNavigate} from "react-router-dom";
-import axios from '../../api/axios';
 
 const USERNAME_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -208,7 +207,7 @@ const Register = () => {
                     <p>
                         Already registered?<br />
                         <span className="line">
-                            <Link to="/login">Sign In</Link>
+                                <Link to="/login">Sign In</Link>
                         </span>
                     </p>
                 </section>

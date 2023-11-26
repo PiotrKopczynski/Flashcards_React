@@ -1,0 +1,19 @@
+﻿.admin-page {
+    overflow-x: auto;
+    margin-left: 2%;
+    margin-right: 2%;
+    width: 30vw;
+}
+
+    .admin-page .table {
+        font-size: 12px;
+    }
+
+    .admin-page .table-striped > tbody {
+        color: #712c66;
+    }
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+    --bs-table-accent-bg: var(--bs-table-striped-bg);
+    color: #712c66;
+}

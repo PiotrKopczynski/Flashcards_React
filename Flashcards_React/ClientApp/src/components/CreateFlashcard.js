@@ -17,6 +17,7 @@ const CreateFlashcard = () => {
 
     const handleCreate = async () => {
         if (!auth.isLoggedIn) {
+            // Navigate unauthenticated out of the authenticated content
             localStorage.removeItem('token');
             localStorage.removeItem('refreshToken');
             navigate('/login');
@@ -38,6 +39,7 @@ const CreateFlashcard = () => {
         } catch (e) {
             console.log("This is from the CreateFlashcard catch block:", e);
             if (e.isTokenRefreshError) {
+                // Navigate users with a invalid token pair out of the authenticated content
                 setAuth({ isLoggedIn: false });
                 localStorage.removeItem('token');
                 localStorage.removeItem('refreshToken');

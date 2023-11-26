@@ -1,5 +1,3 @@
-import { Counter } from "./components/Counter";
-import { FetchData } from "./components/FetchData";
 import Home from "./components/Home";
 import Login from "./components/authentication/Login";
 import Register from "./components/authentication/Register";
@@ -10,6 +8,7 @@ import DeleteDeck from "./components/DeleteDeck";
 import BrowseFlashcards from "./components/BrowseFlashcards";
 import CreateFlashcard from "./components/CreateFlashcard";
 import UserTable from "./components/admin/UserTable";
+import Unauthorized from "./components/admin/Unauthorized";
 import UpdateFlashcard from "./components/UpdateFlashcard";
 import DeleteFlashcard from "./components/DeleteFlashcard";
 
@@ -18,14 +17,6 @@ const AppRoutes = [
   {
     index: true,
     element: <Home />
-  },
-  {
-    path: '/counter',
-    element: <Counter />
-  },
-  {
-    path: '/fetch-data',
-    element: <FetchData />
   },
   {
     path: '/browsedecks',
@@ -62,6 +53,10 @@ const AppRoutes = [
   {
     path: '/usertable',
     element: <UserTable />
+  },
+  {
+    path: '/unauthorized',
+    element: <Unauthorized />
   },
   {
     path: '/login',
