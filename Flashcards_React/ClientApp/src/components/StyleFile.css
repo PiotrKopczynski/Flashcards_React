@@ -171,13 +171,13 @@ nav {
   .search:focus-within {
     box-shadow: 2px 2px 5px #000;
   }
-  
-  .searchButton,
-  .searchInput {
-    background-color: #fff;
+
+.searchButton,
+.searchInput {
+    background-color: #FFFAF0;
     border: none;
     outline: none;
-  }
+}
 
 .searchInput {
     padding: 2em;

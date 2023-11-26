@@ -67,23 +67,6 @@ const BrowseDecks = () => {
         navigate(`/browseflashcards/${deck.deckId}`, { state: { deck } });
     }
 
-    /*
-    const pagesArray = Array(totalPages).fill().map((_, index) => index + 1)
-
-    const lastPage = () => setPage(totalPages)
-
-    const firstPage = () => setPage(1)
-
-    const nav = (
-        <nav className="nav">
-            <button onClick={firstPage} disabled={!hasPreviousPage || deckPage === 1}>&lt;&lt;</button>
-            {pagesArray.map(pg => <PageButton key={pg} pg={pg} setPage={setDeckPage} />)}
-            <button onClick={lastPage} disabled={!hasNextPage || deckPage === totalPages}>&gt;&gt;</button>
-        </nav>
-    )*/
-
-
-
     return (
         <div>
             <h1>Deck List</h1>
