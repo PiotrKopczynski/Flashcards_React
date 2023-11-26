@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import SleepyCatAnimation from './SleepyCatAnimation';
 import BulbAnimation from './BulbAnimation';
@@ -6,6 +6,15 @@ import './AuthenticatedHome.css';
 
   
 const AuthenticatedHome = () => {
+
+    useEffect(() => {
+        document.body.style.backgroundColor = '#192040';
+
+        return () => {
+            document.body.style.backgroundColor = '';
+        };
+    }, []);
+
     return (
         <div>
             <h1 className=" text-center mb-0 fs-1 heading">Ready to practice?</h1>
