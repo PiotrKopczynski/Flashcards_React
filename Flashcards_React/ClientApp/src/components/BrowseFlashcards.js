@@ -1,4 +1,7 @@
-﻿import React, { useEffect, useState, useContext } from 'react';
+﻿import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
+
+import React, { useEffect, useState, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import api from '../api/axios';
 import './StyleFile.css';
@@ -9,6 +12,8 @@ const BrowseFlashcards = () => {
     const [flashcards, setFlashcards] = useState([]);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+    const [showContent, setShowContent] = useState(false);
+
 
     useEffect(() => {
         const getFlashcards = async () => {
@@ -46,6 +51,11 @@ const BrowseFlashcards = () => {
         navigate(`/browsedecks`);
     };
 
+    // Function to toggle answer and notes visibility simultaneously
+    const toggleContent = () => {
+        setShowContent(!showContent);
+    };
+
     return (
         <div>
             <h1>Flashcards</h1>
@@ -53,24 +63,29 @@ const BrowseFlashcards = () => {
                 <p>Loading...</p>
             ) : (
                 <>
-                    <div className="row row-cols-1 row-cols-md-2 g-4">
-                        {flashcards.map((flashcard) => (
-                            <div key={flashcard.FlashcardId} className="col">
-                                <div className="card text-center" style={{ width: '18rem' }}>
-                                    <div className="card-body">
-                                        <p className="card-text">Question: {flashcard.question}</p>
-                                        <p className="card-text">Answer: {flashcard.answer}</p>
-                                        <p className="card-text">Notes: {flashcard.notes}</p>
-                                        <button
-                                            className="btn btn-danger"
-                                            onClick={() => handleDeleteFlashcardButton(flashcard.FlashcardId)}>
-                                            Delete
-                                        </button>
-                                        <button
-                                            className="btn btn-primary mx-2"
-                                            onClick={() => handleUpdateFlashcardButton(flashcard.FlashcardId, deck.deckId)}>
-                                            Update
-                                        </button>
+                        <div className="row row-cols-1 row-cols-md-2 g-4">
+                            {flashcards.map((flashcard) => (
+                                <div key={flashcard.FlashcardId} className="col">
+                                    <div className="card text-center" style={{ width: '18rem' }}>
+                                        <div className="card-body">
+                                            <p className="card-text">Question: {flashcard.question}</p>
+                      
+                                            {showContent && <p className="card-text">Answer: {flashcard.answer}</p>}
+                        
+                                            {showContent && <p className="card-text">Notes: {flashcard.notes}</p>}
+                                            <button className="eye-toggle-button" onClick={toggleContent}>
+                                                <FontAwesomeIcon icon={showContent ? faEyeSlash : faEye} aria-hidden="true" />Show answer
+                                            </button>
+                                            <button
+                                                className="btn btn-danger"
+                                                onClick={() => handleDeleteFlashcardButton(flashcard.FlashcardId)}>
+                                                Delete
+                                            </button>
+                                            <button
+                                                className="btn btn-primary mx-2"
+                                                onClick={() => handleUpdateFlashcardButton(flashcard.FlashcardId, deck.deckId)}>
+                                                Update
+                                            </button>
                                     </div>
                                 </div>
                             </div>
