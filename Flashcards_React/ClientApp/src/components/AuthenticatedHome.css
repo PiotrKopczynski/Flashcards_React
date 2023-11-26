@@ -1,0 +1,25 @@
+﻿.user-landing-page {
+    background: #192040;
+}
+
+
+.heading {
+    flex: 1;
+    padding-right: 20px;
+    color: white;
+}
+
+.practice-btn {
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+#sleepy-cat-btn {
+    font-size: 15px;
+    width: 30%;
+    padding: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
