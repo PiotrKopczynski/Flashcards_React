@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import {useContext} from 'react';
 import UnauthenticatedHome from './UnauthenticatedHome';
 import AuthenticatedHome from './AuthenticatedHome';
 import AuthContext from '../context/AuthProvider';
