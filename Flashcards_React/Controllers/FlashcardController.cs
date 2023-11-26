@@ -28,7 +28,7 @@ namespace Flashcards_React.Controllers
 
         [HttpGet]
         [Route("BrowseFlashcards")]
-        public async Task<IActionResult> BrowseFlashcards(int deckId) // Maybe move this to the DeckController and use the list property of a deck?
+        public async Task<IActionResult> BrowseFlashcards(int deckId, int? pageNumber)
         // Function that retrieves a list of Flashcards belonging to the deck with the 
         {
             var flashcards = await _flashcardRepository.GetFlashcardsByDeckId(deckId);
@@ -37,7 +37,20 @@ namespace Flashcards_React.Controllers
                 _logger.LogError("[FlashcardController] Flashcards not found while executing _flashcardRepository.GetFlashcardsByDeckId() DeckId:{deckId}", deckId);
                 return NotFound("Flashcard list not found");
             }
-            return Ok(flashcards);
+
+            var pageSize = 4;
+            var paginatedFlashcards = PaginatedList<Flashcard>.Create(flashcards.ToList(), pageNumber ?? 1, pageSize) ?? 
+                new PaginatedList<Flashcard>(new List<Flashcard>(), 0, 1, 1); ; // To avoid null warnings
+
+            var response = new
+            {
+                Flashcards = paginatedFlashcards,
+                paginatedFlashcards.TotalPages,
+                paginatedFlashcards.HasPreviousPage,
+                paginatedFlashcards.HasNextPage
+            };
+
+            return Ok(response);
         }
 
         [HttpPost]
