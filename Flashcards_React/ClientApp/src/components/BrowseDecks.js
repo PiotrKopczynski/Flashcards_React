@@ -2,25 +2,27 @@
 import { useNavigate } from 'react-router-dom';
 import api from '../api/axios';
 import AuthContext from '../context/AuthProvider';
-import PageButton from './PageButton'
+import PaginationNav from './PaginationNav';
+import DeckSearchBar from './DeckSearchBar';
 import './StyleFile.css'; 
 
 const BrowseDecks = () => {
     const [decks, setDecks] = useState([]);
-    const [page, setPage] = useState(1);
+    const [deckPage, setDeckPage] = useState(1);
     const [totalPages, setTotalPages] = useState();
     const [hasPreviousPage, setHasPreviousPage] = useState();
     const [hasNextPage, setHasNextPage] = useState();
+    const [searchString, setSearchString] = useState("");
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
     const { auth, setAuth } = useContext(AuthContext);
 
     // Fetch decks from the server
-    const getDecks = async (page) => {
+    const getDecks = async (deckPage, searchString) => {
         try {
-            page = (page < 0) ? 1 : page;
-            page = (page > totalPages) ? totalPages : page;
-            const response = await api.get(`api/Deck/BrowseDecks?pageNumber=${page}`);
+            deckPage = (deckPage < 0) ? 1 : deckPage;
+            deckPage = (deckPage > totalPages) ? totalPages : deckPage;
+            const response = await api.get(`api/Deck/BrowseDecks?pageNumber=${deckPage}&searchString=${searchString}`);
 
             if (response.status === 200) {
                 setDecks(response.data.decks);
@@ -31,7 +33,7 @@ const BrowseDecks = () => {
             }
         }
         catch (e) {
-            console.log("This is from the BrowseDecks catch block:", e);
+            console.error("Error fetching decks:", e);
             if (e.isTokenRefreshError) { // The refresh of the JWT token failed or the tokens were invalid.
                 setAuth({ isLoggedIn: false })
                 localStorage.removeItem('token');
@@ -47,10 +49,9 @@ const BrowseDecks = () => {
             localStorage.removeItem('token');
             localStorage.removeItem('refreshToken');
             navigate('/login');
-        }
-        
-        getDecks(page);
-    }, [page]);
+        }        
+        getDecks(deckPage, searchString);
+    }, [deckPage, searchString]);
 
     const handleUpdateDeckButton = (deck) => {
         navigate(`/updatedeck/${deck.deckId}`, { state: {deck}});
@@ -65,6 +66,7 @@ const BrowseDecks = () => {
         navigate(`/browseflashcards/${deck.deckId}`, { state: { deck } });
     }
 
+    /*
     const pagesArray = Array(totalPages).fill().map((_, index) => index + 1)
 
     const lastPage = () => setPage(totalPages)
@@ -73,12 +75,11 @@ const BrowseDecks = () => {
 
     const nav = (
         <nav className="nav">
-            <button onClick={firstPage} disabled={!hasPreviousPage || page === 1}>&lt;&lt;</button>
-            {/* Removed isPreviousData from PageButton to keep button focus color instead */}
-            {pagesArray.map(pg => <PageButton key={pg} pg={pg} setPage={setPage} />)}
-            <button onClick={lastPage} disabled={!hasNextPage || page === totalPages}>&gt;&gt;</button>
+            <button onClick={firstPage} disabled={!hasPreviousPage || deckPage === 1}>&lt;&lt;</button>
+            {pagesArray.map(pg => <PageButton key={pg} pg={pg} setPage={setDeckPage} />)}
+            <button onClick={lastPage} disabled={!hasNextPage || deckPage === totalPages}>&gt;&gt;</button>
         </nav>
-    )
+    )*/
 
 
 
@@ -89,7 +90,7 @@ const BrowseDecks = () => {
                 <p>Loading...</p>
             ) : (
                 <>
-                    {nav}
+                    <DeckSearchBar setSearchString={setSearchString} />
                     <div className="row row-cols-1 row-cols-md-3 g-4">
                         {decks.map(deck => (
                             <div key={deck.deckId} className="col">
@@ -97,23 +98,25 @@ const BrowseDecks = () => {
                                     <div className="card-body">
                                         <h2 className="fs-3 card-title">{deck.title}</h2>
                                         <p className="card-text">{deck.description}</p>
-                                        <button class="btn btn-primary mt-2" onClick={() => handleBrowseFlashcardsButton(deck)}>
-                                            <i class="fas fa-arrow-alt-circle-right"></i> View
+                                        <button className="btn btn-primary mt-2" onClick={() => handleBrowseFlashcardsButton(deck)}>
+                                            <i className="fas fa-arrow-alt-circle-right"></i> View
                                         </button>
-                                        <button class="btn btn-secondary mt-2" onClick={() => handleUpdateDeckButton(deck)}>
-                                            <i class="fas fa-pen-to-square"></i>
+                                        <button className="btn btn-secondary mt-2" onClick={() => handleUpdateDeckButton(deck)}>
+                                            <i className="fas fa-pen-to-square"></i>
                                         </button>
-                                        <button class="btn btn-danger mt-2" onClick={() => handleDeleteDeckButton(deck)}>
-                                            <i class="fa-solid fa-trash"></i>
+                                        <button className="btn btn-danger mt-2" onClick={() => handleDeleteDeckButton(deck)}>
+                                            <i className="fa-solid fa-trash"></i>
                                         </button>
                                     </div>
                                 </div>
                             </div>
                         ))}
                     </div>
-                        <button class="btn btn-outline-primary" onClick={() => handleCreateDeckButton()}>
+                        {(decks && decks.length) ? <PaginationNav page={deckPage} setPage={setDeckPage} hasPreviousPage={hasPreviousPage}
+                         hasNextPage={hasNextPage} totalPages={totalPages}/> : <div id="emptyResultsContainer">The search results are empty</div>}
+                    <button className="btn btn-outline-primary" onClick={() => handleCreateDeckButton()}>
                         Create New Deck
-                        </button>
+                    </button>
                 </>
             )}
         </div>

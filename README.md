@@ -24,6 +24,8 @@
 npm i --save @fortawesome/fontawesome-svg-core
 npm install --save @fortawesome/free-solid-svg-icons
 npm install --save @fortawesome/react-fontawesome
+npm install --save @fortawesome/fontawesome-free
+npm install axios
 ``````
 > [!NOTE]
 > Please log in using the admin account for having access to all functions
