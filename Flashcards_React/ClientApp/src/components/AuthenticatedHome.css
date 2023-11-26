@@ -1,0 +1,38 @@
+﻿.heading {
+    flex: 1;
+    padding-right: 20px;
+    color: white;
+}
+
+.practice-btn {
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+#sleepy-cat-btn {
+    font-size: 15px;
+    width: 30%;
+    padding: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+/* Custom modifications on bootstrap button */
+
+.practice-btn .btn-primary {
+    background: linear-gradient(45deg, #6610f2, #4a038e);
+}
+
+    .practice-btn .btn-primary:hover {
+        border: solid;
+        border-width: 1px;
+        border-color: #ff95a0;
+        background: linear-gradient(45deg, #4a038e, #6610f2);
+    }
+
+    /*.practice-btn .btn-primary, .practice-btn .btn-primary:focus {
+        background-color: #cc3557;
+        box-shadow: 0 0 0 0.1rem rgba(255, 0, 255, 0.5) !important;
+    }*/

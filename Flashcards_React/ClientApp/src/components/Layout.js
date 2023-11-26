@@ -2,6 +2,7 @@ import React from 'react';
 import { Container } from 'reactstrap';
 import NavMenu from './NavMenu';
 import WaveAnimation from './WaveAnimation';
+import Footer from './Footer';
 
 const Layout = ({ children }) => (
     <div className="main-content">
@@ -12,6 +13,7 @@ const Layout = ({ children }) => (
                 {children}
             </Container>   
         </div>
+        <Footer />
     </div>
 );
 
