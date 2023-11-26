@@ -8,6 +8,7 @@ import DeleteDeck from "./components/DeleteDeck";
 import BrowseFlashcards from "./components/BrowseFlashcards";
 import CreateFlashcard from "./components/CreateFlashcard";
 import UserTable from "./components/admin/UserTable";
+import Unauthorized from "./components/admin/Unauthorized";
 import UpdateFlashcard from "./components/UpdateFlashcard";
 import DeleteFlashcard from "./components/DeleteFlashcard";
 
@@ -52,6 +53,10 @@ const AppRoutes = [
   {
     path: '/usertable',
     element: <UserTable />
+  },
+  {
+    path: '/unauthorized',
+    element: <Unauthorized />
   },
   {
     path: '/login',

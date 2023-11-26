@@ -1,4 +1,3 @@
-import React from 'react';
 import PageButton from './PageButton';
 
 const PaginationNav = ({page, setPage, hasPreviousPage, hasNextPage, totalPages}) => {

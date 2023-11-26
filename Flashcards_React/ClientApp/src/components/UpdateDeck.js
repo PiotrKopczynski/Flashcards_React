@@ -14,6 +14,7 @@ const UpdateDeck = () => {
 
     const handleSubmit = async () => {
         if (!auth.isLoggedIn) {
+            // Navigate unauthenticated users out of the authenticated content
             localStorage.removeItem('token');
             localStorage.removeItem('refreshToken');
             navigate('/login');

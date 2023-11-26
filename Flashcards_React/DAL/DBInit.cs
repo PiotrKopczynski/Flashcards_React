@@ -109,15 +109,13 @@ namespace Flashcards_React.DAL
             var userEmail = "testUser@example.com";
             var userUserName = "TestUser";
 
-            var sharedPassword = "123456#eE";
+            var sharedPassword = "123456#eE"; // This is the password of the seeded users
 
             if (await userManager.FindByEmailAsync(adminEmail) == null) // If user does not exist.
             {
                 var admin = CreateUser();
 
                 var emailStore = (IUserEmailStore<IdentityUser>)userStore;
-                // Because of the way the scaffolded Indentity code is, we have to set the UserName to
-                // be equal to the email.
                 await userStore.SetUserNameAsync(admin, adminUserName, CancellationToken.None);
                 await emailStore.SetEmailAsync(admin, adminEmail, CancellationToken.None);
 
@@ -140,8 +138,6 @@ namespace Flashcards_React.DAL
                 var user = CreateUser();
 
                 var emailStore = (IUserEmailStore<IdentityUser>)userStore;
-                // Because of the way the scaffolded Indentity code is, we have to set the UserName to
-                // be equal to the email.
                 await userStore.SetUserNameAsync(user, userUserName, CancellationToken.None);
                 await emailStore.SetEmailAsync(user, userEmail, CancellationToken.None);
 

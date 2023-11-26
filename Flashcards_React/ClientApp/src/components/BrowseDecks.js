@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState, useContext } from 'react';
+﻿import { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../api/axios';
 import AuthContext from '../context/AuthProvider';
@@ -35,6 +35,7 @@ const BrowseDecks = () => {
         catch (e) {
             console.error("Error fetching decks:", e);
             if (e.isTokenRefreshError) { // The refresh of the JWT token failed or the tokens were invalid.
+                // Navigate users with a invalid token pair out of the authenticated content
                 setAuth({ isLoggedIn: false })
                 localStorage.removeItem('token');
                 localStorage.removeItem('refreshToken');

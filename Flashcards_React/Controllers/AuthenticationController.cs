@@ -1,5 +1,4 @@
-﻿using Flashcards_React.Configurations;
-using Flashcards_React.DTO;
+﻿using Flashcards_React.DTO;
 using Flashcards_React.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -57,23 +56,22 @@ namespace Flashcards_React.Controllers
                     });
                 }
 
-                // Create a user.
+                // Create a object.
                 var newFlashcardsUser = new IdentityUser()
                 {
                     Email = registerDTO.Email,
                     UserName = registerDTO.UserName,
                     EmailConfirmed = false
                 };
-
+                // Create the user object in the database.
                 var created = await _userManager.CreateAsync(newFlashcardsUser, registerDTO.Password);
 
                 if (created.Succeeded)
                 {
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(newFlashcardsUser);
 
+                    // In a production environment this url should be encoded such that sesitive data is not readable from the link
                     var callbackUrl = Request.Scheme + "://" + Request.Host + Url.Action("ConfirmEmail", "Authentication", new { flashcardsUserId = newFlashcardsUser.Id, code = code});
-
-                    //callbackUrl = HtmlEncoder.Default.Encode(callbackUrl); DECODING OF THIS DOES NOT WORK FOR SOME REASON.
 
                     var emailBody = $"Please confirm your account by <a href='{callbackUrl}'>clicking here</a>.";
 
@@ -138,7 +136,6 @@ namespace Flashcards_React.Controllers
                 });
             }
 
-            //code = Encoding.UTF8.GetString(Convert.FromBase64String(code));
             var result = await _userManager.ConfirmEmailAsync(flashcardsUser, code);
             var status = result.Succeeded ? "Thank you for confirming you email." : "Your email is not confirmed, please try again later.";
 
@@ -210,6 +207,7 @@ namespace Flashcards_React.Controllers
         [HttpPost]
         [Route("RefreshToken")]
         public async Task<IActionResult> RefreshToken([FromBody] TokenRequestDTO tokenRequestDTO)
+            // Endpoint for refreshing a JWT token given both the expired JWT and a refresh-token
         {
             if(ModelState.IsValid)
             {
@@ -240,6 +238,7 @@ namespace Flashcards_React.Controllers
         }
 
         private async Task<AuthResult?> VerifyAndGenerateToken(TokenRequestDTO tokenRequestDTO)
+            // Function for verifying a pair of tokens and calling the function that generates a token pair.
         {
             var jwtTokenHandler = new JwtSecurityTokenHandler();
 
@@ -262,9 +261,9 @@ namespace Flashcards_React.Controllers
 
             try
             {
-                _tokenValidationParameters.ValidateLifetime = false; // Such that the below validation does not fail
+                _tokenValidationParameters.ValidateLifetime = false; // Such that the below validation does not fail for an expired token
                 var tokenInVerification = jwtTokenHandler.ValidateToken(tokenRequestDTO.Token, _tokenValidationParameters, out var validatedToken);
-                _tokenValidationParameters.ValidateLifetime = true; // Such that the below validation does not fail
+                _tokenValidationParameters.ValidateLifetime = true; // Change this back such that the expired tokens are not considered valuid
 
                 if (validatedToken is JwtSecurityToken jwtSecurityToken)
                 {
@@ -276,20 +275,6 @@ namespace Flashcards_React.Controllers
                         return null;
                     }
                 }
-
-                
-
-                /* YOU DO NOT NEED TO CHECK THE EXPIRE DATE ON THE JWT TOKEN, INSTEAD YOU CHECK IF THE REFRESH TOKEN IS EXPIRED DOWN BELOW.
-                // In the case that the JwtToken has not expirad maybe can return that a refresh is not needed.
-                var utcExpiryDate = long.Parse(tokenInVerification.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Exp).Value);
-
-
-                var expiryDate = UnixTimeStampToDateTime(utcExpiryDate);
-
-                if (expiryDate < DateTime.UtcNow) // Check if the token is expired.
-                {
-                    return expiredTokensResult;
-                }*/
 
                 var storedToken = await _refreshTokenRepository.FindByToken(tokenRequestDTO);
 
@@ -361,30 +346,27 @@ namespace Flashcards_React.Controllers
             }
         }
 
-        /* THIS FUNCTION IS POSSIBLY NOT NEEDED.
-        private static DateTime UnixTimeStampToDateTime(long unixTimeStamp)
-        {
-            var dateTimeVal = new DateTime(1970, 1, 1, 0, 0 ,0, 0, DateTimeKind.Utc); // UTC is every single second from 1 january 1970.
-            return dateTimeVal.AddSeconds(unixTimeStamp).ToUniversalTime();
-        }*/
-
-
         private async Task<AuthResult> GenerateJwtToken(IdentityUser flashcardsUser)
             // This function creates a new JWT token and a RefreshToken for the flashcardsUser.
         {
+            // Get the role of the user
+            var roles = await _userManager.GetRolesAsync(flashcardsUser);
+            var role = roles.FirstOrDefault() ?? "user";
+
             var jwtTokenHandler = new JwtSecurityTokenHandler();
 
             var key = Encoding.UTF8.GetBytes(_configuration["JwtConfig:Secret"] ?? ""); // Get the secret key as an array of bytes
 
             var tokenDescriptor = new SecurityTokenDescriptor() // Token descriptor that allows configure what the payload data of the jwt token will be.
             {
-                Subject = new ClaimsIdentity(new [] // List of claims.
+                Subject = new ClaimsIdentity(new[] // List of claims.
                 {
                     new Claim("Id", flashcardsUser.Id),
                     new Claim(JwtRegisteredClaimNames.Sub, flashcardsUser.Id ?? ""),
                     new Claim(JwtRegisteredClaimNames.Email, flashcardsUser.Id ?? ""),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()), // Unique token reference.
                     new Claim(JwtRegisteredClaimNames.Iat, DateTime.Now.ToUniversalTime().ToString()), // Creates a unique id that will be specific for the token and the user.
+                    new Claim(ClaimTypes.Role, role) // Add role to the JWT for correct authorization
                 }),
                 
                 Expires = DateTime.Now.Add(TimeSpan.Parse(_configuration["JwtConfig:ExpiryTimeFrame"] ?? "00:01:00")), // Check the JwtConfig:ExpiryTimeFrame in appsettings.
@@ -400,7 +382,7 @@ namespace Flashcards_React.Controllers
                 JwtId = token.Id,
                 Token = RandomStringGeneration(20), // Generate Refresh Token using 20 random characters.
                 AddedDate = DateTime.UtcNow,
-                ExpiryDate = DateTime.UtcNow.AddMonths(6),
+                ExpiryDate = DateTime.UtcNow.AddMonths(6), // Our refresh-token currently has a 6 month expiry date
                 IsRevoked = false,
                 IsUsed = false,
                 FlashcardsUserId = flashcardsUser.Id ?? "",
@@ -412,11 +394,13 @@ namespace Flashcards_React.Controllers
             {
                 Token = jwtToken,
                 RefreshToken = refreshToken.Token,
-                Result = true
+                Result = true,
+                UserRole = role
             };
         }
 
         private string RandomStringGeneration(int length)
+            // Function for generating a random string of large and lowercase letters, numbers and _
         {
             var random = new Random();
             var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890abcdefghijklmnopqrstuvwxyz_";
@@ -446,7 +430,7 @@ namespace Flashcards_React.Controllers
 
                 smtpClient.EnableSsl = true;
                 smtpClient.UseDefaultCredentials = false;
-                smtpClient.Credentials = new NetworkCredential("webapplicationp50@gmail.com", "rukj bnjc oksp fblu");
+                smtpClient.Credentials = new NetworkCredential("webapplicationp50@gmail.com", "rukj bnjc oksp fblu"); // An email we created specifically for this project
                 smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
                 smtpClient.Send(message);
                 return true;

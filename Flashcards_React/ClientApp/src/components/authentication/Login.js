@@ -36,7 +36,7 @@ const Login = () => {
                 if (data.result === true) {
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('refreshToken', data.refreshToken);
-                    setAuth({ isLoggedIn: true });
+                    setAuth({ isLoggedIn: true, userRole: data.userRole });
                     setEmail('');
                     setPwd('');
                     navigate('/');
