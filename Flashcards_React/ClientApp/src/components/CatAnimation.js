@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import './CatAnimation.css';
 
 const CatAnimation = () => {
     useEffect(() => {

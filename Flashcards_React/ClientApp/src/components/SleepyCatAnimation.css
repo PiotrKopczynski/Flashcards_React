@@ -1,0 +1,217 @@
+﻿.cat-container {
+    height: 500px;
+    width: 350px;
+    position: relative;
+    transform: translate(-50%, 10%);
+    left: 48%;
+    bottom: 0;
+}
+
+.cat {
+    background-color: #f7770f;
+    height: 65px;
+    width: 80px;
+    border-radius: 0 80px 80px 0;
+    position: absolute;
+    bottom: 60px;
+    right: 50px;
+}
+
+.ear {
+    height: 15px;
+    width: 15px;
+    background-color: #f7770f;
+    position: absolute;
+    bottom: 64px;
+    left: 8px;
+    border-radius: 20px 0 0 0;
+    box-shadow: 25px 0 #f7770f;
+}
+
+.eye, .eye:before {
+    height: 7px;
+    width: 10px;
+    border: 2px solid #2c2c2c;
+    position: absolute;
+    border-radius: 0 0 15px 15px;
+    border-top: none;
+    /*
+    animation: open-eyes 0.3s forwards;*/
+}
+
+.eye {
+    top: 18px;
+    left: 15px;
+}
+
+    .eye:before {
+        content: "";
+        left: 30px;
+    }
+
+.nose {
+    height: 12px;
+    width: 12px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    position: absolute;
+    top: 32px;
+    left: 25px;
+    box-shadow: 12px 0 #ffffff;
+}
+
+    .nose:before {
+        content: "";
+        width: 12px;
+        height: 8px;
+        position: absolute;
+        background-color: #ffffff;
+        left: 6px;
+    }
+
+    .nose:after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-top: 8px solid #ef926b;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        bottom: 7px;
+        left: 6px;
+    }
+
+.mouth {
+    height: 15px;
+    width: 17px;
+    background-color: #2c2c2c;
+    border-radius: 0 0 5px 5px;
+    position: absolute;
+    top: 38px;
+    left: 27px;
+    animation: mouth-move 2s infinite;
+    transform-origin: top;
+}
+
+@keyframes mouth-move {
+    50% {
+        transform: scaleY(0.7);
+    }
+}
+
+.cat-body {
+    background-color: #f7770f;
+    height: 90px;
+    width: 140px;
+    position: absolute;
+    right: 65px;
+    bottom: 0;
+    border-radius: 60px 60px 0 0;
+    animation: sleep 2s infinite;
+    transform-origin: bottom right;
+}
+
+@keyframes sleep {
+    50% {
+        transform: scale(0.9, 1.05);
+    }
+}
+
+.tail {
+    background-color: #d07219;
+    height: 20px;
+    width: 100px;
+    position: absolute;
+    right: 150px;
+    bottom: 0;
+    border-radius: 20px 0 0 20px;
+}
+
+.cat-body:before {
+    content: "";
+    position: absolute;
+    background-color: #ffffff;
+    height: 12px;
+    width: 30px;
+    left: 22px;
+    bottom: 0;
+    border-radius: 6px;
+    box-shadow: 45px 0 #ffffff;
+}
+
+.cat-bubble {
+    height: 20px;
+    width: 20px;
+    background-color: rgba(225, 255, 255, 0.4);
+    position: relative; /*absolute before bubble popping*/
+    top: 20px;
+    left: 65px;
+    border-radius: 50px 50px 50px 5px;
+    animation: bubble-scale 2s infinite;
+    /**/
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+    .cat-bubble::before,
+    .cat-bubble::after {
+        content: "";
+        width: 12px;
+        height: 6px;
+        background-color: rgba(225, 255, 255, 0.4);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        border-radius: 50px 50px 50px 50px;
+        opacity: 0;
+        transform-origin: center;
+        transition: all 0.3s;
+    }
+
+    .cat-bubble::before {
+        transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    .cat-bubble::after {
+        transform: translate(-50%, -20%) rotate(-60deg);
+    }
+
+
+@keyframes bubble-scale {
+    50% {
+        transform: scale(1.6);
+    }
+}
+
+.cat-shadow {
+    height: 10px;
+    width: 240px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    position: absolute;
+    bottom: 52px;
+    left: 60px;
+    animation: shadow 2s infinite;
+}
+
+@keyframes shadow {
+    50% {
+        transform: scaleX(0.7);
+    }
+}
+
+.cat-bubble:hover {
+    opacity: 0;
+}
+
+    .cat-bubble:hover::before,
+    .cat-bubble:hover::after {
+        opacity: 10;
+        width: 15px;
+        height: 9px;
+        transform: translate(-50%, -50%) rotate(45deg) scale(2);
+    }
+
+    .cat-bubble:hover::after {
+        transform: translate(-50%, -30%) rotate(65deg) scale(2);
+    }
+
