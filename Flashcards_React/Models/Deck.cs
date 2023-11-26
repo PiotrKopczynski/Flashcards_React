@@ -15,7 +15,5 @@ namespace Flashcards_React.Models
         public virtual List<Flashcard>? Flashcards { get; set; } //Virtual keyword used for lazy loading
         //navigation property
         public string FlashcardsUserId { get; set; } = string.Empty;
-        //navigation property
-        // public virtual FlashcardsUser FlashcardsUser { get; set; } = default!;
     }
 }

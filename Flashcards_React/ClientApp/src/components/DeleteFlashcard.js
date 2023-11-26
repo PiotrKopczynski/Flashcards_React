@@ -11,6 +11,7 @@ const DeleteFlashcard = () => {
 
     const handleDelete = async () => {
         if (!auth.isLoggedIn) {
+            // Navigate unauthenticated users out of the authenticated content
             localStorage.removeItem('token');
             localStorage.removeItem('refreshToken');
             navigate('/login');
@@ -29,6 +30,7 @@ const DeleteFlashcard = () => {
         } catch (e) {
             console.log("Error in DeleteFlashcard:", e);
             if (e.isTokenRefreshError) {
+                // Navigate users with a invalid token pair out of the authenticated content
                 setAuth({ isLoggedIn: false });
                 localStorage.removeItem('token');
                 localStorage.removeItem('refreshToken');

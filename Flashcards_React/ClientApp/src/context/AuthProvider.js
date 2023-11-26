@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 
+// This is a context that keeps track of if the user is logged in or not and is passed down to all components
 const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {

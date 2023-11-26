@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Flashcards_React.Controllers
 {
     [Authorize]
-    [Route("api/[controller]")]
+    [Route("api/[controller]")] // The square brackets will be filled with the controller name so in this case this will be api/authentication.
     [ApiController]
     public class FlashcardController : ControllerBase
     {
@@ -29,7 +29,7 @@ namespace Flashcards_React.Controllers
         [HttpGet]
         [Route("BrowseFlashcards")]
         public async Task<IActionResult> BrowseFlashcards(int deckId, int? pageNumber)
-        // Function that retrieves a list of Flashcards belonging to the deck with the 
+        // Function that retrieves a list of Flashcards belonging to the deck with the specified deckId
         {
             var flashcards = await _flashcardRepository.GetFlashcardsByDeckId(deckId);
             if (flashcards == null)
@@ -39,6 +39,7 @@ namespace Flashcards_React.Controllers
             }
 
             var pageSize = 4;
+            // We return the flashcards wrapped in the PaginatedList<> class such that not all flashcards are sent to the frontend at once.
             var paginatedFlashcards = PaginatedList<Flashcard>.Create(flashcards.ToList(), pageNumber ?? 1, pageSize) ?? 
                 new PaginatedList<Flashcard>(new List<Flashcard>(), 0, 1, 1); ; // To avoid null warnings
 

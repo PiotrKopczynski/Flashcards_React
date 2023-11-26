@@ -1,4 +1,3 @@
-using Flashcards_React.Configurations;
 using Flashcards_React.DAL;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -13,8 +12,6 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("AuthDbContextConnection") ?? throw new InvalidOperationException("Connection string 'AuthDbContextConnection' not found.");
 // Add services to the container.
 builder.Services.AddDbContext<AuthDbContext>(options => options.UseSqlite(connectionString));
-
-builder.Services.Configure<JwtConfig>(builder.Configuration.GetSection("JwtConfig"));
 
 var key = Encoding.ASCII.GetBytes(builder.Configuration.GetSection("JwtConfig:Secret").Value ?? "");
 
@@ -44,15 +41,24 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddSingleton(tokenValidationParameters);
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false) // Register the Identity services.
+builder.Services.AddDefaultIdentity<IdentityUser>(options => { // Register the Identity services.
+    // Password settings
+    options.SignIn.RequireConfirmedAccount = false;
+    options.Password.RequireDigit = false;
+    options.Password.RequiredLength = 8;
+    options.Password.RequireNonAlphanumeric = true;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireUppercase = true;
+
+    //User settings
+    options.User.RequireUniqueEmail = true;
+    }) 
     .AddRoles<IdentityRole>() // Add roles to Identity
     .AddEntityFrameworkStores<AuthDbContext>();
 
 builder.Services.Configure<DataProtectionTokenProviderOptions>(o => o.TokenLifespan = TimeSpan.FromDays(1));
 
 builder.Services.AddControllers();
-//builder.Services.AddEndpointsApiExplorer(); maybe needed
-
 
 builder.Services.AddScoped<IDeckRepository, DeckRepository>();
 builder.Services.AddScoped<IFlashcardRepository, FlashcardRepository>();
@@ -70,6 +76,7 @@ loggerConfiguration.Filter.ByExcluding(e => e.Properties.TryGetValue("SourceCont
 var logger = loggerConfiguration.CreateLogger();
 builder.Logging.AddSerilog(logger);
 
+// Use Services and middleware
 
 var app = builder.Build();
 
