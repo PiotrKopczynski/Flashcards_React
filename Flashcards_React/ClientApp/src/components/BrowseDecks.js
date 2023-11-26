@@ -67,23 +67,6 @@ const BrowseDecks = () => {
         navigate(`/browseflashcards/${deck.deckId}`, { state: { deck } });
     }
 
-    /*
-    const pagesArray = Array(totalPages).fill().map((_, index) => index + 1)
-
-    const lastPage = () => setPage(totalPages)
-
-    const firstPage = () => setPage(1)
-
-    const nav = (
-        <nav className="nav">
-            <button onClick={firstPage} disabled={!hasPreviousPage || deckPage === 1}>&lt;&lt;</button>
-            {pagesArray.map(pg => <PageButton key={pg} pg={pg} setPage={setDeckPage} />)}
-            <button onClick={lastPage} disabled={!hasNextPage || deckPage === totalPages}>&gt;&gt;</button>
-        </nav>
-    )*/
-
-
-
     return (
         <div>
             <h1>Deck List</h1>
@@ -95,10 +78,10 @@ const BrowseDecks = () => {
                     <div className="row row-cols-1 row-cols-md-3 g-4">
                         {decks.map(deck => (
                             <div key={deck.deckId} className="col">
-                                <div className="card text-center" style={{ width: '18rem' }}>
-                                    <div className="card-body">
+                                <div className="deck text-center" style={{ width: '18rem' }}>
+                                    <div className="deck-body">
                                         <h2 className="fs-3 card-title">{deck.title}</h2>
-                                        <p className="card-text">{deck.description}</p>
+                                        <p className="deck-text">{deck.description}</p>
                                         <button className="btn btn-primary mt-2" onClick={() => handleBrowseFlashcardsButton(deck)}>
                                             <i className="fas fa-arrow-alt-circle-right"></i> View
                                         </button>

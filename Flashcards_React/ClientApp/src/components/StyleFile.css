@@ -92,7 +92,7 @@
     }
 
 
-.card {
+.deck {
     --b: 2px; /* border thickness */
     --s: .45em; /* size of the corner */
     --color: #192040;
@@ -100,7 +100,6 @@
     width: 300px;
     height: 300px;
     border-radius: calc(var(--s) * 2);
-    background: conic-gradient(from 90deg at var(--b) var(--b), #0000 90deg, var(--color) 0) var(--s) var(--s)/calc(100% - var(--b) - 2*var(--s)) calc(100% - var(--b) - 2*var(--s));
     transition: .3s linear, background-color 0s;
     box-shadow: 5px 5px 30px 7px rgba(0, 0, 0, 0.25), -5px -5px 30px 7px rgba(0, 0, 0, 0.22);
     position: relative;
@@ -115,7 +114,7 @@
     padding:1rem;
 }
 
-    .card:hover {
+    .deck:hover {
         transform: scale(0.9, 0.9);
         background: linear-gradient(135deg, #d62a50, #f7770f);
         color: #fff;
@@ -128,6 +127,78 @@
 .title-black {
     color: black;
 }
+
+/**/
+.card {
+    position: relative;
+    width: 600px;
+    height: 300px;
+    transition: transform 0.3s ease-out;
+    box-shadow: 0 0 2px 0 #000;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+}
+
+/* Card content */
+.card-content {
+    position: relative;
+    z-index: 1;
+}
+
+/* Toggle button container */
+.eye-toggle-button-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+/* Toggle button styles */
+.eye-toggle-button {
+    appearance: none;
+    background-color: #FFFFFF;
+    border-width: 0;
+    box-sizing: border-box;
+    color: #000000;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Clarkson, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1em;
+    margin: 0;
+    opacity: 1;
+    outline: 0;
+    padding: 1.5em 2.2em;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    text-rendering: geometricprecision;
+    text-transform: uppercase;
+    transition: opacity 300ms cubic-bezier(.694, 0, 0.335, 1), background-color 100ms cubic-bezier(.694, 0, 0.335, 1), color 100ms cubic-bezier(.694, 0, 0.335, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    white-space: nowrap;
+    padding: 10px 20px;
+    background-color: #fff;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+}
+    /* Card hover effect */
+    .card:hover {
+    transform: scale(0.9, 0.9);
+    background: linear-gradient(135deg, #d62a50, #f7770f);
+    color: #fff;
+}
+
+
 
 /*/////////////////////////////////////////////// Css for the pagination menu ///////////////////////////////////////////////////*/
 nav {
@@ -171,13 +242,13 @@ nav {
   .search:focus-within {
     box-shadow: 2px 2px 5px #000;
   }
-  
-  .searchButton,
-  .searchInput {
-    background-color: #fff;
+
+.searchButton,
+.searchInput {
+    background-color: #FFFAF0;
     border: none;
     outline: none;
-  }
+}
 
 .searchInput {
     padding: 2em;

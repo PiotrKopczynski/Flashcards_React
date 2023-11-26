@@ -5,16 +5,15 @@ import WaveAnimation from './WaveAnimation';
 import Footer from './Footer';
 
 const Layout = ({ children }) => (
-    <div className="main-content">
+    <>
         <NavMenu />
-        <div className="">
-            <WaveAnimation />
+        <WaveAnimation />
             <Container tag="main" className="pb-5">
                 {children}
             </Container>   
-        </div>
         <Footer />
-    </div>
+    </>
+
 );
 
 export default Layout;
