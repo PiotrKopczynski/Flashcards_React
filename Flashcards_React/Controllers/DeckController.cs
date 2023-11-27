@@ -59,12 +59,12 @@ namespace Flashcards_React.Controllers
             PaginatedList<Deck> paginatedDecks = PaginatedList<Deck>.Create(decks.ToList(), pageNumber ?? 1, pageSize)
                 ?? new PaginatedList<Deck>(new List<Deck>(), 0, 1, 1);
 
-            var response = new
+            var response = new PaginatedResponseDTO<Deck>
             {
-                Decks = paginatedDecks,
-                paginatedDecks.TotalPages,
-                paginatedDecks.HasPreviousPage,
-                paginatedDecks.HasNextPage
+                List = paginatedDecks,
+                TotalPages = paginatedDecks.TotalPages,
+                HasPreviousPage = paginatedDecks.HasPreviousPage,
+                HasNextPage = paginatedDecks.HasNextPage
             };
 
             return Ok(response);
