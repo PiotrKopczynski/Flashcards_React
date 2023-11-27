@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState, useContext } from 'react';
+﻿import React, { useState, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import api from '../api/axios';
 import AuthContext from '../context/AuthProvider';
@@ -7,7 +7,7 @@ import './StyleFile.css';
 
 const CreateDeck = () => {
     const location = useLocation();
-    const { deck } = location.state;
+    //const { deck } = location.state;
     const navigate = useNavigate();
     const { auth, setAuth } = useContext(AuthContext);
 
@@ -70,8 +70,8 @@ const CreateDeck = () => {
                 />
 
             </form>
-            <button class="btn btn-primary mt-5 m-2" type="button" onClick={handleCreate}>Create</button>
-            <button class="btn btn-secondary mt-5 m-2" type="button" onClick={handleCancel}>Cancel</button>
+            <button className="btn btn-primary mt-5 m-2" type="button" onClick={handleCreate}>Create</button>
+            <button className="btn btn-secondary mt-5 m-2" type="button" onClick={handleCancel}>Cancel</button>
 
             
         </div>

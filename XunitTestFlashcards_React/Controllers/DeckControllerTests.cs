@@ -1,4 +1,5 @@
-﻿using Flashcards_React.Controllers;
+﻿using Azure;
+using Flashcards_React.Controllers;
 using Flashcards_React.DAL;
 using Flashcards_React.DTO;
 using Flashcards_React.Models;
@@ -75,6 +76,7 @@ namespace XunitTestFlashcards_React.Controllers
             {
                 deck1, deck2
             };
+            PaginatedList<Deck>? paginatedDeckList = PaginatedList<Deck>.Create(deckList, 1, 6);
 
             var mockDeckRepository = new Mock<IDeckRepository>();
             // The flashcardUserId passed in to the GetAll function in the controller will be an empty string "",
@@ -83,16 +85,28 @@ namespace XunitTestFlashcards_React.Controllers
             var deckController = CreateDeckController(mockDeckRepository);
 
             // Act
-            var result = await deckController.BrowseDecks("");
+            var result = await deckController.BrowseDecks("", null);
 
             // Assert
             Assert.IsAssignableFrom<IActionResult>(result);
             var okResult = Assert.IsType<OkObjectResult>(result);
             Assert.Equal(200, okResult.StatusCode);
 
-            var resultingDecks = Assert.IsAssignableFrom<IEnumerable<Deck>>(okResult.Value);
-            Assert.Equal(2, resultingDecks.Count());
-            Assert.Equal(deckList, resultingDecks);
+            var response = okResult.Value as dynamic;
+            Assert.NotNull(response);
+
+            if (response != null)
+            {
+                var resultingDecks = response.List;
+                var totalPages = response.TotalPages;
+                var hasPreviousPage = response.HasPreviousPage;
+                var hasNextPage = response.HasNextPage;
+
+                Assert.Equal(1, totalPages);
+                Assert.Equal(deckList, resultingDecks);
+                Assert.False(hasPreviousPage);
+                Assert.False(hasNextPage);
+            }
         }
 
         [Fact]
@@ -113,16 +127,28 @@ namespace XunitTestFlashcards_React.Controllers
             var deckController = CreateDeckController(mockDeckRepository);
 
             // Act
-            var result = await deckController.BrowseDecks(searchString);
+            var result = await deckController.BrowseDecks(searchString, null);
 
             // Assert
             Assert.IsAssignableFrom<IActionResult>(result);
             var okResult = Assert.IsType<OkObjectResult>(result);
             Assert.Equal(200, okResult.StatusCode);
 
-            var resultingDecks = Assert.IsAssignableFrom<IEnumerable<Deck>>(okResult.Value);
-            Assert.Equal(2, resultingDecks.Count());
-            Assert.Equal(deckList, resultingDecks);
+            var response = okResult.Value as dynamic;
+            Assert.NotNull(response);
+
+            if (response != null)
+            {
+                var resultingDecks = response.List;
+                var totalPages = response.TotalPages;
+                var hasPreviousPage = response.HasPreviousPage;
+                var hasNextPage = response.HasNextPage;
+
+                Assert.Equal(1, totalPages);
+                Assert.Equal(deckList, resultingDecks);
+                Assert.False(hasPreviousPage);
+                Assert.False(hasNextPage);
+            }
         }
 
         [Fact]
@@ -141,7 +167,7 @@ namespace XunitTestFlashcards_React.Controllers
             var deckController = CreateDeckController(mockDeckRepository);
 
             // Act
-            var result = await deckController.BrowseDecks("");
+            var result = await deckController.BrowseDecks("", null);
 
             // Assert
             Assert.IsAssignableFrom<IActionResult>(result);

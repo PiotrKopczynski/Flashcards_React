@@ -87,21 +87,35 @@ namespace XunitTestFlashcards_React.Controllers
                 flashcard1,flashcard2
             };
 
+            PaginatedList<Flashcard>? paginatedFlashcardList = PaginatedList<Flashcard>.Create(flashcardList, 1, 6);
+
             var mockFlashcardRepository = new Mock<IFlashcardRepository>();
             mockFlashcardRepository.Setup(repo => repo.GetFlashcardsByDeckId(testDeckId)).ReturnsAsync(flashcardList);
             var deckController = CreateFlashcardController(mockFlashcardRepository);
 
             // Act
-            var result = await deckController.BrowseFlashcards(testDeckId);
+            var result = await deckController.BrowseFlashcards(testDeckId, null);
 
             // Assert
             Assert.IsAssignableFrom<IActionResult>(result);
             var okResult = Assert.IsType<OkObjectResult>(result);
             Assert.Equal(200, okResult.StatusCode);
 
-            var resultingFlashcards = Assert.IsAssignableFrom<IEnumerable<Flashcard>>(okResult.Value);
-            Assert.Equal(2, resultingFlashcards.Count());
-            Assert.Equal(flashcardList, resultingFlashcards);
+            var response = okResult.Value as dynamic;
+            Assert.NotNull(response);
+
+            if (response != null)
+            {
+                var resultingFlashcards = response.List;
+                var totalPages = response.TotalPages;
+                var hasPreviousPage = response.HasPreviousPage;
+                var hasNextPage = response.HasNextPage;
+
+                Assert.Equal(1, totalPages);
+                Assert.Equal(flashcardList, resultingFlashcards);
+                Assert.False(hasPreviousPage);
+                Assert.False(hasNextPage);
+            }
         }
 
         
@@ -119,7 +133,7 @@ namespace XunitTestFlashcards_React.Controllers
             var deckController = CreateFlashcardController(mockFlashcardRepository);
 
             // Act
-            var result = await deckController.BrowseFlashcards(testDeckId);
+            var result = await deckController.BrowseFlashcards(testDeckId, null);
 
             // Assert
             Assert.IsAssignableFrom<IActionResult>(result);

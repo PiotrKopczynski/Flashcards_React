@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import api from '../api/axios';
 import AuthContext from '../context/AuthProvider';
@@ -63,8 +63,8 @@ const UpdateDeck = () => {
                     onChange={(e) => setDescription(e.target.value)}
                 />
             </form>
-            <button class="btn btn-primary mt-4 m-2" type="button" onClick={handleSubmit}>Save</button>
-            <button class="btn btn-secondary mt-4 m-2" type="button" onClick={handleCancel}>Cancel</button>
+            <button className="btn btn-primary mt-4 m-2" type="button" onClick={handleSubmit}>Save</button>
+            <button className="btn btn-secondary mt-4 m-2" type="button" onClick={handleCancel}>Cancel</button>
             <p>Deck ID: {deck.deckId}</p>
             <p>Title: {deck.title}</p>
             <p>Description: {deck.description}</p>

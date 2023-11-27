@@ -43,12 +43,12 @@ namespace Flashcards_React.Controllers
             var paginatedFlashcards = PaginatedList<Flashcard>.Create(flashcards.ToList(), pageNumber ?? 1, pageSize) ?? 
                 new PaginatedList<Flashcard>(new List<Flashcard>(), 0, 1, 1); ; // To avoid null warnings
 
-            var response = new
+            var response = new PaginatedResponseDTO<Flashcard>
             {
-                Flashcards = paginatedFlashcards,
-                paginatedFlashcards.TotalPages,
-                paginatedFlashcards.HasPreviousPage,
-                paginatedFlashcards.HasNextPage
+                List = paginatedFlashcards,
+                TotalPages = paginatedFlashcards.TotalPages,
+                HasPreviousPage = paginatedFlashcards.HasPreviousPage,
+                HasNextPage = paginatedFlashcards.HasNextPage
             };
 
             return Ok(response);
