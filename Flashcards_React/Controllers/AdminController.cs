@@ -22,9 +22,8 @@ namespace Flashcards_React.Controllers
 
         [HttpGet]
         [Route("GetUsers")]
-        public async Task<IActionResult> GetUsers()
+        public async Task<IActionResult> UserTable()
         {
-            // We do not include a unit test for this method as we did not find a way to setup the return of _userManager.Users.ToListAsync();
             List<IdentityUser> users = await _userManager.Users.ToListAsync();
             if (users == null)
             {
