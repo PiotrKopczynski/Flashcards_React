@@ -43,7 +43,7 @@ const NavMenu = () => {
                               </NavItem>
                           )}
                           <NavItem>
-                                  <NavLink tag={Link}  className="text-light" onClick={handleLogout}>Logout</NavLink>
+                                  <NavLink className="text-light" style={{cursor: 'pointer'}} onClick={handleLogout}>Logout</NavLink>
                           </NavItem>
                       </>) : (
               <>
@@ -51,7 +51,7 @@ const NavMenu = () => {
                   <NavLink tag={Link} className="text-light" to="/register">Register</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink className="text-light" to="/login">Login</NavLink>
+                  <NavLink tag={Link} className="text-light" to="/login">Login</NavLink>
                 </NavItem>
               </>)}
           </ul>
