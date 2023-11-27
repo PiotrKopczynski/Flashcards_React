@@ -7,7 +7,7 @@ import DeckSearchBar from './DeckSearchBar';
 import './StyleFile.css'; 
 
 const BrowseDecks = () => {
-    const [decks, setDecks] = useState([]);
+    const [decks, setDecks] = useState();
     const [deckPage, setDeckPage] = useState(1);
     const [totalPages, setTotalPages] = useState();
     const [hasPreviousPage, setHasPreviousPage] = useState();
@@ -23,9 +23,8 @@ const BrowseDecks = () => {
             deckPage = (deckPage < 0) ? 1 : deckPage;
             deckPage = (deckPage > totalPages) ? totalPages : deckPage;
             const response = await api.get(`api/Deck/BrowseDecks?pageNumber=${deckPage}&searchString=${searchString}`);
-
             if (response.status === 200) {
-                setDecks(response.data.decks);
+                setDecks(response.data.list);
                 setTotalPages(response.data.totalPages);
                 setHasPreviousPage(response.data.hasPreviousPage);
                 setHasNextPage(response.data.hasNextPage);
