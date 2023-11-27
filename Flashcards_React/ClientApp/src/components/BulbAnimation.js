@@ -1,5 +1,5 @@
 import React from 'react';
-import './BulbAnimation.css'
+import './BulbAnimation.css';
 
 const BulbAnimation = () => {
     return (

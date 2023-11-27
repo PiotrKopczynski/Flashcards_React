@@ -8,9 +8,6 @@
     }
 }
 
-
-
-
 .deck {
     --b: 2px; /* border thickness */
     --s: .45em; /* size of the corner */
@@ -115,7 +112,7 @@
     transform: scale(0.9, 0.9);
     background: linear-gradient(135deg, #d62a50, #f7770f);
     color: #fff;
-}
+    }
 
 
 

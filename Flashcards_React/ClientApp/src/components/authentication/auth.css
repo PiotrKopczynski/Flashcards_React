@@ -1,78 +1,42 @@
-/* Css for the registration form */
-/*.instructions {
-    font-size: 0.75rem;
-    border-radius: 0.5rem;
-    background: #000;
-    color: #fff;
-    padding: 0.25rem;
-    position: relative;
-    bottom: -10px;
-  }
-  
-  .instructions > svg {
-    margin-right: 0.25rem;
-  }
-  
-  .offscreen {
-    position: absolute;
-    left: -9999px;
-  }
-  
-  .hide {
-    display: none;
-  }
-  
-  .valid {
-    color: limegreen;
-    margin-left: 0.25rem;
-  }
-  
-  .invalid {
-    color: red;
-    margin-left: 0.25rem;
-  }
-  
-  .errmsg {
-    background-color: lightpink;
-    color: firebrick;
-    font-weight: bold;
-    padding: 0.5rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  .line {
-    display: inline-block;
-  }*/
-  @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+/* ********** Targetting Extra Small Devices ********** */
 
-/*
-    * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+@media (max-width: 576px) {
+
+    /* targetting input fields of the form */
+    .form-control {
+        width: 100%;
+    }
+
+    .login-form-section .card {
+        width: 80vw;
+    }
 }
 
-html {
-    font-family: 'Nunito', sans-serif;
-    font-size: 22px;
-    color: #fff;
+/* ********** Targetting Large Devices ********** */
+
+@media (min-width: 992px) {
+
+    .login-form-section {
+        padding-left: 10%;
+        padding-right: 10%;
+    }
 }
 
-body {
+
+
+/*.App {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     min-height: 100vh;
-}
-*/
+    padding: 1rem 0.5rem;
+}*/
 
-.App {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh; 
-  padding: 1rem 0.5rem;
-}
 
-/*section {
+/* ye pehly wala form ka section hai jo mein remove ker rahi hu*/
+
+    /*section {
     width: 100%;
     max-width: 420px;
     min-height: 400px;
@@ -83,115 +47,224 @@ body {
     background-color: rgba(255,255,255,1);  
 }*/
 
-login-form-section {
-    min-height: 250px;
-    width: 100%;
-    margin: 0 auto;
+
+.login-form-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 60px 5vw;
 }
 
-.form-container {
-    width: 100%;
-    max-width: 420px;
-    height: 50vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    .login-form-section .card {
+        width: 40vw;
+        height: 400px;
+        background-color: #fff;
+        border: 1px solid rgba(0,0,0,.125);
+        border-radius: 0.25rem;
+        box-shadow: 0 0 0 0.10rem rgba(234, 80,62, 0.25);
+    }
+
+    .login-form-section .card-body {
+        padding: 10px 20px 20px 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }  
+
+    .login-form-section .form-control:focus {
+        color: #212529;
+        background-color: #fff;
+        border-color: #6123a8;
+        outline: 0;
+        box-shadow: 0 0 0 0.4rem rgba(234, 80, 62, 0.25);
+    }
+
+    .login-form-section .card:hover {
+            transform: none;
+            background: #fff;
+            color: #712c66;
+        }
+
+/*.login-form-section .login-card {
+    padding: 0px 0px 12px 0px;
+}
+
+.login-form-section .login-card {
+    margin: 0px 0px -12px 0px;
+}
+
+.login-form-section .login-card {
+    width: 50%;
+}
+
+.login-form-section .login-card {
+    font-size: 1rem;
+    color: #495057;
+    text-align: center;
     padding: 1rem;
-    background-color: rgba(255,255,255,1);
-    border: solid 0.5px;
 }
 
-form {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-bottom: 1rem;
-    padding-top: 1rem;
-}
+.login-form-section .login-card {
+    padding: 10px 20px;
+}*/
 
-input[type="text"],
-input[type="password"] {
-    font-size: 20px;
-    padding: 0.25rem;
-    border-radius: 0.1px;
-    border: 1px solid #ced4da;
-    border-radius: 0.25rem;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-    color: #212529;
-    background-color: #fff;
-    outline: 0;
-    box-shadow: 0 0 0 0.10rem rgba(234, 80, 62, 0.25);
-}
+    
 
-#form-text {
-    color: #712c66;
-    font-size: 15px;
-}
 
-label,
-button {
-  /*margin-top: 1rem;*/
-}
+    
 
-/*button {
+
+    /*.form-container {
+        width: 100%;
+        max-width: 420px;
+        height: 50vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 1rem;
+        background-color: rgba(255,255,255,1);
+        border: solid 0.5px;
+    }
+
+    form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 1rem;
+        padding-top: 1rem;
+    }*/
+
+    input[type="text"],
+    input[type="password"] {
+        font-size: 20px;
+        padding: 0.25rem;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        color: #212529;
+        background-color: #fff;
+        outline: 0;
+        box-shadow: 0 0 0 0.10rem rgba(234, 80, 62, 0.25);
+    }
+
+    #form-text {
+        color: #712c66;
+        font-size: 15px;
+        margin-bottom: 20px;
+    }
+
+    label,
+    button {
+        /*margin-top: 1rem;*/
+    }
+
+    /*button {
   padding: 0.5rem;
 }*/
 
-li {
-    list-style-type: none;
-}
+    li {
+        list-style-type: none;
+    }
 
-.instructions {
-    font-size: 0.75rem;
-    border-radius: 0.5rem;
-    background: #000;
-    color: #fff;
-    padding: 0.25rem;
-    position: relative;
-    bottom: -10px;
-}
+    .instructions {
+        font-size: 0.75rem;
+        border-radius: 0.5rem;
+        background: #000;
+        color: #fff;
+        padding: 0.25rem;
+        position: relative;
+        bottom: -10px;
+    }
 
-.instructions > svg {
-    margin-right: 0.25rem;
-}
+        .instructions > svg {
+            margin-right: 0.25rem;
+        }
 
-.offscreen {
-    position: absolute;
-    left: -9999px;
-}
+    .offscreen {
+        position: absolute;
+        left: -9999px;
+    }
 
-.hide {
-    display: none;
-}
+    .hide {
+        display: none;
+    }
 
-.valid {
-    color: limegreen;
-    margin-left: 0.25rem;
-}
+    .valid {
+        color: limegreen;
+        margin-left: 0.25rem;
+    }
 
-.invalid {
-    color: red;
-    margin-left: 0.25rem;
-}
+    .invalid {
+        color: red;
+        margin-left: 0.25rem;
+    }
 
-.errmsg {
-    background-color: lightpink;
-    color: firebrick;
-    font-weight: bold;
-    padding: 0.5rem;
-    margin-bottom: 0.5rem;
-}
+    .errmsg {
+        background-color: lightpink;
+        color: firebrick;
+        font-weight: bold;
+        padding: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
 
-.line {
-    display: inline-block;
-}
+    .line {
+        display: inline-block;
+    }
 
-.flexGrow {
-    flex-grow: 1;
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-end;
-}
+    .flexGrow {
+        flex-grow: 1;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-end;
+    }
+
+
+
+
+    /* Css for the registration form */
+    .instructions {
+        font-size: 0.75rem;
+        border-radius: 0.5rem;
+        background: #000;
+        color: #fff;
+        padding: 0.25rem;
+        position: relative;
+        bottom: -10px;
+    }
+
+        .instructions > svg {
+            margin-right: 0.25rem;
+        }
+
+    .offscreen {
+        position: absolute;
+        left: -9999px;
+    }
+
+    .hide {
+        display: none;
+    }
+
+    .valid {
+        color: limegreen;
+        margin-left: 0.25rem;
+    }
+
+    .invalid {
+        color: red;
+        margin-left: 0.25rem;
+    }
+
+    .errmsg {
+        background-color: lightpink;
+        color: firebrick;
+        font-weight: bold;
+        padding: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .line {
+        display: inline-block;
+    }

@@ -53,28 +53,9 @@ h1 {
 }
 
 
-/* ********** Targetting Extra Small Devices ********** */
-
-@media (max-width: 576px) {
-
-    /* login form id */
-    #account {
-        max-width: 100%;
-    }
-
-    /* targetting input fields of the form */
-    .form-control {
-        width: 100%;
-    }
-}
-
 /* ********** Targetting Medium Devices ********** */
 
 @media (min-width: 768px) {
-
-    .container {
-        width: 738px;
-    }
 
     html {
         font-size: 14px;
@@ -85,20 +66,8 @@ h1 {
     }
 }
 
-/* ********** Targetting Large Devices ********** */
 
-@media (min-width: 992px) {
-
-    .login-form-section {
-        padding-left: 10%;
-        padding-right: 10%;
-    }
-}
-
-
-
-
-/* ********** Section ********** */
+/* ********** Section modification to fram layers properly ********** */
 
 .section-intro {
     position: relative;
@@ -115,53 +84,6 @@ h1 {
     max-width: 1200px;
     margin: 0 auto;
     padding: 60px 5vw;
-}
-
-
-/* Css for the registration form */
-.instructions {
-    font-size: 0.75rem;
-    border-radius: 0.5rem;
-    background: #000;
-    color: #fff;
-    padding: 0.25rem;
-    position: relative;
-    bottom: -10px;
-}
-
-.instructions > svg {
-  margin-right: 0.25rem;
-}
-
-.offscreen {
-  position: absolute;
-  left: -9999px;
-}
-
-.hide {
-  display: none;
-}
-
-.valid {
-  color: limegreen;
-  margin-left: 0.25rem;
-}
-
-.invalid {
-  color: red;
-  margin-left: 0.25rem;
-}
-
-.errmsg {
-  background-color: lightpink;
-  color: firebrick;
-  font-weight: bold;
-  padding: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.line {
-  display: inline-block;
 }
 
 
