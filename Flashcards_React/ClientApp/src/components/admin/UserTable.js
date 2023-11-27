@@ -6,7 +6,7 @@ import './adminStyles.css';
 
 
 const FlashcardsUsersTable = () => {
-    const [users, setUsers] = useState([]);
+    const [users, setUsers] = useState();
     const { auth, setAuth } = useContext(AuthContext);
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
@@ -17,12 +17,10 @@ const FlashcardsUsersTable = () => {
         }
         try {
             const response = await api.get(`api/Admin/GetUsers`);
-            console.log("UserTable response:", response);
 
             if (response.status === 403) { // Unauthorized
                 navigate('/unauthorized')
             }
-            console.log(users);
             if (response.status === 200) {
                 setUsers(response.data);
                 setLoading(false);
@@ -79,7 +77,7 @@ const FlashcardsUsersTable = () => {
                                 </thead>
                                 <tbody>
                                     {users.map((user) => (
-                                        <tr key={user.Id}>
+                                        <tr key={user.id}>
                                             <td>{user.id}</td>
                                             <td>{user.userName}</td>
                                             <td>{user.normalizedUserName}</td>

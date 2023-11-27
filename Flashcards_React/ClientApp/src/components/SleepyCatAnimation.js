@@ -3,16 +3,16 @@ import './SleepyCatAnimation.css'
 
 const SleepyCatAnimation = () => {
     return (
-        <div class="cat-container">
-            <div class="cat-shadow"></div>
-            <div class="cat">
-                <div class="ear"></div>
-                <div class="eye"></div>
-                <div class="mouth"></div>
-                <div class="nose"></div>
-                <div class="tail"></div>
-                <div class="cat-body"></div>
-                <div class="cat-bubble"></div>
+        <div className="cat-container">
+            <div className="cat-shadow"></div>
+            <div className="cat">
+                <div className="ear"></div>
+                <div className="eye"></div>
+                <div className="mouth"></div>
+                <div className="nose"></div>
+                <div className="tail"></div>
+                <div className="cat-body"></div>
+                <div className="cat-bubble"></div>
             </div>
         </div>
     );
