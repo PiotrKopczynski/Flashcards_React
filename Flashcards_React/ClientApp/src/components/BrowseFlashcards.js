@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
-
+import TextToSpeech from './TextToSpeech';
 import React, { useEffect, useState, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import api from '../api/axios';
@@ -20,6 +20,8 @@ const BrowseFlashcards = () => {
     const navigate = useNavigate();
     const { auth, setAuth } = useContext(AuthContext);
     const [showContent, setShowContent] = useState(false);
+
+    const [isSpeaking, setIsSpeaking] = useState(false);
 
     const getFlashcards = async (flashcardPage) => {
         try {
@@ -67,7 +69,9 @@ const BrowseFlashcards = () => {
         navigate(`/updateflashcard/${flashcardId}`, { state: { flashcardId, deckId } });
     };
 
-
+    const startTextToSpeech = (text) => {
+        setIsSpeaking(true);
+    };
 
     const handleBackToDeckButton = () => {
         navigate(`/browsedecks`);
@@ -91,8 +95,21 @@ const BrowseFlashcards = () => {
                                     <div className="card text-center" style={{ width: '18rem' }}>
                                         <div className="card-body">
                                             <p className="card-text">Question: {flashcard.question}</p>
-                                            {showContent && <p className="card-text">Answer: {flashcard.answer}</p>}
-                                            {showContent && <p className="card-text">Notes: {flashcard.notes}</p>}
+                                            {showContent && (
+                                                <>
+                                                    <p className="card-text">Answer: {flashcard.answer}</p>
+                                                    {showContent && (
+                                                        <div>
+                                                            <TextToSpeech
+                                                                text={flashcard.answer}
+                                                                onSpeechStateChanged={(state) => setIsSpeaking(state)}
+                                                                startTextToSpeech={startTextToSpeech}
+                                                            />
+                                                        </div>
+                                                    )}
+                                                    <p className="card-text">Notes: {flashcard.notes}</p>
+                                                </>
+                                            )}
                                             <button className="eye-toggle-button" onClick={toggleContent}>
                                                 <FontAwesomeIcon icon={showContent ? faEyeSlash : faEye} aria-hidden="true" />Show answer
                                             </button>
@@ -118,15 +135,6 @@ const BrowseFlashcards = () => {
                         Create a Flashcard
                     </button>
                     <button className="btn btn-primary mx-5 mt-2 mb-5" onClick={() => handleBackToDeckButton()}>
-{/*
-                    </div>
-                    <button
-                        className="btn btn-primary mx-5 mt-2 mb-5"
-                        onClick={() => handleCreateFlashcardButton(deck)}>
-                        Create a Flashcard
-                    </button>
-                    <button className="btn btn-primary mx-5 mt-2 mb-5" onClick={handleBackToDeckButton}>
-*/}
                         Back to Decks
                     </button>
                 </>
