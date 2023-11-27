@@ -59,12 +59,12 @@ const BrowseFlashcards = () => {
         navigate(`/createflashcard/${deck.deckId}`, { state: { deck } });
     };
 
-    const handleDeleteFlashcardButton = (flashcardId) => {
-        navigate(`/deleteflashcard/${flashcardId}`, { state: { flashcardId } });
+    const handleDeleteFlashcardButton = (flashcard,deck) => {
+        navigate(`/deleteflashcard/${flashcard.flashcardId}`, { state: { flashcard,deck} });
     };
 
-    const handleUpdateFlashcardButton = (flashcardId, deckId) => {
-        navigate(`/updateflashcard/${flashcardId}`, { state: { flashcardId, deckId } });
+    const handleUpdateFlashcardButton = (flashcard,deck) => {
+        navigate(`/updateflashcard/${flashcard.flashcardId}`, { state: { flashcard,deck} });
     };
 
 
@@ -100,12 +100,12 @@ const BrowseFlashcards = () => {
                                             </button>
                                             <button
                                                 className="btn btn-danger"
-                                                onClick={() => handleDeleteFlashcardButton(flashcard.FlashcardId)}>
+                                                onClick={() => handleDeleteFlashcardButton(flashcard,deck)}>
                                                 Delete
                                             </button>
                                             <button
                                                 className="btn btn-primary mx-2"
-                                                onClick={() => handleUpdateFlashcardButton(flashcard.FlashcardId, deck.deckId)}>
+                                                onClick={() => handleUpdateFlashcardButton(flashcard,deck)}>
                                                 Update
                                             </button>
                                     </div>
