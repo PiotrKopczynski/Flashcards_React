@@ -1,9 +1,4 @@
-﻿@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
+﻿
 a {
     color: #a22c65;
     text-decoration: underline;
@@ -24,6 +19,10 @@ a {
 
 img, svg {
     vertical-align: middle; 
+}
+
+.icon-spacing {
+    margin-right: 5px; 
 }
 
 .navbar > .container, .navbar > .container-fluid, .navbar > .container-sm, .navbar > .container-md, .navbar > .container-lg, .navbar > .container-xl, .navbar > .container-xxl {
@@ -74,27 +73,11 @@ img, svg {
     background-size: 100%;
 }
 
-/*.border-top {
-  border-top: 1px solid #e5e5e5;
-}*/
-
-/*.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
-}*/
-
-/*.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}*/
-
-
 .btn-primary {
     color: #fff;
-    /*background-color: #1b6ec2;
-  border-color: #1861ac;*/
 }
 
 button.accept-policy {
     font-size: 1rem;
     line-height: inherit;
 }
-

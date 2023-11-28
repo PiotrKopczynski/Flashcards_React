@@ -24,12 +24,12 @@ const NavMenu = () => {
 
   return (
       <header>
-          <Navbar className="navbar-expand-sm navbar-toggleable-sm navbar-dark">
+          <Navbar className="navbar-expand-sm navbar-toggleable-sm navbar-dark fs-5">
               <NavbarBrand tag={Link} to="/">
-                  <img src="catIcon.svg" alt="Flashcards Logo" width="20" height="20" />
+                  <img src="catIcon.svg" alt="Flashcards Logo" width="25" height="25" className="icon-spacing" />
                   Flashcards
               </NavbarBrand>
-        <NavbarToggler onClick={toggleNavbar} className="mr-2" />
+              <NavbarToggler onClick={toggleNavbar} className="mr-2" />
               <Collapse isOpen={!collapsed} navbar>
                   <ul className="navbar-nav flex-grow">
                       {auth.isLoggedIn ? (
@@ -43,20 +43,20 @@ const NavMenu = () => {
                               </NavItem>
                           )}
                           <NavItem>
-                                  <NavLink tag={Link}  className="text-light" onClick={handleLogout}>Logout</NavLink>
+                                  <NavLink className="text-light" style={{cursor: 'pointer'}} onClick={handleLogout}>Logout</NavLink>
                           </NavItem>
                       </>) : (
-              <>
-                <NavItem>
-                  <NavLink tag={Link} className="text-light" to="/register">Register</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink className="text-light" to="/login">Login</NavLink>
-                </NavItem>
-              </>)}
-          </ul>
-        </Collapse>
-      </Navbar>
+                              <>
+                                  <NavItem>
+                                      <NavLink tag={Link} className="text-light" to="/register">Register</NavLink>
+                                  </NavItem>
+                                  <NavItem>
+                                      <NavLink tag={Link} className="text-light" to="/login">Login</NavLink>
+                                  </NavItem>
+                              </>)}
+                  </ul>
+                  </Collapse>
+          </Navbar>
     </header>
   );
 };

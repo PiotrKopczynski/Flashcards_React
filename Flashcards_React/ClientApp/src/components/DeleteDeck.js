@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState, useContext } from 'react';
+﻿import React, { useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import api from '../api/axios';
 import AuthContext from '../context/AuthProvider';
@@ -45,8 +45,8 @@ const DeleteDeck = () => {
             <p>Are you sure you want to delete the following deck?</p>
             <p>Title: {deck.title}</p>
             <p>Description: {deck.description}</p>
-            <button class="btn btn-danger mx-3 mt-5" type="button" onClick={handleDelete}>Delete</button>
-            <button class="btn btn-secondary mt-5" type="button" onClick={handleCancel}>Cancel</button>
+            <button className="btn btn-danger mx-3 mt-5" type="button" onClick={handleDelete}>Delete</button>
+            <button className="btn btn-secondary mt-5" type="button" onClick={handleCancel}>Cancel</button>
         </div>
     );
 };

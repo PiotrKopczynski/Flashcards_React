@@ -17,8 +17,8 @@ namespace Flashcards_React.Controllers
         private readonly IDeckRepository _deckRepository;
         private readonly ILogger<FlashcardController> _logger;
 
-        public FlashcardController(IFlashcardRepository flashcardRepository, 
-            IDeckRepository deckRepository, 
+        public FlashcardController(IFlashcardRepository flashcardRepository,
+            IDeckRepository deckRepository,
             ILogger<FlashcardController> logger)
         {
             _flashcardRepository = flashcardRepository;
@@ -40,15 +40,15 @@ namespace Flashcards_React.Controllers
 
             var pageSize = 4;
             // We return the flashcards wrapped in the PaginatedList<> class such that not all flashcards are sent to the frontend at once.
-            var paginatedFlashcards = PaginatedList<Flashcard>.Create(flashcards.ToList(), pageNumber ?? 1, pageSize) ?? 
+            var paginatedFlashcards = PaginatedList<Flashcard>.Create(flashcards.ToList(), pageNumber ?? 1, pageSize) ??
                 new PaginatedList<Flashcard>(new List<Flashcard>(), 0, 1, 1); ; // To avoid null warnings
 
-            var response = new
+            var response = new PaginatedResponseDTO<Flashcard>
             {
-                Flashcards = paginatedFlashcards,
-                paginatedFlashcards.TotalPages,
-                paginatedFlashcards.HasPreviousPage,
-                paginatedFlashcards.HasNextPage
+                List = paginatedFlashcards,
+                TotalPages = paginatedFlashcards.TotalPages,
+                HasPreviousPage = paginatedFlashcards.HasPreviousPage,
+                HasNextPage = paginatedFlashcards.HasNextPage
             };
 
             return Ok(response);

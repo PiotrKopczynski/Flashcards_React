@@ -12,7 +12,7 @@ import TextToSpeech from './TextToSpeech';
 const BrowseFlashcards = () => {
     const location = useLocation();
     const { deck } = location.state;
-    const [flashcards, setFlashcards] = useState([]);
+    const [flashcards, setFlashcards] = useState();
     const [flashcardPage, setFlashcardPage] = useState(1);
     const [totalPages, setTotalPages] = useState();
     const [hasPreviousPage, setHasPreviousPage] = useState();
@@ -28,7 +28,7 @@ const BrowseFlashcards = () => {
             flashcardPage = (flashcardPage > totalPages) ? totalPages : flashcardPage;
             const response = await api.get(`api/Flashcard/BrowseFlashcards?deckId=${deck.deckId}&pageNumber=${flashcardPage}`);
             if (response.status === 200) {
-                setFlashcards(response.data.flashcards);
+                setFlashcards(response.data.list);
                 setTotalPages(response.data.totalPages);
                 setHasPreviousPage(response.data.hasPreviousPage);
                 setHasNextPage(response.data.hasNextPage);
@@ -60,12 +60,12 @@ const BrowseFlashcards = () => {
         navigate(`/createflashcard/${deck.deckId}`, { state: { deck } });
     };
 
-    const handleDeleteFlashcardButton = (flashcardId) => {
-        navigate(`/deleteflashcard/${flashcardId}`, { state: { flashcardId } });
+    const handleDeleteFlashcardButton = (flashcard,deck) => {
+        navigate(`/deleteflashcard/${flashcard.flashcardId}`, { state: { flashcard,deck} });
     };
 
-    const handleUpdateFlashcardButton = (flashcardId, deckId) => {
-        navigate(`/updateflashcard/${flashcardId}`, { state: { flashcardId, deckId } });
+    const handleUpdateFlashcardButton = (flashcard,deck) => {
+        navigate(`/updateflashcard/${flashcard.flashcardId}`, { state: { flashcard,deck} });
     };
 
     const handleBackToDeckButton = () => {
@@ -86,7 +86,7 @@ const BrowseFlashcards = () => {
                 <>
                         <div className="row row-cols-1 row-cols-md-2 g-4">
                             {flashcards.map((flashcard) => (
-                                <div key={flashcard.FlashcardId} className="col">
+                                <div key={flashcard.flashcardId} className="col">
                                     <div className="card text-center" style={{ width: '18rem' }}>
                                         <div className="card-body">
                                             <p className="card-text">Question: {flashcard.question}</p>
@@ -107,12 +107,12 @@ const BrowseFlashcards = () => {
                                             </button>
                                             <button
                                                 className="btn btn-danger"
-                                                onClick={() => handleDeleteFlashcardButton(flashcard.FlashcardId)}>
+                                                onClick={() => handleDeleteFlashcardButton(flashcard,deck)}>
                                                 Delete
                                             </button>
                                             <button
                                                 className="btn btn-primary mx-2"
-                                                onClick={() => handleUpdateFlashcardButton(flashcard.FlashcardId, deck.deckId)}>
+                                                onClick={() => handleUpdateFlashcardButton(flashcard,deck)}>
                                                 Update
                                             </button>
                                     </div>
