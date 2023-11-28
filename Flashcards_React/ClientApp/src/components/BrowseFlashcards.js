@@ -1,12 +1,13 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
-import TextToSpeech from './TextToSpeech';
+
 import React, { useEffect, useState, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import api from '../api/axios';
 import AuthContext from '../context/AuthProvider';
 import PaginationNav from './PaginationNav';
 import './StyleFile.css'; 
+import TextToSpeech from './TextToSpeech';
 
 const BrowseFlashcards = () => {
     const location = useLocation();
@@ -100,11 +101,7 @@ const BrowseFlashcards = () => {
                                                     <p className="card-text">Answer: {flashcard.answer}</p>
                                                     {showContent && (
                                                         <div>
-                                                            <TextToSpeech
-                                                                text={flashcard.answer}
-                                                                onSpeechStateChanged={(state) => setIsSpeaking(state)}
-                                                                startTextToSpeech={startTextToSpeech}
-                                                            />
+                                                            <TextToSpeech text={flashcard.answer} isLanguageFlashcard={flashcard.isLanguageFlashcard} />
                                                         </div>
                                                     )}
                                                     <p className="card-text">Notes: {flashcard.notes}</p>

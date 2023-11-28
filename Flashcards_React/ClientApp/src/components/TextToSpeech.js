@@ -2,7 +2,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faVolumeUp, faVolumeMute } from '@fortawesome/free-solid-svg-icons';
 
-const TextToSpeech = ({ text }) => {
+const TextToSpeech = ({ text, isLanguageFlashcard }) => {
     const [isPaused, setIsPaused] = useState(false);
     const [utterance, setUtterance] = useState(null);
     const [voice, setVoice] = useState(null);
@@ -111,15 +111,18 @@ const TextToSpeech = ({ text }) => {
 
             <br />
 
-            <button
-                style={{
-                    border: 'none',
-                    background: 'transparent',
-                    cursor: 'pointer'
-                }}
-                onClick={handlePlayToggle}>
-                <FontAwesomeIcon icon={isPaused ? faVolumeUp : faVolumeMute} size="2x" />
-            </button>
+          {isLanguageFlashcard && (
+                <button 
+                    style={{
+                        border: 'none',
+                        background: 'transparent',
+                        cursor: 'pointer'
+                    }}
+                    onClick={handlePlayToggle}
+                >
+                    <FontAwesomeIcon icon={isPaused ? faVolumeUp : faVolumeMute} size="2x" />
+                </button>
+            )}
         </div>
     );
 };
