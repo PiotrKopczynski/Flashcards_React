@@ -27,7 +27,8 @@
 }
 
 
-.deck-form-container input[type="text"]{
+.deck-form-container input[type="text"],
+.deck-form-container textarea {
     font-size: 18px;
     border: 1.2px solid #ced4da;
     border-radius: 0.25rem;
