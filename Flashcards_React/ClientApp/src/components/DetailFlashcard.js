@@ -8,12 +8,8 @@ const DetailFlashcard = () => {
     const { flashcard, deck } = location.state;
     const [showContent, setShowContent] = useState(false);
     const navigate = useNavigate();
-    const { auth, setAuth } = useContext(AuthContext);
+    const { auth, setAuth} = useContext(AuthContext);
 
-    // Function to toggle answer and notes visibility simultaneously
-    const toggleContent = () => {
-        setShowContent(!showContent);
-    };
 
     const handleDeleteFlashcardButton = (flashcard, deck) => {
         navigate(`/deleteflashcard/${flashcard.flashcardId}`, { state: { flashcard, deck } });
