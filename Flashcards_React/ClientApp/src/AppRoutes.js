@@ -11,61 +11,68 @@ import UserTable from "./components/admin/UserTable";
 import Unauthorized from "./components/admin/Unauthorized";
 import UpdateFlashcard from "./components/UpdateFlashcard";
 import DeleteFlashcard from "./components/DeleteFlashcard";
+import Privacy from "./components/Privacy";
 
 
 const AppRoutes = [
-  {
+    {
     index: true,
     element: <Home />
-  },
-  {
+    },
+    {
     path: '/browsedecks',
     element: <BrowseDecks />
-  },
-  {
+    },
+    {
     path: '/updatedeck/:deckId',
     element: <UpdateDeck />
-  },
-  {
+    },
+    {
     path: '/createdeck',
     element: <CreateDeck />
-  },
-  {
+    },
+    {
     path: '/deletedeck/:deckId',
     element: <DeleteDeck />
-  },
-  {
+    },
+    {
     path: '/browseflashcards/:deckId',
     element: <BrowseFlashcards />
-   },
-   {
-     path: '/updateflashcards/:deckId',
-     element: <UpdateFlashcard />
-   },
-   {
-      path: '/deleteflashcards/:deckId',
-      element: <DeleteFlashcard />
-   },
-  {
+    },
+    {
+        path: '/updateflashcard/:deckId',
+        element: <UpdateFlashcard />
+    },
+    {
+        path: '/deleteflashcard/:deckId',
+        element: <DeleteFlashcard />
+    },
+    {
     path: '/createflashcard/:deckId',
     element: <CreateFlashcard />
-  },
-  {
+    },
+    {
     path: '/usertable',
     element: <UserTable />
-  },
-  {
+    },
+    {
     path: '/unauthorized',
     element: <Unauthorized />
-  },
-  {
+    },
+    {
     path: '/login',
     element: <Login />
-  },
-  {
-    path: '/register',
+    },
+    {
+        path: '/register',
     element: <Register />
-  }
+    },
+
+    {
+        path: '/privacy',
+        element: <Privacy />
+    }
+
 ];
 
 export default AppRoutes;

@@ -87,7 +87,7 @@ const BrowseDecks = () => {
                                         <button className="btn btn-primary mt-2" onClick={() => handleBrowseFlashcardsButton(deck)}>
                                             <i className="fas fa-arrow-alt-circle-right"></i> View
                                         </button>
-                                        <button className="btn btn-secondary mt-2" onClick={() => handleUpdateDeckButton(deck)}>
+                                        <button className="btn btn-secondary mt-2 mx-1" onClick={() => handleUpdateDeckButton(deck)}>
                                             <i className="fas fa-pen-to-square"></i>
                                         </button>
                                         <button className="btn btn-danger mt-2" onClick={() => handleDeleteDeckButton(deck)}>

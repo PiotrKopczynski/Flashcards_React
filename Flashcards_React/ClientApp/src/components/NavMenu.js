@@ -24,9 +24,9 @@ const NavMenu = () => {
 
   return (
       <header>
-          <Navbar className="navbar-expand-sm navbar-toggleable-sm navbar-dark">
-              <NavbarBrand tag={Link} to="/" className="">
-                  <img src="catIcon.svg" alt="Flashcards Logo" width="20" height="20" className="icon-spacing" />
+          <Navbar className="navbar-expand-sm navbar-toggleable-sm navbar-dark fs-5">
+              <NavbarBrand tag={Link} to="/">
+                  <img src="catIcon.svg" alt="Flashcards Logo" width="25" height="25" className="icon-spacing" />
                   Flashcards
               </NavbarBrand>
               <NavbarToggler onClick={toggleNavbar} className="mr-2" />
