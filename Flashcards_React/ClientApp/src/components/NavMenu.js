@@ -25,11 +25,11 @@ const NavMenu = () => {
   return (
       <header>
           <Navbar className="navbar-expand-sm navbar-toggleable-sm navbar-dark">
-              <NavbarBrand tag={Link} to="/">
-                  <img src="catIcon.svg" alt="Flashcards Logo" width="20" height="20" />
+              <NavbarBrand tag={Link} to="/" className="">
+                  <img src="catIcon.svg" alt="Flashcards Logo" width="20" height="20" className="icon-spacing" />
                   Flashcards
               </NavbarBrand>
-        <NavbarToggler onClick={toggleNavbar} className="mr-2" />
+              <NavbarToggler onClick={toggleNavbar} className="mr-2" />
               <Collapse isOpen={!collapsed} navbar>
                   <ul className="navbar-nav flex-grow">
                       {auth.isLoggedIn ? (
@@ -46,17 +46,17 @@ const NavMenu = () => {
                                   <NavLink className="text-light" style={{cursor: 'pointer'}} onClick={handleLogout}>Logout</NavLink>
                           </NavItem>
                       </>) : (
-              <>
-                <NavItem>
-                  <NavLink tag={Link} className="text-light" to="/register">Register</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} className="text-light" to="/login">Login</NavLink>
-                </NavItem>
-              </>)}
-          </ul>
-        </Collapse>
-      </Navbar>
+                              <>
+                                  <NavItem>
+                                      <NavLink tag={Link} className="text-light" to="/register">Register</NavLink>
+                                  </NavItem>
+                                  <NavItem>
+                                      <NavLink tag={Link} className="text-light" to="/login">Login</NavLink>
+                                  </NavItem>
+                              </>)}
+                  </ul>
+                  </Collapse>
+          </Navbar>
     </header>
   );
 };

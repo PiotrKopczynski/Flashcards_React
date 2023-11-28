@@ -68,16 +68,19 @@ const BrowseDecks = () => {
 
     return (
         <div>
-            <h1>Deck List</h1>
+            
             {loading ? (
-                <p>Loading...</p>
+                <>
+                    <h1 className="fs-2">Deck List</h1>
+                    <p>Loading...</p>
+                </>
             ) : (
                 <>
                     <DeckSearchBar setSearchString={setSearchString} />
-                    <div className="row row-cols-1 row-cols-md-3 g-4">
+                        <div className="row row-cols-1 row-cols-md-3 row-cols-lg-3 g-4">
                         {decks.map(deck => (
                             <div key={deck.deckId} className="col">
-                                <div className="deck text-center" style={{ width: '18rem' }}>
+                                <div className="deck text-center">
                                     <div className="deck-body">
                                         <h2 className="fs-3 card-title">{deck.title}</h2>
                                         <p className="deck-text">{deck.description}</p>
@@ -95,11 +98,17 @@ const BrowseDecks = () => {
                             </div>
                         ))}
                     </div>
-                        {(decks && decks.length) ? <PaginationNav page={deckPage} setPage={setDeckPage} hasPreviousPage={hasPreviousPage}
-                         hasNextPage={hasNextPage} totalPages={totalPages}/> : <div id="emptyResultsContainer">The search results are empty</div>}
-                    <button className="btn btn-outline-primary" onClick={() => handleCreateDeckButton()}>
-                        Create New Deck
-                    </button>
+                        <div className="buttons-container">
+                            <div className="create-deck-section">
+                                <button className="btn btn-outline-primary" onClick={() => handleCreateDeckButton()}>
+                                    Create New Deck
+                                </button>
+                            </div>
+                            <div className="controller-pagination">
+                                {(decks && decks.length) ? <PaginationNav page={deckPage} setPage={setDeckPage} hasPreviousPage={hasPreviousPage}
+                                    hasNextPage={hasNextPage} totalPages={totalPages} /> : <div id="emptyResultsContainer">The search results are empty</div>}
+                            </div>
+                        </div>
                 </>
             )}
         </div>
