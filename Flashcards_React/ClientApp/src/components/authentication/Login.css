@@ -22,7 +22,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center; /*try space around then decide accordingly*/
+        justify-content: center;
     }
 
     .login-form-section .form-control:focus {
