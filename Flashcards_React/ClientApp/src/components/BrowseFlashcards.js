@@ -59,13 +59,9 @@ const BrowseFlashcards = () => {
     const handleCreateFlashcardButton = (deck) => {
         navigate(`/createflashcard/${deck.deckId}`, { state: { deck } });
     };
-
-    const handleDeleteFlashcardButton = (flashcard,deck) => {
-        navigate(`/deleteflashcard/${flashcard.flashcardId}`, { state: { flashcard,deck} });
-    };
-
-    const handleUpdateFlashcardButton = (flashcard,deck) => {
-        navigate(`/updateflashcard/${flashcard.flashcardId}`, { state: { flashcard,deck} });
+   
+    const handleDetailButton = (flashcard, deck) => {
+        navigate(`/detailflashcard/${flashcard.flashcardId}`, { state: { flashcard, deck } });
     };
 
     const handleBackToDeckButton = () => {
@@ -106,14 +102,9 @@ const BrowseFlashcards = () => {
                                                 {showContent ? 'Hide answer' : 'Show answer'}
                                             </button>
                                             <button
-                                                className="btn btn-danger"
-                                                onClick={() => handleDeleteFlashcardButton(flashcard,deck)}>
-                                                Delete
-                                            </button>
-                                            <button
                                                 className="btn btn-primary mx-2"
-                                                onClick={() => handleUpdateFlashcardButton(flashcard,deck)}>
-                                                Update
+                                                onClick={() => handleDetailButton(flashcard, deck)}>
+                                                Inspect
                                             </button>
                                     </div>
                                 </div>
