@@ -77,10 +77,10 @@ const BrowseDecks = () => {
             ) : (
                 <>
                     <DeckSearchBar setSearchString={setSearchString} />
-                    <div className="row row-cols-1 row-cols-md-3 g-4">
+                        <div className="row row-cols-1 row-cols-md-3 row-cols-lg-3 g-4">
                         {decks.map(deck => (
                             <div key={deck.deckId} className="col">
-                                <div className="deck text-center" style={{ width: '18rem' }}>
+                                <div className="deck text-center">
                                     <div className="deck-body">
                                         <h2 className="fs-3 card-title">{deck.title}</h2>
                                         <p className="deck-text">{deck.description}</p>

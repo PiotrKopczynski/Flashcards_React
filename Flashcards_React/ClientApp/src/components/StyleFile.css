@@ -1,19 +1,14 @@
 /* BrowseDecks.css */
 @import '~@fortawesome/fontawesome-free/css/all.min.css';
 
-@media all and (max-width: 500px) {
-    .card-list {
-        /* On small screens, we are no longer using row direction but column */
-        flex-direction: column;
-    }
-}
+
 
 .deck {
     --b: 2px; /* border thickness */
     --s: .45em; /* size of the corner */
     --color: #192040;
     margin: 30px auto;
-    width: 300px;
+    width: 20rem;
     height: 300px;
     border-radius: calc(var(--s) * 2);
     transition: .3s linear, background-color 0s;
@@ -27,7 +22,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding:1rem;
+    padding: 1rem;
 }
 
     .deck:hover {
@@ -44,7 +39,7 @@
     color: black;
 }
 
-/**/
+/*
 .card {
     position: relative;
     width: 600px;
@@ -56,11 +51,14 @@
     background: #fff;
 }
 
-/* Card content */
+
 .card-content {
     position: relative;
     z-index: 1;
 }
+
+*/
+
 
 /* Toggle button container */
 .eye-toggle-button-container {
@@ -139,7 +137,7 @@ nav {
     }
 
         .nav button:focus {
-            background-color: yellow;
+            background-color: #f7770f;
         }
 
 
@@ -165,4 +163,45 @@ nav {
 .controller-pagination {
     display: flex;
     justify-content: center;
+}
+
+
+/* ********** Targetting Medium Devices ********** */
+
+@media (min-width: 577px) and (max-width: 768px) {
+
+    .deck {
+        width: 15rem; 
+        height: 300px;
+        box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.25), -5px -5px 30px 7px rgba(0, 0, 0, 0.22);
+        padding: 0.1rem;
+    }
+ 
+}
+
+
+/* ********** Targetting Large Devices ********** */
+
+@media (min-width: 769px) and (max-width: 1199px) {
+
+    .deck {
+        width: 18rem;
+        height: 340px;
+        box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.25), -5px -5px 30px 7px rgba(0, 0, 0, 0.22);
+        padding: 0.1rem;
+    }
+  
+}
+
+/* ********** Targetting Extra Large Devices ********** */
+
+@media (min-width: 1200px) {
+
+    .deck {
+        width: 20rem;
+        height: 360px;
+        box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.25), -5px -5px 30px 7px rgba(0, 0, 0, 0.22);
+        padding: 0.1rem;
+    }
+  
 }
