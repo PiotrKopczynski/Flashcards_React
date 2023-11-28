@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import api from '../api/axios';
 import AuthContext from '../context/AuthProvider';
+import './UpdateDeck.css';
 
 const UpdateDeck = () => {
     const location = useLocation();
@@ -42,33 +43,42 @@ const UpdateDeck = () => {
     };
 
     return (
-        <div>
-            <h1>Update Deck</h1>
-            <form>
-                <label htmlFor="title">Title:</label>
-                <input 
-                    type="text"
-                    id = "title"
-                    value = {title}
-                    required
-                    onChange={(e) => setTitle(e.target.value)}
-                />
-
-                <label htmlFor="description">Description:</label>
-                <input 
-                    type="text"
-                    id = "description"
-                    value = {description}
-                    required
-                    onChange={(e) => setDescription(e.target.value)}
-                />
+        <section className="deck-form">
+            <h1 className="fs-2 mx-3 mb-5">Update Deck</h1>
+            <form className="deck-form">
+                <div className="form-floating pb-4">
+                    
+                    <input 
+                        type="text"
+                        className="form-control"
+                        placeholder="Title"
+                        id = "title"
+                        value = {title}
+                        required
+                        onChange={(e) => setTitle(e.target.value)}
+                    />
+                    <label htmlFor="title fs-4">Title</label>
+                </div>
+                <div className="form-floating pb-4">
+                    
+                    <input 
+                        type="text"
+                        className="form-control"
+                        placeholder="Description fs-4"
+                        id = "description"
+                        value = {description}
+                        required
+                        onChange={(e) => setDescription(e.target.value)}
+                    />
+                    <label htmlFor="description">Description</label>
+                </div>
             </form>
             <button className="btn btn-primary mt-4 m-2" type="button" onClick={handleSubmit}>Save</button>
             <button className="btn btn-secondary mt-4 m-2" type="button" onClick={handleCancel}>Cancel</button>
-            <p>Deck ID: {deck.deckId}</p>
-            <p>Title: {deck.title}</p>
-            <p>Description: {deck.description}</p>
-        </div>
+            {/*<p>Deck ID: {deck.deckId}</p>*/}
+            <p className="fs-5 mx-3 pt-4">Title: {deck.title}</p>
+            <p className="fs-5 mx-3 pt-4">Description: {deck.description}</p>
+        </section>
     );
 };
 
