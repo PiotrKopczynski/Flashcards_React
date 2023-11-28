@@ -143,3 +143,26 @@ nav {
         }
 
 
+/* Custom Design Of Decks Bottom Buttons On Browse Decks Page */
+
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.create-deck-section {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    min-height: 170px;
+    width: 100%;
+}
+
+.controller-pagination {
+    display: flex;
+    justify-content: center;
+}

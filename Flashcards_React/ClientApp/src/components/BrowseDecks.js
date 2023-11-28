@@ -98,11 +98,17 @@ const BrowseDecks = () => {
                             </div>
                         ))}
                     </div>
-                        {(decks && decks.length) ? <PaginationNav page={deckPage} setPage={setDeckPage} hasPreviousPage={hasPreviousPage}
-                         hasNextPage={hasNextPage} totalPages={totalPages}/> : <div id="emptyResultsContainer">The search results are empty</div>}
-                    <button className="btn btn-outline-primary" onClick={() => handleCreateDeckButton()}>
-                        Create New Deck
-                    </button>
+                        <div className="buttons-container">
+                            <div className="create-deck-section">
+                                <button className="btn btn-outline-primary" onClick={() => handleCreateDeckButton()}>
+                                    Create New Deck
+                                </button>
+                            </div>
+                            <div className="controller-pagination">
+                                {(decks && decks.length) ? <PaginationNav page={deckPage} setPage={setDeckPage} hasPreviousPage={hasPreviousPage}
+                                    hasNextPage={hasNextPage} totalPages={totalPages} /> : <div id="emptyResultsContainer">The search results are empty</div>}
+                            </div>
+                        </div>
                 </>
             )}
         </div>

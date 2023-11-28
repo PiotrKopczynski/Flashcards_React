@@ -203,3 +203,22 @@ h1 {
         padding: 60px 5vw;
     }
 }
+
+/* ********** Targetting Large Devices ********** */
+
+@media (min-width: 769px) and (max-width: 1199px) {
+
+    html {
+        font-size: 16px;
+    }
+}
+
+/* ********** Targetting Extra Large Devices ********** */
+
+@media (min-width: 1200px) {
+
+    html {
+        font-size: 16px;
+    }
+
+}
