@@ -1,6 +1,6 @@
 ﻿import { useRef, useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import './auth.css';
+import './Login.css';
 import AuthContext from '../../context/AuthProvider';
 
 const Login = () => {
