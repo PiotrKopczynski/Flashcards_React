@@ -40,11 +40,10 @@
     }
     
         .search-bar input[type="text"] {
-                padding: 0.6rem;
+            padding: 0.6rem;
         }
 
         .search-bar button {
-            border-radius: 0.25rem;
             padding: 0.6rem 0.8rem;
             margin-left: 2px;            
         }
@@ -60,20 +59,12 @@
     }
 
         .search-bar input[type="text"] {
-            padding: 0.7rem;
-            border: 1px solid lightgray;
-            border-radius: 0.25rem;
-            font-size: 1rem;
-            width: 80%;
+            padding: 0.6rem;
         }
 
         .search-bar button {
-            border-radius: 0.25rem;
-            font-size: 1rem;
-            padding: 0.7rem 0.9rem;
-            border: none;
-            background: linear-gradient(45deg, #FF6B6B, #FF8E53);
-            color: #412958;
+            padding: 0.6rem 0.8rem;
+            margin-left: 2px;
         }
 }
 
@@ -82,17 +73,44 @@
 
 @media (min-width: 769px) and (max-width: 1199px) {
 
-    
+    .search-bar {
+        padding: 50px 3vw;
+    }
+
+        .search-bar input[type="text"] {
+            padding: 0.7rem;
+            width: 83%;
+        }
+
+        .search-bar button {
+            padding: 0.6rem 0.8rem;
+            margin-left: 2px;
+        }
+ 
 }
 
 /* ********** Targetting Extra Large Devices ********** */
 
 @media (min-width: 1200px) {
 
+    .search-bar {
+        padding: 20px 3vw;
+        padding-bottom: 90px;
+    }
+
+        .search-bar input[type="text"] {
+            padding: 0.7rem;
+            width: 83%;
+        }
+
+        .search-bar button {
+            padding: 0.7rem 0.8rem;
+            margin-left: 2px;
+        }
     
 }
 
-
+/* Oldy goldy */
 
 /*.search {
     width: 10%;
