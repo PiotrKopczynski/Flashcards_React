@@ -1,0 +1,255 @@
+﻿/* ********** Registration form ********** */
+
+
+.register-form-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 5vw;
+}
+
+    .register-form-section .card {
+        width: 40vw;
+        height: 550px;
+        background-color: #fff;
+        border: 1px solid rgba(0,0,0,.125);
+        border-radius: 0.25rem;
+        box-shadow: 0 0 0 0.10rem rgba(234, 80,62, 0.25);
+    }
+
+    .register-form-section .card-body {
+        padding: 10px 20px 20px 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center; /*try space around then decide accordingly*/
+    }
+
+    .register-form-section .form-control:focus {
+        color: #212529;
+        background-color: #fff;
+        border-color: #6123a8;
+        outline: 0;
+        box-shadow: 0 0 0 0.4rem rgba(234, 80, 62, 0.25);
+    }
+
+    .register-form-section .card:hover {
+        transform: none;
+        background: #fff;
+        color: #712c66;
+    }
+
+.custom-hr {
+    display: block;
+    width: 90%;
+    margin: 1rem 0;
+    border: 0;
+    border-top: 2px solid #712c66;
+    opacity: 0.25;
+}
+
+input[type="text"],
+input[type="password"] {
+    font-size: 20px;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    color: #212529;
+    background-color: #fff;
+    outline: 0;
+    box-shadow: 0 0 0 0.10rem rgba(234, 80, 62, 0.25);
+}
+
+/* resetting lists styles */
+li {
+    list-style-type: none;
+}
+
+/* targets instruction box which appears while registration*/
+.instructions {
+    font-size: 0.75rem;
+    border-radius: 0.5rem;
+    background: #000;
+    color: #fff;
+    padding: 0.25rem;
+    position: relative;
+    bottom: -10px;
+}
+
+    .instructions > svg {
+        margin-right: 0.25rem;
+    }
+
+/* utility classes; offscreen and hide affecting visibility and positioning */
+.offscreen {
+    position: absolute;
+    left: -9999px;
+}
+
+.hide {
+    display: none;
+}
+
+/* visual representation of validation feedback with tick and cross*/
+.valid {
+    color: limegreen;
+    margin-left: 0.25rem;
+}
+
+.invalid {
+    color: red;
+    margin-left: 0.25rem;
+}
+
+/*display of error message*/
+.errmsg {
+    background-color: lightpink;
+    color: firebrick;
+    font-weight: bold;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.flexGrow {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+
+/* ********** Targetting Extra Small Devices ********** */
+
+@media (max-width: 576px) {
+
+    .register-form-section .card {
+        width: 80vw;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        font-size: 18px;
+    }
+}
+
+
+/* ********** Targetting Medium Devices ********** */
+
+@media (min-width: 577px) and (max-width: 768px) {
+
+    .register-form-section .card {
+        width: 52vw;
+    }
+
+    .register-form-section .card-body {
+        padding: 20px 20px 20px 20px;
+        justify-content: space-around;
+    }
+
+    .custom-hr {
+        width: 80%;
+    }
+
+
+    input[type="text"],
+    input[type="password"] {
+        font-size: 21px;
+    }
+}
+
+
+/* ********** Targetting Large Devices ********** */
+
+@media (min-width: 769px) and (max-width: 1199px) {
+
+    .register-form-section .card {
+        width: 40vw;
+    }
+
+    .register-form-section .card-body {
+        padding: 20px 20px 20px 20px;
+        justify-content: space-around;
+    }
+
+    .custom-hr {
+        width: 80%;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        font-size: 25px;
+    }
+}
+
+/* ********** Targetting Extra Large Devices ********** */
+
+@media (min-width: 1200px) {
+
+    .register-form-section .card {
+        width: 40vw;
+    }
+
+    .register-form-section .card-body {
+        padding: 20px 20px 20px 20px;
+        justify-content: space-around; /*try space around then decide accordingly*/
+    }
+
+    .custom-hr {
+        width: 80%;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        font-size: 25px;
+    }
+}
+
+
+
+/** Old might be gold **/
+
+/*
+    .form-container {
+        width: 100%;
+        max-width: 420px;
+        height: 50vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 1rem;
+        background-color: rgba(255,255,255,1);
+        border: solid 0.5px;
+    }
+
+    form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 1rem;
+        padding-top: 1rem;
+    }
+
+
+    .App {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 1rem 0.5rem;
+    }
+
+    section {
+        width: 100%;
+        max-width: 420px;
+        min-height: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 1rem;
+        background-color: rgba(255,255,255,1);  
+    }
+
+*/

@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
+import './DeckSearchBar.css';
 
 const DeckSearchBar = ({ setSearchString}) => {
     
@@ -11,19 +12,22 @@ const DeckSearchBar = ({ setSearchString}) => {
     }
 
     return (
-        <div>
+        <section className="search-bar">
+            <h1 class="fs-2 mt-2">Browse Decks</h1>
             <form className="search" onSubmit={handleSubmit}>
-                <input
-                    className="searchInput"
-                    type="text"
-                    id="search"
-                    name="search"
-                />
-                <button className="searchButton">
-                    <FontAwesomeIcon icon={faMagnifyingGlass} />
-                </button>
+                    <input
+                        type="text"
+                        className="searchInput"
+                        name="search"
+                        placeholder="search here"
+                        id="search"
+                        name="search"
+                    />
+                    <button className="searchButton">
+                        <FontAwesomeIcon icon={faMagnifyingGlass} />
+                    </button>
             </form>
-        </div>
+        </section>
     );
 };
 

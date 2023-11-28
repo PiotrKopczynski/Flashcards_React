@@ -1,0 +1,49 @@
+﻿.section-intro .btn-primary {
+    background: linear-gradient(45deg, #543770, #543770);
+    border: none;
+    /*border-color: #543770;*/
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+    .section-intro .btn-primary:hover {
+        color: #fff;
+        /*border-color: #cc3557;*/
+        border: none;
+        background: linear-gradient(45deg, #a22c65, #cc3557);
+        transform: scale(1.05);
+    }
+
+    .section-intro.btn-check:focus + .btn-primary, .btn-primary:focus {
+        color: #fff;
+        background-color: #cc3557;
+        /*border-color: #cc3557;*/
+        border: none;
+        box-shadow: 0 0 0 0.25rem rgba(234, 80, 62, 0.5) !important;
+    }
+
+    .section-intro .btn-primary, .section-intro .btn-primary, .section-intro .btn-primary:active, .section-intro.btn-primary.active, .show > .section-intro .btn-primary.dropdown-toggle {
+        color: #fff;
+        background-color: #543770;
+        border-color: #cc3557;
+    }
+
+.section-intro .btn-secondary {
+    background: linear-gradient(45deg, #6c757d, #6c757d);
+    /*border-color: #6c757d;*/
+    border: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+    .section-intro .btn-secondary:hover {
+        color: #fff;
+        /*border-color: #cc3557;*/
+        border: none;
+        background: linear-gradient(45deg, #a22c65, #cc3557);
+        transform: scale(1.05);
+    }
+
+    
+
+
+
+
