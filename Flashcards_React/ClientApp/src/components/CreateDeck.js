@@ -2,7 +2,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import api from '../api/axios';
 import AuthContext from '../context/AuthProvider';
-import './StyleFile.css'; 
+import './CreateDeck.css'; 
 
 
 const CreateDeck = () => {
@@ -48,33 +48,36 @@ const CreateDeck = () => {
     };
 
     return (
-        <div>
-            <h1>Create Deck</h1>
-            <form>
-                <label htmlFor="title">Title:</label>
-                <input
-                    type="text"
-                    id="title"
-                    value={title}
-                    required
-                    onChange={(e) => setTitle(e.target.value)}
-                />
+        <section className="deck-form-container">
+            <h1 className="fs-1 mx-4 mb-5 text-center">Create Deck</h1>
+            <form className="deck-form">
+                <div className="form-group">
+                    <label htmlFor="title" className="fs-4">Title<span className="text-danger">*</span></label>
+                    <input
+                        type="text"
+                        className="form-control mt-2 mb-3"
+                        id="title"
+                        value={title}
+                        required
+                        onChange={(e) => setTitle(e.target.value)}
+                    />
 
-                <label htmlFor="description">Description:</label>
-                <input
-                    type="text"
-                    id="description"
-                    value={description}
-                    required
-                    onChange={(e) => setDescription(e.target.value)}
-                />
-
-            </form>
-            <button className="btn btn-primary mt-5 m-2" type="button" onClick={handleCreate}>Create</button>
-            <button className="btn btn-secondary mt-5 m-2" type="button" onClick={handleCancel}>Cancel</button>
-
-            
-        </div>
+                    <label htmlFor="description" className="fs-4">Description</label>
+                    <input
+                        type="text"
+                        className="form-control mt-2 mb-3"
+                        id="description"
+                        value={description}
+                        required
+                        onChange={(e) => setDescription(e.target.value)}
+                    />
+                </div>
+                <div className="form-buttons-container">
+                    <button className="btn btn-primary mt-5 m-2 fs-5" type="button" onClick={handleCreate}>Create</button>
+                    <button className="btn btn-secondary mt-5 m-2 fs-5" type="button" onClick={handleCancel}>Cancel</button>
+                </div>
+            </form>   
+        </section>
     );
 };
 

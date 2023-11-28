@@ -1,0 +1,18 @@
+﻿.deck-form-container {
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.deck-form {
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.form-buttons-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
