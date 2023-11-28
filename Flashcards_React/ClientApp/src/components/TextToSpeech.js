@@ -1,6 +1,6 @@
 ﻿import React, { useState, useEffect } from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faVolumeUp, faVolumeMute } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faVolumeUp, faVolumeMute } from "@fortawesome/free-solid-svg-icons";
 
 const TextToSpeech = ({ text, isLanguageFlashcard }) => {
     const [isPaused, setIsPaused] = useState(false);
@@ -58,69 +58,76 @@ const TextToSpeech = ({ text, isLanguageFlashcard }) => {
 
     return (
         <div>
-            <label>
-                Voice:
-                <select value={voice?.name} onChange={handleVoiceChange}>
-                    {window.speechSynthesis.getVoices().map((voice) => (
-                        <option key={voice.name} value={voice.name}>
-                            {voice.name}
-                        </option>
-                    ))}
-                </select>
-            </label>
+            {isLanguageFlashcard && (
+                <div>
+                    <label>
+                        Voice:
+                        <select value={voice?.name} onChange={handleVoiceChange}>
+                            {window.speechSynthesis.getVoices().map((v) => (
+                                <option key={v.name} value={v.name}>
+                                    {v.name}
+                                </option>
+                            ))}
+                        </select>
+                    </label>
 
-            <br />
+                    <br />
 
-            <label>
-                Pitch:
-                <input
-                    type="range"
-                    min="0.5"
-                    max="2"
-                    step="0.1"
-                    value={pitch}
-                    onChange={handlePitchChange}
-                />
-            </label>
+                    <label>
+                        Pitch:
+                        <input
+                            type="range"
+                            min="0.5"
+                            max="2"
+                            step="0.1"
+                            value={pitch}
+                            onChange={handlePitchChange}
+                        />
+                    </label>
 
-            <br />
+                    <br />
 
-            <label>
-                Speed:
-                <input
-                    type="range"
-                    min="0.5"
-                    max="2"
-                    step="0.1"
-                    value={rate}
-                    onChange={handleRateChange}
-                />
-            </label>
-            <br />
-            <label>
-                Volume:
-                <input
-                    type="range"
-                    min="0"
-                    max="1"
-                    step="0.1"
-                    value={volume}
-                    onChange={handleVolumeChange}
-                />
-            </label>
+                    <label>
+                        Speed:
+                        <input
+                            type="range"
+                            min="0.5"
+                            max="2"
+                            step="0.1"
+                            value={rate}
+                            onChange={handleRateChange}
+                        />
+                    </label>
+                    <br />
+                    <label>
+                        Volume:
+                        <input
+                            type="range"
+                            min="0"
+                            max="1"
+                            step="0.1"
+                            value={volume}
+                            onChange={handleVolumeChange}
+                        />
+                    </label>
 
-            <br />
+                    <br />
+                </div>
+            )}
 
-          {isLanguageFlashcard && (
-                <button 
+            {isLanguageFlashcard && (
+                <button
                     style={{
-                        border: 'none',
-                        background: 'transparent',
-                        cursor: 'pointer'
+                        border: "none",
+                        background: "transparent",
+                        cursor: "pointer",
                     }}
                     onClick={handlePlayToggle}
                 >
-                    <FontAwesomeIcon icon={isPaused ? faVolumeUp : faVolumeMute} size="2x" />
+                    <FontAwesomeIcon
+                        icon={isPaused ? faVolumeUp : faVolumeMute}
+                        size="2x"
+                    />
                 </button>
             )}
         </div>

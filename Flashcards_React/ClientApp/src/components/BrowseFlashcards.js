@@ -22,8 +22,6 @@ const BrowseFlashcards = () => {
     const { auth, setAuth } = useContext(AuthContext);
     const [showContent, setShowContent] = useState(false);
 
-    const [isSpeaking, setIsSpeaking] = useState(false);
-
     const getFlashcards = async (flashcardPage) => {
         try {
             flashcardPage = (flashcardPage < 0) ? 1 : flashcardPage;
@@ -70,10 +68,6 @@ const BrowseFlashcards = () => {
         navigate(`/updateflashcard/${flashcardId}`, { state: { flashcardId, deckId } });
     };
 
-    const startTextToSpeech = (text) => {
-        setIsSpeaking(true);
-    };
-
     const handleBackToDeckButton = () => {
         navigate(`/browsedecks`);
     };
@@ -108,7 +102,8 @@ const BrowseFlashcards = () => {
                                                 </>
                                             )}
                                             <button className="eye-toggle-button" onClick={toggleContent}>
-                                                <FontAwesomeIcon icon={showContent ? faEyeSlash : faEye} aria-hidden="true" />Show answer
+                                                <FontAwesomeIcon icon={showContent ? faEyeSlash : faEye} aria-hidden="true" />
+                                                {showContent ? 'Hide answer' : 'Show answer'}
                                             </button>
                                             <button
                                                 className="btn btn-danger"
