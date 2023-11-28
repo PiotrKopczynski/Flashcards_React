@@ -2,7 +2,6 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import api from '../api/axios';
 import AuthContext from '../context/AuthProvider';
-import './DeleteDeck.css';
 
 const DeleteDeck = () => {
     const location = useLocation();
