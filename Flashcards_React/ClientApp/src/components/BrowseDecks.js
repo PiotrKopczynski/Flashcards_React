@@ -68,9 +68,12 @@ const BrowseDecks = () => {
 
     return (
         <div>
-            <h1>Deck List</h1>
+            
             {loading ? (
-                <p>Loading...</p>
+                <>
+                    <h1 className="fs-2">Deck List</h1>
+                    <p>Loading...</p>
+                </>
             ) : (
                 <>
                     <DeckSearchBar setSearchString={setSearchString} />
