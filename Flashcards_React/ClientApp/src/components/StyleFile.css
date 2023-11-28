@@ -32,6 +32,10 @@
         color: #fff;
     }
 
+.deck-body {
+    padding: 5px;
+}
+
 .title-white {
     color: white;
 }
