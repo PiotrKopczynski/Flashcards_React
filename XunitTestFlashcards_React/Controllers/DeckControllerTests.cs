@@ -163,7 +163,7 @@ namespace XunitTestFlashcards_React.Controllers
             var mockDeckRepository = new Mock<IDeckRepository>();
             // The flashcardUserId passed in to the GetAll function in the controller will be an empty string "",
             // so for the test to work, an empty string needs to be passed in here as well.
-            mockDeckRepository.Setup(repo => repo.GetAll("")).ReturnsAsync((IEnumerable<Deck> ?)null);
+            mockDeckRepository.Setup(repo => repo.GetAll("")).ReturnsAsync((IEnumerable<Deck>?)null);
             var deckController = CreateDeckController(mockDeckRepository);
 
             // Act
@@ -181,8 +181,8 @@ namespace XunitTestFlashcards_React.Controllers
         [Fact]
         public async Task TestCreateDeckFails()
         {
-        // Arrange
-        var mockDeckRepository = new Mock<IDeckRepository>();
+            // Arrange
+            var mockDeckRepository = new Mock<IDeckRepository>();
             // Below It.IsAny<Deck>() is used because a new deck object is created in the CreateDeck function, such
             // that the deck object created in the unit test may be equal to the object created in the CreateDeck
             // function, but the pointers will point to two separate objects in memory,

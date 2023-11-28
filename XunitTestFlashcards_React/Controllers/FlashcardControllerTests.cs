@@ -59,7 +59,7 @@ namespace XunitTestFlashcards_React.Controllers
             Question = "Test1",
             Answer = "This is the first test card.",
             Notes = "Test notes.",
-            IsLanguageFlashcard= true
+            IsLanguageFlashcard = true
         };
 
         private readonly int testDeckId = 1;
@@ -118,7 +118,7 @@ namespace XunitTestFlashcards_React.Controllers
             }
         }
 
-        
+
         [Fact]
         public async Task TestBrowseFlashcardsFails()
         {
