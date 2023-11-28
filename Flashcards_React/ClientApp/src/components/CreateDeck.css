@@ -16,3 +16,25 @@
     flex-direction: row;
     justify-content: center;
 }
+
+
+.deck-form-container .form-control:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: #6123a8;
+    outline: 0;
+    box-shadow: 0 0 0 0.4rem rgba(234, 80, 62, 0.25);
+}
+
+
+.deck-form-container input[type="text"],
+.deck-form-container input[type="password"] {
+    font-size: 18px;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    color: #212529;
+    background-color: #fff;
+    outline: 0;
+    box-shadow: 0 0 0 0.10rem rgba(234, 80, 62, 0.25);
+}

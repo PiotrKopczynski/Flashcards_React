@@ -49,7 +49,7 @@ const CreateDeck = () => {
 
     return (
         <section className="deck-form-container">
-            <h1 className="fs-1 mx-4 mb-5 text-center">Create Deck</h1>
+            <h1 className="fs-2 mx-4 mb-5 text-center">Create Deck</h1>
             <form className="deck-form">
                 <div className="form-group">
                     <label htmlFor="title" className="fs-4">Title<span className="text-danger">*</span></label>
