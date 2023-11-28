@@ -1,9 +1,4 @@
-﻿@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
+﻿
 a {
     color: #a22c65;
     text-decoration: underline;
@@ -24,6 +19,10 @@ a {
 
 img, svg {
     vertical-align: middle; 
+}
+
+.icon-spacing {
+    margin-right: 3px; 
 }
 
 .navbar > .container, .navbar > .container-fluid, .navbar > .container-sm, .navbar > .container-md, .navbar > .container-lg, .navbar > .container-xl, .navbar > .container-xxl {
@@ -98,3 +97,8 @@ button.accept-policy {
     line-height: inherit;
 }
 
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
