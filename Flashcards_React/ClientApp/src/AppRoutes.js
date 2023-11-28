@@ -11,6 +11,7 @@ import UserTable from "./components/admin/UserTable";
 import Unauthorized from "./components/admin/Unauthorized";
 import UpdateFlashcard from "./components/UpdateFlashcard";
 import DeleteFlashcard from "./components/DeleteFlashcard";
+import DetailFlashcard from "./components/DetailFlashcard";
 import Privacy from "./components/Privacy";
 
 
@@ -50,6 +51,10 @@ const AppRoutes = [
     {
     path: '/createflashcard/:deckId',
     element: <CreateFlashcard />
+    },
+    {
+    path: '/detailflashcard/:deckId',
+    element: <DetailFlashcard />
     },
     {
     path: '/usertable',
