@@ -7,6 +7,7 @@ import api from '../api/axios';
 import AuthContext from '../context/AuthProvider';
 import PaginationNav from './PaginationNav';
 import './StyleFile.css'; 
+import TextToSpeech from './TextToSpeech';
 
 const BrowseFlashcards = () => {
     const location = useLocation();
@@ -67,8 +68,6 @@ const BrowseFlashcards = () => {
         navigate(`/updateflashcard/${flashcard.flashcardId}`, { state: { flashcard,deck} });
     };
 
-
-
     const handleBackToDeckButton = () => {
         navigate(`/browsedecks`);
     };
@@ -91,12 +90,20 @@ const BrowseFlashcards = () => {
                                     <div className="card text-center" style={{ width: '18rem' }}>
                                         <div className="card-body">
                                             <p className="card-text">Question: {flashcard.question}</p>
-                      
-                                            {showContent && <p className="card-text">Answer: {flashcard.answer}</p>}
-                        
-                                            {showContent && <p className="card-text">Notes: {flashcard.notes}</p>}
+                                            {showContent && (
+                                                <>
+                                                    <p className="card-text">Answer: {flashcard.answer}</p>
+                                                    {showContent && (
+                                                        <div>
+                                                            <TextToSpeech text={flashcard.answer} isLanguageFlashcard={flashcard.isLanguageFlashcard} />
+                                                        </div>
+                                                    )}
+                                                    <p className="card-text">Notes: {flashcard.notes}</p>
+                                                </>
+                                            )}
                                             <button className="eye-toggle-button" onClick={toggleContent}>
-                                                <FontAwesomeIcon icon={showContent ? faEyeSlash : faEye} aria-hidden="true" />Show answer
+                                                <FontAwesomeIcon icon={showContent ? faEyeSlash : faEye} aria-hidden="true" />
+                                                {showContent ? 'Hide answer' : 'Show answer'}
                                             </button>
                                             <button
                                                 className="btn btn-danger"
@@ -120,15 +127,6 @@ const BrowseFlashcards = () => {
                         Create a Flashcard
                     </button>
                     <button className="btn btn-primary mx-5 mt-2 mb-5" onClick={() => handleBackToDeckButton()}>
-{/*
-                    </div>
-                    <button
-                        className="btn btn-primary mx-5 mt-2 mb-5"
-                        onClick={() => handleCreateFlashcardButton(deck)}>
-                        Create a Flashcard
-                    </button>
-                    <button className="btn btn-primary mx-5 mt-2 mb-5" onClick={handleBackToDeckButton}>
-*/}
                         Back to Decks
                     </button>
                 </>
