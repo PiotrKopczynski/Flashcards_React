@@ -21,7 +21,7 @@ namespace Flashcards_React.Controllers
         private readonly UserManager<IdentityUser> _userManager;
 
         public DeckController(IDeckRepository deckRepository,
-            ILogger<DeckController> logger, 
+            ILogger<DeckController> logger,
             UserManager<IdentityUser> userManager)
         {
             _deckRepository = deckRepository;
@@ -73,7 +73,7 @@ namespace Flashcards_React.Controllers
         [HttpPost]
         [Route("CreateDeck")]
         public async Task<IActionResult> CreateDeck([FromBody] CreateDeckDTO deckDTO)
-        {      
+        {
             if (ModelState.IsValid) // Server side validation.
             {
                 var deck = new Deck()
@@ -94,7 +94,7 @@ namespace Flashcards_React.Controllers
 
         [HttpPatch]
         [Route("UpdateDeck")]
-        public async Task<IActionResult> UpdateDeck([FromBody]  UpdateDeckDTO deckDTO)
+        public async Task<IActionResult> UpdateDeck([FromBody] UpdateDeckDTO deckDTO)
         {
             if (ModelState.IsValid) // Server side validation.
             {

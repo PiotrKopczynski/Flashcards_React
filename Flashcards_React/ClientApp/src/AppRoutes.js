@@ -39,11 +39,11 @@ const AppRoutes = [
     element: <BrowseFlashcards />
    },
    {
-     path: '/updateflashcards/:deckId',
+     path: '/updateflashcard/:deckId',
      element: <UpdateFlashcard />
    },
    {
-      path: '/deleteflashcards/:deckId',
+      path: '/deleteflashcard/:deckId',
       element: <DeleteFlashcard />
    },
   {

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Flashcards_React.DTO
 {
     public class PaginatedResponseDTO<T>
-        // This class is utilized such that the unit tests are easier to write
+    // This class is utilized such that the unit tests are easier to write
     {
         [Required]
         public required PaginatedList<T> List { get; set; }
