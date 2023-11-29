@@ -109,8 +109,9 @@ const BrowseFlashcards = () => {
             {loading ? (
                 <p>Loading...</p>
             ) : (
-                <>
-                        <TextToSpeechSettings onUpdateSettings={handleTextToSpeechSettingsUpdate} utterance={utterance} />
+                    <>
+                        {(flashcards && flashcards.length) ? <TextToSpeechSettings onUpdateSettings={handleTextToSpeechSettingsUpdate} utterance={utterance} /> :
+                            <div></div>}                       
                         <div className="row row-cols-1 row-cols-md-2 g-4">
                             {flashcards.map((flashcard, index) => (
                                 <div key={flashcard.flashcardId} className="col">
@@ -155,7 +156,7 @@ const BrowseFlashcards = () => {
                             </div>
                             <div className="controller-pagination">
                                 {(flashcards && flashcards.length) ? <PaginationNav setPage={setFlashcardPage} hasPreviousPage={hasPreviousPage}
-                                    hasNextPage={hasNextPage} totalPages={totalPages} /> : <div id="emptyResultsContainer">The search results are empty</div>}
+                                    hasNextPage={hasNextPage} totalPages={totalPages} /> : <div id="emptyResultsContainer">The deck is empty</div>}
                             </div>
                         </div>    
                 </>
