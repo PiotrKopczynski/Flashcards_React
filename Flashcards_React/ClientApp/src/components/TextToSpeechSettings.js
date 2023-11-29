@@ -1,4 +1,5 @@
 ﻿import React, { useState } from "react";
+import './TextToSpeechSettings'; 
 
 const TextToSpeechSettings = ({ onUpdateSettings }) => {
     const [pitch, setPitch] = useState(1);
@@ -21,11 +22,12 @@ const TextToSpeechSettings = ({ onUpdateSettings }) => {
     };
 
     return (
-        <div>
+        <div className="text-center mb-4">
             <label>
                 Pitch:
                 <input
                     type="range"
+                    className="setting-colors"
                     min="0.5"
                     max="2"
                     step="0.1"
@@ -40,6 +42,7 @@ const TextToSpeechSettings = ({ onUpdateSettings }) => {
                 Speed:
                 <input
                     type="range"
+                    className="setting-colors"
                     min="0.5"
                     max="2"
                     step="0.1"
@@ -53,6 +56,7 @@ const TextToSpeechSettings = ({ onUpdateSettings }) => {
                 Volume:
                 <input
                     type="range"
+                    className="setting-colors"
                     min="0"
                     max="1"
                     step="0.1"
