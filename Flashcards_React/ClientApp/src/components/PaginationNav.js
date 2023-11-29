@@ -14,6 +14,7 @@ const PaginationNav = ({page, setPage, hasPreviousPage, hasNextPage, totalPages}
             {pagesArray.map(pg => <PageButton key={pg} pg={pg} setPage={setPage} />)}
             <button onClick={lastPage} disabled={!hasNextPage || page === totalPages}>&gt;&gt;</button>
         </nav>
+
     );
 };
 
