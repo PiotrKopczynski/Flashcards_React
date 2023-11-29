@@ -1,114 +1,98 @@
-﻿// TextToSpeech.js
-import React, { useState, useEffect, useRef } from "react";
+﻿import React, { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faVolumeUp, faVolumeMute, faLanguage } from "@fortawesome/free-solid-svg-icons";
 
-const TextToSpeech = ({ text, isLanguageFlashcard, settings, utterance }) => {
+const TextToSpeech = ({ text, isLanguageFlashcard, settings }) => {
     const [isPaused, setIsPaused] = useState(false);
-    const [voices, setVoices] = useState([]);
     const [showVoiceDropdown, setShowVoiceDropdown] = useState(false);
-
-    const dropdownRef = useRef(null);
-
-    useEffect(() => {
-        const synth = window.speechSynthesis;
-
-        const handleVoicesChanged = () => {
-            const availableVoices = synth.getVoices();
-            setVoices(availableVoices);
-        };
-
-        synth.addEventListener("voiceschanged", handleVoicesChanged);
-
-        return () => {
-            synth.removeEventListener("voiceschanged", handleVoicesChanged);
-        };
-    }, []); // Only run this effect once when the component mounts
-
-    useEffect(() => {
-        const synth = window.speechSynthesis;
-        const u = new SpeechSynthesisUtterance(text);
-
-        utterance.current = u;
-
-        return () => {
-            synth.cancel();
-        };
-    }, [text, utterance]);
+    const [voices, setVoices] = useState([]);
+    const utteranceRef = useRef(new SpeechSynthesisUtterance()); // Initialize with a ref
+    const dropdownRef = useRef();
 
     const handlePlayToggle = () => {
         const synth = window.speechSynthesis;
-        const currentUtterance = utterance.current;
+        const currentUtterance = utteranceRef.current;
 
         if (isPaused) {
             synth.resume();
         } else {
-            currentUtterance.voice = settings.voice; 
-            currentUtterance.pitch = settings.pitch; 
-            currentUtterance.rate = settings.rate; 
-            currentUtterance.volume = settings.volume; 
+            currentUtterance.text = text;
+            currentUtterance.voice = settings.voice;
+            currentUtterance.pitch = settings.pitch;
+            currentUtterance.rate = settings.rate;
+            currentUtterance.volume = settings.volume;
             synth.speak(currentUtterance);
         }
 
         setIsPaused(!isPaused);
     };
 
-    const handleVoiceChange = (selectedVoice) => {
-        if (selectedVoice) {
-            settings.voice = selectedVoice;
-            utterance.current.voice = selectedVoice;
-        }
-
-        setShowVoiceDropdown(false); 
-    };
-
-    const handleClickOutside = (event) => {
-        if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-            setShowVoiceDropdown(false);
-        }
-    };
-
-    useEffect(() => {
-        document.addEventListener("mousedown", handleClickOutside);
-
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, []);
-
     const toggleVoiceDropdown = () => {
         setShowVoiceDropdown(!showVoiceDropdown);
     };
 
+    const handleVoiceChange = (voiceName) => {
+        const synth = window.speechSynthesis;
+        const selectedVoice = voices.find((voice) => voice.name === voiceName);
+
+        if (selectedVoice) {
+            settings.voice = selectedVoice;
+            utteranceRef.current.voice = selectedVoice;
+        }
+
+        setShowVoiceDropdown(false);
+    };
+
+    useEffect(() => {
+        const synth = window.speechSynthesis;
+        setVoices(synth.getVoices());
+
+        const voiceChangeHandler = () => {
+            setVoices(synth.getVoices());
+        };
+
+        synth.addEventListener("voiceschanged", voiceChangeHandler);
+
+        return () => {
+            synth.removeEventListener("voiceschanged", voiceChangeHandler);
+            synth.cancel();
+        };
+    }, []);
+
     return (
         <div>
-            {isLanguageFlashcard && (
-                <>
-                    <label>
-                        <FontAwesomeIcon icon={faLanguage} onClick={toggleVoiceDropdown} size="2x" />
-                        {showVoiceDropdown && (
-                            <select ref={dropdownRef} onChange={(e) => handleVoiceChange(e.target.value)}>
-                                {voices.map((v) => (
-                                    <option key={v.name} value={v.name}>
-                                        {v.name}
-                                    </option>
-                                ))}
-                            </select>
-                        )}
-                    </label>
+            <button
+                style={{
+                    border: "none",
+                    background: "transparent",
+                    cursor: "pointer",
+                }}
+                onClick={handlePlayToggle}
+            >
+                <FontAwesomeIcon icon={isPaused ? faVolumeUp : faVolumeMute} size="2x" />
+            </button>
 
-                    <br />
+            <FontAwesomeIcon
+                icon={faLanguage}
+                onClick={toggleVoiceDropdown}
+                size="2x"
+                style={{
+                    marginLeft: "10px",
+                    cursor: "pointer",
+                }}
+            />
 
-                    <button
-                        style={{
-                            border: "none",
-                            background: "transparent",
-                            cursor: "pointer",
-                        }}
-                        onClick={handlePlayToggle}>
-                        <FontAwesomeIcon icon={isPaused ? faVolumeUp : faVolumeMute} size="2x"/>
-                    </button>
-                </>
+            {showVoiceDropdown && (
+                <select
+                    ref={dropdownRef}
+                    onChange={(e) => handleVoiceChange(e.target.value)}
+                >
+                    {voices.map((voice) => (
+                        <option key={voice.name} value={voice.name}>
+                            {voice.name}
+                        </option>
+                    ))}
+                </select>
             )}
         </div>
     );
