@@ -1,6 +1,4 @@
-﻿// TextToSpeechSettings.js
-
-import React, { useState } from "react";
+﻿import React, { useState } from "react";
 
 const TextToSpeechSettings = ({ onUpdateSettings }) => {
     const [pitch, setPitch] = useState(1);

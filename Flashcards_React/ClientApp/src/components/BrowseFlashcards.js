@@ -1,4 +1,3 @@
-// BrowseFlashcards.js
 import React, { useEffect, useState, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import api from '../api/axios';
@@ -20,7 +19,6 @@ const BrowseFlashcards = () => {
     const navigate = useNavigate();
     const { auth, setAuth } = useContext(AuthContext);
     const [showContent, setShowContent] = useState(false);
-
     const [utterance, setUtterance] = useState(null);
 
     useEffect(() => {

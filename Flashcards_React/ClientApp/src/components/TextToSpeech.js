@@ -43,10 +43,10 @@ const TextToSpeech = ({ text, isLanguageFlashcard, settings, utterance }) => {
         if (isPaused) {
             synth.resume();
         } else {
-            currentUtterance.voice = settings.voice; // Set the selected voice
-            currentUtterance.pitch = settings.pitch; // Set pitch
-            currentUtterance.rate = settings.rate; // Set rate
-            currentUtterance.volume = settings.volume; // Set volume
+            currentUtterance.voice = settings.voice; 
+            currentUtterance.pitch = settings.pitch; 
+            currentUtterance.rate = settings.rate; 
+            currentUtterance.volume = settings.volume; 
             synth.speak(currentUtterance);
         }
 
@@ -59,22 +59,19 @@ const TextToSpeech = ({ text, isLanguageFlashcard, settings, utterance }) => {
             utterance.current.voice = selectedVoice;
         }
 
-        setShowVoiceDropdown(false); // Hide the voice selection dropdown
+        setShowVoiceDropdown(false); 
     };
 
     const handleClickOutside = (event) => {
         if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-            // Clicked outside the dropdown, hide it
             setShowVoiceDropdown(false);
         }
     };
 
     useEffect(() => {
-        // Attach event listener for clicks outside the dropdown
         document.addEventListener("mousedown", handleClickOutside);
 
         return () => {
-            // Remove event listener on component unmount
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, []);
@@ -88,15 +85,9 @@ const TextToSpeech = ({ text, isLanguageFlashcard, settings, utterance }) => {
             {isLanguageFlashcard && (
                 <>
                     <label>
-                        <FontAwesomeIcon
-                            icon={faLanguage}
-                            onClick={toggleVoiceDropdown}
-                            size="2x" />
+                        <FontAwesomeIcon icon={faLanguage} onClick={toggleVoiceDropdown} size="2x" />
                         {showVoiceDropdown && (
-                            <select
-                                ref={dropdownRef}
-                                onChange={(e) => handleVoiceChange(e.target.value)}
-                            >
+                            <select ref={dropdownRef} onChange={(e) => handleVoiceChange(e.target.value)}>
                                 {voices.map((v) => (
                                     <option key={v.name} value={v.name}>
                                         {v.name}
@@ -114,12 +105,8 @@ const TextToSpeech = ({ text, isLanguageFlashcard, settings, utterance }) => {
                             background: "transparent",
                             cursor: "pointer",
                         }}
-                        onClick={handlePlayToggle}
-                    >
-                        <FontAwesomeIcon
-                            icon={isPaused ? faVolumeUp : faVolumeMute}
-                            size="2x"
-                        />
+                        onClick={handlePlayToggle}>
+                        <FontAwesomeIcon icon={isPaused ? faVolumeUp : faVolumeMute} size="2x"/>
                     </button>
                 </>
             )}
