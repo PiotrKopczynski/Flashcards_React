@@ -19,7 +19,15 @@ const BrowseFlashcards = () => {
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
     const { auth, setAuth } = useContext(AuthContext);
-    const [showContent, setShowContent] = useState(false);
+    //const [showContent, setShowContent] = useState(false);
+    const [showContentArray, setShowContentArray] = useState([]);
+
+    useEffect(() => {
+        if (flashcards) {
+            // Initialize the showContentArray with false for each flashcard
+            setShowContentArray(new Array(flashcards.length).fill(false));
+        }
+    }, [flashcards]);
 
     const [utterance, setUtterance] = useState(null);
 
@@ -74,9 +82,12 @@ const BrowseFlashcards = () => {
         navigate(`/browsedecks`);
     };
 
-    // Function to toggle answer and notes visibility simultaneously
-    const toggleContent = () => {
-        setShowContent(!showContent);
+    const toggleContent = (index) => {
+        setShowContentArray((prevArray) => {
+            const newArray = [...prevArray];
+            newArray[index] = !newArray[index];
+            return newArray;
+        });
     };
 
     const [textToSpeechSettings, setTextToSpeechSettings] = useState({
@@ -99,35 +110,34 @@ const BrowseFlashcards = () => {
                 <p>Loading...</p>
             ) : (
                 <>
-                <TextToSpeechSettings onUpdateSettings={handleTextToSpeechSettingsUpdate} utterance={utterance} />
-                    <div className="row row-cols-1 row-cols-md-2 g-4">
-                        {flashcards.map((flashcard) => (
-                            <div key={flashcard.flashcardId} className="col">
-                                <div className="card text-center" style={{ width: '18rem' }}>
-                                    <div className="card-body">
-                                        <p className="card-text">Question: {flashcard.question}</p>
-                                        {showContent && (
-                                            <>
-                                                <p className="card-text">Answer: {flashcard.answer}</p>
-                                                {showContent && (
-                                                    <TextToSpeech
-                                                        text={flashcard.answer}
-                                                        isLanguageFlashcard={flashcard.isLanguageFlashcard}
-                                                        settings={textToSpeechSettings}
-                                                       
-                                                    />
-                                                )}
-                                                <p className="card-text">Notes: {flashcard.notes}</p>
-                                            </>
-                                        )}
-                                        <button className="eye-toggle-button" onClick={toggleContent}>
-                                            {showContent ? 'Hide answer' : 'Show answer'}
-                                        </button>
-                                        <button
-                                            className="btn btn-primary mx-2"
-                                            onClick={() => handleDetailButton(flashcard, deck)}>
-                                            Inspect
-                                        </button>
+                        <TextToSpeechSettings onUpdateSettings={handleTextToSpeechSettingsUpdate} utterance={utterance} />
+                        <div className="row row-cols-1 row-cols-md-2 g-4">
+                            {flashcards.map((flashcard, index) => (
+                                <div key={flashcard.flashcardId} className="col">
+                                    <div className="card text-center" style={{ width: '18rem' }}>
+                                        <div className="card-body">
+                                            <p className="card-text">Question: {flashcard.question}</p>
+                                            {showContentArray[index] && (
+                                                <>
+                                                    <p className="card-text">Answer: {flashcard.answer}</p>
+                                                    {showContentArray[index] && (
+                                                        <TextToSpeech
+                                                            text={flashcard.answer}
+                                                            isLanguageFlashcard={flashcard.isLanguageFlashcard}
+                                                            settings={textToSpeechSettings}
+                                                        />
+                                                    )}
+                                                    <p className="card-text">Notes: {flashcard.notes}</p>
+                                                </>
+                                            )}
+                                            <button className="eye-toggle-button" onClick={() => toggleContent(index)}>
+                                                {showContentArray[index] ? 'Hide answer' : 'Show answer'}
+                                            </button>
+                                            <button
+                                                className="btn btn-primary mx-2"
+                                                onClick={() => handleDetailButton(flashcard, deck)}>
+                                                Inspect
+                                            </button>
                                     </div>
                                 </div>
                             </div>
