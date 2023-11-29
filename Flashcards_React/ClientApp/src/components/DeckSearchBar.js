@@ -13,7 +13,7 @@ const DeckSearchBar = ({ setSearchString}) => {
 
     return (
         <section className="search-bar">
-            <h1 class="fs-2 mt-2">Browse Decks</h1>
+            <h1 className="fs-2 mt-2">Browse Decks</h1>
             <form className="search" onSubmit={handleSubmit}>
                     <input
                         type="text"
