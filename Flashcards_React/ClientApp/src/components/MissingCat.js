@@ -1,6 +1,6 @@
 import React from 'react';
 
-const WaveAnimation = () => {
+const MissingCat = () => {
 	return (
 		<div className="text-center">
 			<svg 
@@ -18,4 +18,4 @@ const WaveAnimation = () => {
     );
 };
 
-export default WaveAnimation;
+export default MissingCat;
