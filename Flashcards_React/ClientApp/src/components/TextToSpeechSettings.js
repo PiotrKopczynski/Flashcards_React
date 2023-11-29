@@ -1,4 +1,5 @@
 ﻿import React, { useState } from "react";
+import './TextToSpeechSettings.css'; 
 
 const TextToSpeechSettings = ({ onUpdateSettings }) => {
     const [pitch, setPitch] = useState(1);
@@ -21,7 +22,7 @@ const TextToSpeechSettings = ({ onUpdateSettings }) => {
     };
 
     return (
-        <div>
+        <div className="text-center mb-4">
             <label>
                 Pitch:
                 <input
