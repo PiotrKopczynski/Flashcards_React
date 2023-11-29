@@ -2,6 +2,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import api from '../api/axios';
 import AuthContext from '../context/AuthProvider';
+import './UpdateFlashcard.css';
 
 const UpdateFlashcard = () => {
     const location = useLocation();
@@ -58,57 +59,67 @@ const UpdateFlashcard = () => {
     }, [auth, navigate]);
 
     return (
-        <div>
-            <h1>Update Flashcard</h1>
+        <section className="deck-form">
+            <h1 className="fs-2 mx-3 mb-5">Update Flashcard</h1>
             {loading ? (
                 <p>Loading...</p>
             ) : (
                 <>
-                    <form>
-                        <label htmlFor="question">Question:</label>
-                        <input
-                            type="text"
-                            id="question"
-                            value={question}
-                            onChange={(e) => setQuestion(e.target.value)}
-                            required
-                        />
-
-                        <label htmlFor="answer">Answer:</label>
-                        <input
-                            type="text"
-                            id="answer"
-                            value={answer}
-                            onChange={(e) => setAnswer(e.target.value)}
-                            required
-                        />
-
-                        <label htmlFor="notes">Notes:</label>
-                        <input
-                            type="text"
-                            id="notes"
-                            value={notes}
-                            onChange={(e) => setNotes(e.target.value)}
-                        />
-
-                        <label htmlFor="isLanguageFlashcard">Is Language Flashcard:</label>
-                        <input
-                            type="checkbox"
-                            id="isLanguageFlashcard"
-                            checked={isLanguageFlashcard}
-                            onChange={(e) => setIsLanguageFlashcard(e.target.checked)}
-                        />
-                    </form>
-
-                    <button className="btn btn-primary mt-4 m-2" type="button" onClick={handleSubmit}>
-                        Save
-                    </button>
-                    <button className="btn btn-secondary mt-4 m-2" type="button" onClick={handleCancel}>
-                        Cancel
-                    </button>
+                        <form className="mx-4">
+                            <div className="form-group">
+                                <label htmlFor="question" className="mt-2 mb-1 fs-5">Question<span className="text-danger">*</span></label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    id="question"
+                                    value={question}
+                                    onChange={(e) => setQuestion(e.target.value)}
+                                    required
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="answer" className="mt-2 mb-1 fs-5">Answer</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    id="answer"
+                                    value={answer}
+                                    onChange={(e) => setAnswer(e.target.value)}
+                                    required
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="notes" className="mt-2 mb-1 fs-5">Notes</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    id="notes"
+                                    value={notes}
+                                    onChange={(e) => setNotes(e.target.value)}
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="isLanguageFlashcard" className="form-check-label mt-4 mb-1 fs-5" >Is Language Flashcard:</label>
+                                <input
+                                    type="checkbox"
+                                    className="form-check-input"
+                                    id="isLanguageFlashcard"
+                                    checked={isLanguageFlashcard}
+                                    onChange={(e) => setIsLanguageFlashcard(e.target.checked)}
+                                />
+                            </div>
+                        </form>
+                        <div className="form-buttons-container">
+                            <button className="btn btn-primary mt-4 m-2" type="button" onClick={handleSubmit}>
+                                Save
+                            </button>
+                            <button className="btn btn-secondary mt-4 m-2" type="button" onClick={handleCancel}>
+                                Cancel
+                            </button>
+                        </div>
                 </>
             )}
-        </div>
+        </section>
     );
 };
 
