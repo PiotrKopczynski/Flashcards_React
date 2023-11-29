@@ -1,0 +1,62 @@
+﻿.flashcard-form-container {
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.flashcard-form {
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.form-buttons-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+
+.flashcard-form-container .form-control:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: #6123a8;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(234, 80, 62, 0.25);
+}
+
+.flashcard-form-container textarea {
+    font-size: 18px;
+    border: 1.2px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    color: #212529;
+    background-color: #fff;
+    outline: 0;
+    box-shadow: 0 0 0 0.1rem rgba(234, 80, 62, 0.25);
+}
+
+.flashcard-form-container .form-check-input:checked {
+    background-color: #f44336;
+    border-color: #f44336;
+}
+
+.flashcard-form-container .form-check-input[type=checkbox] {
+    border-radius: 0.60em;
+}
+
+.flashcard-form-container .form-check-input {
+    width: 1.5em;
+    height: 1.5em;
+    margin-top: 1.5em;
+    margin-left: 5px;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+    .flashcard-form-container .form-check-input:focus {
+        border-color: #6123a8;
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(234, 80, 62, 0.25);
+    }
