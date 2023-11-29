@@ -1,8 +1,8 @@
-﻿import React, { useState, useContext } from 'react';
+﻿import React, { useState, useContext, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import api from '../api/axios';
 import AuthContext from '../context/AuthProvider';
-import './StyleFile.css';
+import './CreateFlashcard.css';
 
 const CreateFlashcard = () => {
     const location = useLocation();
@@ -14,6 +14,14 @@ const CreateFlashcard = () => {
     const [answer, setAnswer] = useState('');
     const [notes, setNotes] = useState('');
     const [isLanguageFlashcard, setIsLanguageFlashcard] = useState(false);
+
+    const textareaRef = useRef(null);
+    const handleResize = () => {
+        if (textareaRef.current) {
+            textareaRef.current.style.height = 'auto';
+            textareaRef.current.style.height = textareaRef.current.scrollHeight + 'px';
+        }
+    };
 
     const handleCreate = async () => {
         if (!auth.isLoggedIn) {
@@ -53,51 +61,66 @@ const CreateFlashcard = () => {
     };
 
     return (
-        <div>
-            <h1>Create Flashcard</h1>
-            <form>
-                <label htmlFor="question">Question:</label>
-                <input
-                    type="text"
-                    id="question"
-                    value={question}
-                    required
-                    onChange={(e) => setQuestion(e.target.value)}
-                />
-
-                <label htmlFor="answer">Answer:</label>
-                <input
-                    type="text"
-                    id="answer"
-                    value={answer}
-                    required
-                    onChange={(e) => setAnswer(e.target.value)}
-                />
-
-                <label htmlFor="notes">Notes:</label>
-                <input
-                    type="text"
-                    id="notes"
-                    value={notes}
-                    onChange={(e) => setNotes(e.target.value)}
-                />
+        <section className="flashcard-form-container">
+            <h1 className="fs-2 mx-4 mb-5 text-center">Create Flashcard</h1>
+            <form className="flashcard-form">
                 <div className="form-group">
-                    <label htmlFor="isLanguageFlashcard">Is Language Flashcard:</label>
-                    <div className="form-check">
+
+                    <label htmlFor="question" className="fs-4">Question:</label>
+                    <textarea
+                        className="form-control mt-2 mb-3"
+                        id="question"
+                        value={question}
+                        required
+                        onChange={(e) => {
+                            setQuestion(e.target.value)
+                            handleResize();
+                        }}
+                        style={{ height: 'auto', overflowY: 'hidden' }}
+                    />
+
+                    <label htmlFor="answer">Answer:</label>
+                    <textarea
+                        className="form-control mt-2 mb-3"
+                        id="answer"
+                        value={answer}
+                        required
+                        onChange={(e) => {
+                            setAnswer(e.target.value)
+                            handleResize();
+                        }}
+                        style={{ height: 'auto', overflowY: 'hidden' }}
+                    />
+
+                    <label htmlFor="notes">Notes:</label>
+                    <textarea
+                        className="form-control mt-2 mb-3"
+                        id="notes"
+                        value={notes}
+                        onChange={(e) => {
+                            setNotes(e.target.value)
+                            handleResize();
+                        }}
+                        style={{ height: 'auto', overflowY: 'hidden' }}
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="isLanguageFlashcard" className="form-check-label mt-4 mb-1 fs-5">Is Language Flashcard:</label>
                         <input
                             type="checkbox"
-                            id="isLanguageFlashcard"
                             className="form-check-input"
+                            id="isLanguageFlashcard"
                             checked={isLanguageFlashcard}
                             onChange={() => setIsLanguageFlashcard(!isLanguageFlashcard)}
-                        />
-          
-                    </div>
+                        />           
                 </div>
             </form>
-            <button className="btn btn-primary mt-5 m-2" type="button" onClick={handleCreate}>Create</button>
-            <button className="btn btn-secondary mt-5 m-2" type="button" onClick={handleCancel}>Cancel</button>
-        </div>
+            <div className="form-buttons-container">
+                <button className="btn btn-primary mt-5 m-2" type="button" onClick={handleCreate}>Create</button>
+                <button className="btn btn-secondary mt-5 m-2" type="button" onClick={handleCancel}>Cancel</button>
+            </div>
+            
+        </section>
     );
 };
 

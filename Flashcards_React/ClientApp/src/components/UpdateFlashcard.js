@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useContext } from 'react';
+﻿import React, { useState, useEffect, useContext, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import api from '../api/axios';
 import AuthContext from '../context/AuthProvider';
@@ -16,6 +16,14 @@ const UpdateFlashcard = () => {
     const [notes, setNotes] = useState(flashcard.notes);
     const [isLanguageFlashcard, setIsLanguageFlashcard] = useState(Boolean(flashcard.isLanguageFlashcard));
     const [loading, setLoading] = useState(false);
+
+    const textareaRef = useRef(null);
+    const handleResize = () => {
+        if (textareaRef.current) {
+            textareaRef.current.style.height = 'auto';
+            textareaRef.current.style.height = textareaRef.current.scrollHeight + 'px';
+        }
+    };
 
     const handleSubmit = async () => {
         setLoading(true);
@@ -68,34 +76,43 @@ const UpdateFlashcard = () => {
                         <form className="mx-4">
                             <div className="form-group">
                                 <label htmlFor="question" className="mt-2 mb-1 fs-5">Question<span className="text-danger">*</span></label>
-                                <input
-                                    type="text"
+                                <textarea
                                     className="form-control"
                                     id="question"
                                     value={question}
-                                    onChange={(e) => setQuestion(e.target.value)}
                                     required
+                                    onChange={(e) => {
+                                        setQuestion(e.target.value)
+                                        handleResize();
+                                    }}
+                                    style={{ height: 'auto', overflowY: 'hidden' }}
                                 />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="answer" className="mt-2 mb-1 fs-5">Answer</label>
-                                <input
-                                    type="text"
+                                <textarea
                                     className="form-control"
                                     id="answer"
                                     value={answer}
-                                    onChange={(e) => setAnswer(e.target.value)}
                                     required
+                                    onChange={(e) => {
+                                        setAnswer(e.target.value)
+                                        handleResize();
+                                    }}
+                                    style={{ height: 'auto', overflowY: 'hidden' }}
                                 />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="notes" className="mt-2 mb-1 fs-5">Notes</label>
-                                <input
-                                    type="text"
+                                <textarea
                                     className="form-control"
                                     id="notes"
                                     value={notes}
-                                    onChange={(e) => setNotes(e.target.value)}
+                                    onChange={(e) => {
+                                        setNotes(e.target.value)
+                                        handleResize();
+                                    }}
+                                    style={{ height: 'auto', overflowY: 'hidden' }}
                                 />
                             </div>
                             <div className="form-group">

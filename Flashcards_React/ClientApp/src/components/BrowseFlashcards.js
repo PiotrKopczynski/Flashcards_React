@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import api from '../api/axios';
 import AuthContext from '../context/AuthProvider';
 import PaginationNav from './PaginationNav';
-import './StyleFile.css'; 
+import './BrowseFlashcards.css';
 import TextToSpeechSettings from './TextToSpeechSettings';
 import TextToSpeech from './TextToSpeech';
 
@@ -105,7 +105,7 @@ const BrowseFlashcards = () => {
 
     return (
         <div>
-            <h1>Flashcards</h1>
+            <h1 className="fs-2">Flashcards</h1>
             {loading ? (
                 <p>Loading...</p>
             ) : (
@@ -142,15 +142,22 @@ const BrowseFlashcards = () => {
                                 </div>
                             </div>
                         ))}
-                    </div>
-                    {(flashcards && flashcards.length) ? <PaginationNav setPage={setFlashcardPage} hasPreviousPage={hasPreviousPage}
-                        hasNextPage={hasNextPage} totalPages={totalPages} /> : <div id="emptyResultsContainer">The search results are empty</div>}
-                    <button className="btn btn-primary mx-5 mt-2 mb-5" onClick={() => handleCreateFlashcardButton(deck)}>
-                        Create a Flashcard
-                    </button>
-                    <button className="btn btn-primary mx-5 mt-2 mb-5" onClick={() => handleBackToDeckButton()}>
-                        Back to Decks
-                    </button>
+                        </div>
+
+                        <div className="buttons-container">
+                            <div className="create-flashcard-section">
+                                <button className="btn btn-outline-primary mt-3 mx-2" onClick={() => handleCreateFlashcardButton(deck)}>
+                                    Create a Flashcard
+                                </button>
+                                <button className="btn btn-outline-primary mt-3 mx-2" onClick={() => handleBackToDeckButton()}>
+                                    Back to Decks
+                                </button>
+                            </div>
+                            <div className="controller-pagination">
+                                {(flashcards && flashcards.length) ? <PaginationNav setPage={setFlashcardPage} hasPreviousPage={hasPreviousPage}
+                                    hasNextPage={hasNextPage} totalPages={totalPages} /> : <div id="emptyResultsContainer">The search results are empty</div>}
+                            </div>
+                        </div>    
                 </>
             )}
         </div>

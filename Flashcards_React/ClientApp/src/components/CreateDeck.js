@@ -64,7 +64,7 @@ const CreateDeck = () => {
                     <label htmlFor="title" className="fs-4">Title<span className="text-danger">*</span></label>
                     <input
                         type="text"
-                        className={"form-control mt-2 mb-3 ${titleError ? 'is-invalid' : ''}"}
+                        className="form-control mt-2 mb-3"
                         id="title"
                         value={title}
                         required
