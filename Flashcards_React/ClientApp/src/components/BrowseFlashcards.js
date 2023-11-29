@@ -134,7 +134,7 @@ const BrowseFlashcards = () => {
                                                 {showContentArray[index] ? 'Hide answer' : 'Show answer'}
                                             </button>
                                             <button
-                                                className="btn btn-primary mt-3 mx-2"
+                                                className="btn btn-primary mt-3 mx-1"
                                                 onClick={() => handleDetailButton(flashcard, deck)}>
                                                 Inspect
                                             </button>
