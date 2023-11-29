@@ -215,7 +215,7 @@ nav {
         justify-content: center;
         align-items: center;
         color: #712c66;
-        background-color: #ea503e17;
+        /*background-color: #ea503e17;*/
         font-size: clamp(12px, 1vw, 14px);
         font-weight: 600;
     }
