@@ -130,11 +130,11 @@ const BrowseFlashcards = () => {
                                                     <p className="card-text">Notes: {flashcard.notes}</p>
                                                 </>
                                             )}
-                                            <button className="btn btn-secondary mt-5 mx-2" onClick={() => toggleContent(index)}>
+                                            <button className="btn btn-secondary mt-3 mx-2" onClick={() => toggleContent(index)}>
                                                 {showContentArray[index] ? 'Hide answer' : 'Show answer'}
                                             </button>
                                             <button
-                                                className="btn btn-primary mt-1 mx-2"
+                                                className="btn btn-primary mt-3 mx-2"
                                                 onClick={() => handleDetailButton(flashcard, deck)}>
                                                 Inspect
                                             </button>
