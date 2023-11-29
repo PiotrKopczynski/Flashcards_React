@@ -66,6 +66,7 @@ const TextToSpeech = ({ text, isLanguageFlashcard, settings }) => {
                     border: "none",
                     background: "transparent",
                     cursor: "pointer",
+                    color: "#712c66",
                 }}
                 onClick={handlePlayToggle}
             >

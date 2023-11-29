@@ -115,10 +115,10 @@ const BrowseFlashcards = () => {
                                 <h1 class="text-center fs-4 mt-5">It looks like this deck is empty. Go ahead and create some cards :)</h1>
                                 <MissingCat />
                             </div>}                       
-                        <div className="row row-cols-1 row-cols-md-2 g-4">
+                        <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
                             {flashcards.map((flashcard, index) => (
                                 <div key={flashcard.flashcardId} className="col">
-                                    <div className="card text-center" style={{ width: '18rem' }}>
+                                    <div className="card text-center">
                                         <div className="card-body">
                                             <p className="card-text">Question: {flashcard.question}</p>
                                             {showContentArray[index] && (
