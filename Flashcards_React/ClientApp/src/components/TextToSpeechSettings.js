@@ -27,7 +27,6 @@ const TextToSpeechSettings = ({ onUpdateSettings }) => {
                 Pitch:
                 <input
                     type="range"
-                    className="setting-colors"
                     min="0.5"
                     max="2"
                     step="0.1"
@@ -42,7 +41,6 @@ const TextToSpeechSettings = ({ onUpdateSettings }) => {
                 Speed:
                 <input
                     type="range"
-                    className="setting-colors"
                     min="0.5"
                     max="2"
                     step="0.1"
@@ -56,7 +54,6 @@ const TextToSpeechSettings = ({ onUpdateSettings }) => {
                 Volume:
                 <input
                     type="range"
-                    className="setting-colors"
                     min="0"
                     max="1"
                     step="0.1"
