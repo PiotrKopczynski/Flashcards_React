@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import api from '../api/axios';
@@ -7,6 +6,7 @@ import PaginationNav from './PaginationNav';
 import './BrowseFlashcards.css';
 import TextToSpeechSettings from './TextToSpeechSettings';
 import TextToSpeech from './TextToSpeech';
+import MissingCat from './MissingCat';
 
 const BrowseFlashcards = () => {
     const location = useLocation();
@@ -105,13 +105,16 @@ const BrowseFlashcards = () => {
 
     return (
         <div>
-            <h1 className="fs-2">Flashcards</h1>
+            <h1 className="fs-2 text-center">Flashcards</h1>
             {loading ? (
                 <p>Loading...</p>
             ) : (
                     <>
                         {(flashcards && flashcards.length) ? <TextToSpeechSettings onUpdateSettings={handleTextToSpeechSettingsUpdate} utterance={utterance} /> :
-                            <div></div>}                       
+                            <div id="emptyResultsContainer">
+                                <h1 class="text-center fs-4 mt-5">It looks like this deck is empty. Go ahead and create some cards :)</h1>
+                                <MissingCat />
+                            </div>}                       
                         <div className="row row-cols-1 row-cols-md-2 g-4">
                             {flashcards.map((flashcard, index) => (
                                 <div key={flashcard.flashcardId} className="col">
@@ -156,7 +159,7 @@ const BrowseFlashcards = () => {
                             </div>
                             <div className="controller-pagination">
                                 {(flashcards && flashcards.length) ? <PaginationNav setPage={setFlashcardPage} hasPreviousPage={hasPreviousPage}
-                                    hasNextPage={hasNextPage} totalPages={totalPages} /> : <div id="emptyResultsContainer">The deck is empty</div>}
+                                    hasNextPage={hasNextPage} totalPages={totalPages} />:<div></div>}
                             </div>
                         </div>    
                 </>

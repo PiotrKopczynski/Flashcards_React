@@ -41,7 +41,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="ClientApp\src\components\MissingCat.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="ClientApp\public\catIcon.png" />
+    <None Remove="ClientApp\public\missingdeck-cat-better %281%29.svg" />
+    <None Remove="ClientApp\src\components\MissingCat.cs" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
