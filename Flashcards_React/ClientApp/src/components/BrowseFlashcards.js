@@ -99,7 +99,7 @@ const BrowseFlashcards = () => {
                 <p>Loading...</p>
             ) : (
                 <>
-                    <TextToSpeechSettings onUpdateSettings={handleTextToSpeechSettingsUpdate} utterance={utterance} />
+                        <TextToSpeechSettings onUpdateSettings={handleTextToSpeechSettingsUpdate} utterance={utterance}  />
                     <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
                         {flashcards.map((flashcard) => (
                             <div key={flashcard.flashcardId} className="col">
