@@ -1,12 +1,11 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
-
+// BrowseFlashcards.js
 import React, { useEffect, useState, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import api from '../api/axios';
 import AuthContext from '../context/AuthProvider';
 import PaginationNav from './PaginationNav';
 import './StyleFile.css'; 
+import TextToSpeechSettings from './TextToSpeechSettings';
 import TextToSpeech from './TextToSpeech';
 
 const BrowseFlashcards = () => {
@@ -21,6 +20,13 @@ const BrowseFlashcards = () => {
     const navigate = useNavigate();
     const { auth, setAuth } = useContext(AuthContext);
     const [showContent, setShowContent] = useState(false);
+
+    const [utterance, setUtterance] = useState(null);
+
+    useEffect(() => {
+        // Initialize utterance when component mounts
+        setUtterance(new SpeechSynthesisUtterance());
+    }, []);
 
     const getFlashcards = async (flashcardPage) => {
         try {
@@ -37,7 +43,7 @@ const BrowseFlashcards = () => {
         } catch (e) {
             console.error("Error fetching flashcards:", e);
             if (e.isTokenRefreshError) { // The refresh of the JWT token failed or the tokens were invalid.
-                // Navigate users with a invalid token pair out of the authenticated content
+                // Navigate users with an invalid token pair out of the authenticated content
                 setAuth({ isLoggedIn: false })
                 localStorage.removeItem('token');
                 localStorage.removeItem('refreshToken');
@@ -59,7 +65,7 @@ const BrowseFlashcards = () => {
     const handleCreateFlashcardButton = (deck) => {
         navigate(`/createflashcard/${deck.deckId}`, { state: { deck } });
     };
-   
+
     const handleDetailButton = (flashcard, deck) => {
         navigate(`/detailflashcard/${flashcard.flashcardId}`, { state: { flashcard, deck } });
     };
@@ -73,6 +79,19 @@ const BrowseFlashcards = () => {
         setShowContent(!showContent);
     };
 
+    const [textToSpeechSettings, setTextToSpeechSettings] = useState({
+        pitch: 1,
+        rate: 1,
+        volume: 1,
+    });
+
+    const handleTextToSpeechSettingsUpdate = (newSettings) => {
+        setTextToSpeechSettings((prevSettings) => ({
+            ...prevSettings,
+            ...newSettings,
+        }));
+    };
+
     return (
         <div>
             <h1>Flashcards</h1>
@@ -80,40 +99,42 @@ const BrowseFlashcards = () => {
                 <p>Loading...</p>
             ) : (
                 <>
-                        <div className="row row-cols-1 row-cols-md-2 g-4">
-                            {flashcards.map((flashcard) => (
-                                <div key={flashcard.flashcardId} className="col">
-                                    <div className="card text-center" style={{ width: '18rem' }}>
-                                        <div className="card-body">
-                                            <p className="card-text">Question: {flashcard.question}</p>
-                                            {showContent && (
-                                                <>
-                                                    <p className="card-text">Answer: {flashcard.answer}</p>
-                                                    {showContent && (
-                                                        <div>
-                                                            <TextToSpeech text={flashcard.answer} isLanguageFlashcard={flashcard.isLanguageFlashcard} />
-                                                        </div>
-                                                    )}
-                                                    <p className="card-text">Notes: {flashcard.notes}</p>
-                                                </>
-                                            )}
-                                            <button className="eye-toggle-button" onClick={toggleContent}>
-                                                <FontAwesomeIcon icon={showContent ? faEyeSlash : faEye} aria-hidden="true" />
-                                                {showContent ? 'Hide answer' : 'Show answer'}
-                                            </button>
-                                            <button
-                                                className="btn btn-primary mx-2"
-                                                onClick={() => handleDetailButton(flashcard, deck)}>
-                                                Inspect
-                                            </button>
+                <TextToSpeechSettings onUpdateSettings={handleTextToSpeechSettingsUpdate} utterance={utterance} />
+                    <div className="row row-cols-1 row-cols-md-2 g-4">
+                        {flashcards.map((flashcard) => (
+                            <div key={flashcard.flashcardId} className="col">
+                                <div className="card text-center" style={{ width: '18rem' }}>
+                                    <div className="card-body">
+                                        <p className="card-text">Question: {flashcard.question}</p>
+                                        {showContent && (
+                                            <>
+                                                <p className="card-text">Answer: {flashcard.answer}</p>
+                                                {showContent && (
+                                                    <TextToSpeech
+                                                        text={flashcard.answer}
+                                                        isLanguageFlashcard={flashcard.isLanguageFlashcard}
+                                                        settings={textToSpeechSettings}
+                                                        utterance={utterance}
+                                                    />
+                                                )}
+                                                <p className="card-text">Notes: {flashcard.notes}</p>
+                                            </>
+                                        )}
+                                        <button className="eye-toggle-button" onClick={toggleContent}>
+                                            {showContent ? 'Hide answer' : 'Show answer'}
+                                        </button>
+                                        <button
+                                            className="btn btn-primary mx-2"
+                                            onClick={() => handleDetailButton(flashcard, deck)}>
+                                            Inspect
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         ))}
-
-                     </div>
-                     {(flashcards && flashcards.length) ? <PaginationNav setPage={setFlashcardPage} hasPreviousPage={hasPreviousPage}
-                         hasNextPage={hasNextPage} totalPages={totalPages}/> : <div id="emptyResultsContainer">The search results are empty</div>}
+                    </div>
+                    {(flashcards && flashcards.length) ? <PaginationNav setPage={setFlashcardPage} hasPreviousPage={hasPreviousPage}
+                        hasNextPage={hasNextPage} totalPages={totalPages} /> : <div id="emptyResultsContainer">The search results are empty</div>}
                     <button className="btn btn-primary mx-5 mt-2 mb-5" onClick={() => handleCreateFlashcardButton(deck)}>
                         Create a Flashcard
                     </button>
