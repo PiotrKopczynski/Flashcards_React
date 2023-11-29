@@ -75,9 +75,6 @@ const UpdateDeck = () => {
             </form>
             <button className="btn btn-primary mt-4 m-2" type="button" onClick={handleSubmit}>Save</button>
             <button className="btn btn-secondary mt-4 m-2" type="button" onClick={handleCancel}>Cancel</button>
-            {/*<p>Deck ID: {deck.deckId}</p>*/}
-            <p className="fs-5 mx-3 pt-4">Title: {deck.title}</p>
-            <p className="fs-5 mx-3 pt-4">Description: {deck.description}</p>
         </section>
     );
 };
