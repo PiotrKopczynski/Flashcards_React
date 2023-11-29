@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import api from '../api/axios';
 import AuthContext from '../context/AuthProvider';
 import PaginationNav from './PaginationNav';
-import './StyleFile.css'; 
+import './BrowseFlashcards.css'; 
 import TextToSpeechSettings from './TextToSpeechSettings';
 import TextToSpeech from './TextToSpeech';
 
@@ -92,16 +92,16 @@ const BrowseFlashcards = () => {
 
     return (
         <div>
-            <h1>Flashcards</h1>
+            <h1 className="fs-2">Flashcards</h1>
             {loading ? (
                 <p>Loading...</p>
             ) : (
                 <>
                 <TextToSpeechSettings onUpdateSettings={handleTextToSpeechSettingsUpdate} utterance={utterance} />
-                    <div className="row row-cols-1 row-cols-md-2 g-4">
+                        <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
                         {flashcards.map((flashcard) => (
                             <div key={flashcard.flashcardId} className="col">
-                                <div className="card text-center" style={{ width: '18rem' }}>
+                                <div className="card text-center">
                                     <div className="card-body">
                                         <p className="card-text">Question: {flashcard.question}</p>
                                         {showContent && (
