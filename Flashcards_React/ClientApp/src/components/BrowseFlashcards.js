@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import api from '../api/axios';
@@ -19,6 +20,7 @@ const BrowseFlashcards = () => {
     const navigate = useNavigate();
     const { auth, setAuth } = useContext(AuthContext);
     const [showContent, setShowContent] = useState(false);
+
     const [utterance, setUtterance] = useState(null);
 
     useEffect(() => {
@@ -112,7 +114,7 @@ const BrowseFlashcards = () => {
                                                         text={flashcard.answer}
                                                         isLanguageFlashcard={flashcard.isLanguageFlashcard}
                                                         settings={textToSpeechSettings}
-                                                        utterance={utterance}
+                                                       
                                                     />
                                                 )}
                                                 <p className="card-text">Notes: {flashcard.notes}</p>
