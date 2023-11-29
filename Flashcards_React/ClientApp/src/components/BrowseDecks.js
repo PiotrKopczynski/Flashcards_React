@@ -77,7 +77,7 @@ const BrowseDecks = () => {
             ) : (
                 <>
                     <DeckSearchBar setSearchString={setSearchString} />
-                        <div className="row row-cols-1 row-cols-md-3 row-cols-lg-3 g-4">
+                        <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
                         {decks.map(deck => (
                             <div key={deck.deckId} className="col">
                                 <div className="deck text-center">

@@ -9,7 +9,7 @@
     --s: .45em; /* size of the corner */
     --color: #192040;
     margin: 30px auto;
-    width: 20rem;
+    width: 18rem;
     height: 300px;
     border-radius: calc(var(--s) * 2);
     transition: .3s linear, background-color 0s;
@@ -194,8 +194,8 @@ nav {
 @media (min-width: 769px) and (max-width: 1199px) {
 
     .deck {
-        width: 18rem;
-        height: 340px;
+        width: 15rem;
+        height: 310px;
         box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.25), -5px -5px 30px 7px rgba(0, 0, 0, 0.22);
         padding: 0.1rem;
     }
