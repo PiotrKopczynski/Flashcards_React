@@ -1,5 +1,3 @@
 ﻿input[type='range'] {
-    overflow: hidden;
-    -webkit-appearance: none;
-    color: #9a905d;
+    accent-color: #F55050;
 }
