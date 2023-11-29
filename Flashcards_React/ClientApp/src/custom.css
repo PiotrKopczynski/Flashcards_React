@@ -193,8 +193,8 @@ h1 {
 
 /* ********** Targetting Medium Devices ********** */
 
-@media (min-width: 768px) {
-
+@media (min-width: 577px) and (max-width: 768px) {
+    
     html {
         font-size: 13px;
     }
@@ -202,7 +202,10 @@ h1 {
     .section-intro {
         padding: 60px 5vw;
     }
+
 }
+
+
 
 /* ********** Targetting Large Devices ********** */
 

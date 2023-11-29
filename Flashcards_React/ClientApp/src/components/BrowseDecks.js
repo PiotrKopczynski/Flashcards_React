@@ -100,7 +100,7 @@ const BrowseDecks = () => {
                     </div>
                         <div className="buttons-container">
                             <div className="create-deck-section">
-                                <button className="btn btn-outline-primary" onClick={() => handleCreateDeckButton()}>
+                                <button className="btn btn-outline-primary mt-3" onClick={() => handleCreateDeckButton()}>
                                     Create New Deck
                                 </button>
                             </div>

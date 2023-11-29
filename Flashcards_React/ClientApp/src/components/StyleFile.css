@@ -185,6 +185,16 @@ nav {
         box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.25), -5px -5px 30px 7px rgba(0, 0, 0, 0.22);
         padding: 0.1rem;
     }
+
+    .buttons-container {
+        height: 60%;
+    }
+
+    .create-deck-section {
+        min-height: 80px;
+        width: 100%;
+    }
+
  
 }
 
@@ -195,7 +205,7 @@ nav {
 
     .deck {
         width: 15rem;
-        height: 310px;
+        height: 300px;
         box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.25), -5px -5px 30px 7px rgba(0, 0, 0, 0.22);
         padding: 0.1rem;
     }
