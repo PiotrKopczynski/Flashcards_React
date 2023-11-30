@@ -1,12 +1,12 @@
-
 import React, { useEffect, useState, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import api from '../api/axios';
-import AuthContext from '../context/AuthProvider';
-import PaginationNav from './PaginationNav';
+import api from '../../api/axios';
+import AuthContext from '../../context/AuthProvider';
+import PaginationNav from '../PaginationNav';
 import './BrowseFlashcards.css';
-import TextToSpeechSettings from './TextToSpeechSettings';
-import TextToSpeech from './TextToSpeech';
+import TextToSpeechSettings from '../tts/TextToSpeechSettings';
+import TextToSpeech from '../tts/TextToSpeech';
+import MissingCat from './MissingCat';
 
 const BrowseFlashcards = () => {
     const location = useLocation();
@@ -18,7 +18,7 @@ const BrowseFlashcards = () => {
     const [hasNextPage, setHasNextPage] = useState();
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
-    const { auth, setAuth } = useContext(AuthContext);
+    const { auth, logout } = useContext(AuthContext);
     //const [showContent, setShowContent] = useState(false);
     const [showContentArray, setShowContentArray] = useState([]);
 
@@ -52,10 +52,7 @@ const BrowseFlashcards = () => {
             console.error("Error fetching flashcards:", e);
             if (e.isTokenRefreshError) { // The refresh of the JWT token failed or the tokens were invalid.
                 // Navigate users with an invalid token pair out of the authenticated content
-                setAuth({ isLoggedIn: false })
-                localStorage.removeItem('token');
-                localStorage.removeItem('refreshToken');
-                navigate('/login');
+                logout();
             }
             setLoading(false);
         }
@@ -63,9 +60,7 @@ const BrowseFlashcards = () => {
 
     useEffect(() => {
         if (!auth.isLoggedIn) {
-            localStorage.removeItem('token');
-            localStorage.removeItem('refreshToken');
-            navigate('/login');
+            logout();
         }
         getFlashcards(flashcardPage);
     }, [flashcardPage]);
@@ -105,17 +100,20 @@ const BrowseFlashcards = () => {
 
     return (
         <div>
-            <h1 className="fs-2">Flashcards</h1>
+            <h1 className="fs-2 text-center">Flashcards</h1>
             {loading ? (
                 <p>Loading...</p>
             ) : (
                     <>
                         {(flashcards && flashcards.length) ? <TextToSpeechSettings onUpdateSettings={handleTextToSpeechSettingsUpdate} utterance={utterance} /> :
-                            <div></div>}                       
-                        <div className="row row-cols-1 row-cols-md-2 g-4">
+                            <div id="emptyResultsContainer">
+                                <h1 className="text-center fs-4 mt-5">It looks like this deck is empty. Go ahead and create some cards :)</h1>
+                                <MissingCat />
+                            </div>}                       
+                        <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
                             {flashcards.map((flashcard, index) => (
                                 <div key={flashcard.flashcardId} className="col">
-                                    <div className="card text-center" style={{ width: '18rem' }}>
+                                    <div className="card text-center">
                                         <div className="card-body">
                                             <p className="card-text">Question: {flashcard.question}</p>
                                             {showContentArray[index] && (
@@ -156,7 +154,7 @@ const BrowseFlashcards = () => {
                             </div>
                             <div className="controller-pagination">
                                 {(flashcards && flashcards.length) ? <PaginationNav setPage={setFlashcardPage} hasPreviousPage={hasPreviousPage}
-                                    hasNextPage={hasNextPage} totalPages={totalPages} /> : <div id="emptyResultsContainer">The deck is empty</div>}
+                                    hasNextPage={hasNextPage} totalPages={totalPages} />:<div></div>}
                             </div>
                         </div>    
                 </>

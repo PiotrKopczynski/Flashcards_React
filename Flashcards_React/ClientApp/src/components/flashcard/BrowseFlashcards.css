@@ -14,7 +14,7 @@
     --s: .45em;
     --color: #192040;
     margin: 30px auto;
-    width: 18rem;
+    width: 20rem;
     height: 300px;
     border-radius: calc(var(--s) * 2);
     transition: .3s linear, background-color 0s;
@@ -113,3 +113,50 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     font-size: 16px;
 }*/
+
+
+/* ********** Targetting Medium Devices ********** */
+
+@media (min-width: 577px) and (max-width: 768px) {
+
+    .card {
+        width: 20rem;
+        height: 320px;
+        box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.25), -5px -5px 30px 7px rgba(0, 0, 0, 0.22);
+        padding: 0.1rem;
+    }
+
+    .buttons-container {
+        height: 60%;
+    }
+
+    .create-flashcard-section {
+        min-height: 80px;
+        width: 100%;
+    }
+}
+
+
+/* ********** Targetting Large Devices ********** */
+
+@media (min-width: 769px) and (max-width: 1199px) {
+
+    .card {
+        width: 22rem;
+        height: 340px;
+        box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.25), -5px -5px 30px 7px rgba(0, 0, 0, 0.22);
+        padding: 0.1rem;
+    }
+}
+
+/* ********** Targetting Extra Large Devices ********** */
+
+@media (min-width: 1200px) {
+
+    .card {
+        width: 22rem;
+        height: 380px;
+        box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.25), -5px -5px 30px 7px rgba(0, 0, 0, 0.22);
+        padding: 0.1rem;
+    }
+}

@@ -1,10 +1,10 @@
 ﻿import { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import api from '../api/axios';
-import AuthContext from '../context/AuthProvider';
-import PaginationNav from './PaginationNav';
+import api from '../../api/axios';
+import AuthContext from '../../context/AuthProvider';
+import PaginationNav from '../PaginationNav';
 import DeckSearchBar from './DeckSearchBar';
-import './StyleFile.css'; 
+import '../StyleFile.css'; 
 
 const BrowseDecks = () => {
     const [decks, setDecks] = useState();
@@ -14,8 +14,8 @@ const BrowseDecks = () => {
     const [hasNextPage, setHasNextPage] = useState();
     const [searchString, setSearchString] = useState("");
     const [loading, setLoading] = useState(true);
+    const { auth, logout } = useContext(AuthContext);
     const navigate = useNavigate();
-    const { auth, setAuth } = useContext(AuthContext);
 
     // Fetch decks from the server
     const getDecks = async (deckPage, searchString) => {
@@ -35,10 +35,7 @@ const BrowseDecks = () => {
             console.error("Error fetching decks:", e);
             if (e.isTokenRefreshError) { // The refresh of the JWT token failed or the tokens were invalid.
                 // Navigate users with a invalid token pair out of the authenticated content
-                setAuth({ isLoggedIn: false })
-                localStorage.removeItem('token');
-                localStorage.removeItem('refreshToken');
-                navigate('/login');
+                logout();
             }
             setLoading(false);
         }
@@ -46,9 +43,7 @@ const BrowseDecks = () => {
 
     useEffect(() => {
         if (!auth.isLoggedIn) {
-            localStorage.removeItem('token');
-            localStorage.removeItem('refreshToken');
-            navigate('/login');
+            logout()
         }        
         getDecks(deckPage, searchString);
     }, [deckPage, searchString]);

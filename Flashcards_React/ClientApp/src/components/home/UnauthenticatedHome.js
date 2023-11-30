@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import CatAnimation from './CatAnimation';
+import CatAnimation from '../animations/CatAnimation';
 import './UnauthenticatedHome.css';
 
 export class UnauthenticatedHome extends Component {

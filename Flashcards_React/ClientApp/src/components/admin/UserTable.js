@@ -7,7 +7,7 @@ import './adminStyles.css';
 
 const FlashcardsUsersTable = () => {
     const [users, setUsers] = useState();
-    const { auth, setAuth } = useContext(AuthContext);
+    const { auth, logout } = useContext(AuthContext);
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
 
@@ -19,7 +19,7 @@ const FlashcardsUsersTable = () => {
             const response = await api.get(`api/Admin/GetUsers`);
 
             if (response.status === 403) { // Unauthorized
-                navigate('/unauthorized')
+                navigate('/unauthorized') // Do not logout the user but instead navigate to the Unauthorized component
             }
             if (response.status === 200) {
                 setUsers(response.data);
@@ -30,10 +30,7 @@ const FlashcardsUsersTable = () => {
             console.error("Error fetching decks:", e);
             if (e.isTokenRefreshError) { // The refresh of the JWT token failed or the tokens were invalid.
                 // Navigate users with a invalid token pair out of the authenticated content
-                setAuth({ isLoggedIn: false })
-                localStorage.removeItem('token');
-                localStorage.removeItem('refreshToken');
-                navigate('/login');
+                logout();
             }
             setLoading(false);
         }
@@ -41,19 +38,17 @@ const FlashcardsUsersTable = () => {
 
     useEffect(() => {
         if (!auth.isLoggedIn) {
-            localStorage.removeItem('token');
-            localStorage.removeItem('refreshToken');
-            navigate('/login');
+            logout();
         }
         getUsers();
     }, []);
 
     return (
-        <>
-            <h1 className="fs-3 text-center mb-5">Table of Flashcards Users</h1><div className="admin-page">
+        <div className="admin-page">
+            <h1 className="fs-3 text-center mb-5">Table of Flashcards Users</h1>
             {loading ? (<p> Loading...</p>) : (
                     <>
-                    <div className="section-intro">
+                    
                             <table className='table table-striped'>
                                 <thead>
                                     <tr>
@@ -104,10 +99,10 @@ const FlashcardsUsersTable = () => {
                                     ))}
                                 </tbody>
                             </table>
-                    </div>
+                    
                 </>
             )}
-        </div></>
+        </div>
     );
 };
 

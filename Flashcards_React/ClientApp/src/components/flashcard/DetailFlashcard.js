@@ -1,14 +1,12 @@
-﻿import React, { useState, useContext, useEffect } from 'react';
+﻿import React, { useContext, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import api from '../api/axios';
-import AuthContext from '../context/AuthProvider';
+import AuthContext from '../../context/AuthProvider';
 
 const DetailFlashcard = () => {
     const location = useLocation();
     const { flashcard, deck } = location.state;
-    const [showContent, setShowContent] = useState(false);
     const navigate = useNavigate();
-    const { auth, setAuth} = useContext(AuthContext);
+    const { auth, logout} = useContext(AuthContext);
 
 
     const handleDeleteFlashcardButton = (flashcard, deck) => {
@@ -25,9 +23,7 @@ const DetailFlashcard = () => {
 
     useEffect(() => {
         if (!auth.isLoggedIn) {
-            localStorage.removeItem('token');
-            localStorage.removeItem('refreshToken');
-            navigate('/login');
+            logout();
         }
     }, [auth, navigate]);
 

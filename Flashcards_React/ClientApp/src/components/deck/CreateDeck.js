@@ -1,15 +1,13 @@
 ﻿import React, { useState, useContext, useRef } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import api from '../api/axios';
-import AuthContext from '../context/AuthProvider';
+import { useNavigate } from 'react-router-dom';
+import api from '../../api/axios';
+import AuthContext from '../../context/AuthProvider';
 import './CreateDeck.css'; 
 
 
 const CreateDeck = () => {
-    const location = useLocation();
-    //const { deck } = location.state;
     const navigate = useNavigate();
-    const { auth, setAuth } = useContext(AuthContext);
+    const { auth, logout} = useContext(AuthContext);
 
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -26,9 +24,7 @@ const CreateDeck = () => {
 
         if (!auth.isLoggedIn) {
             // Navigate unauthenticated users out of the authenticated content
-            localStorage.removeItem('token');
-            localStorage.removeItem('refreshToken');
-            navigate('/login');
+            logout();
         }
 
         try {
@@ -45,10 +41,7 @@ const CreateDeck = () => {
             console.log("This is from the CreateDeck catch block:", e);
             if (e.isTokenRefreshError) {
                 // Navigate users with a invalid token pair out of the authenticated content
-                setAuth({ isLoggedIn: false });
-                localStorage.removeItem('token');
-                localStorage.removeItem('refreshToken');
-                navigate('/login');
+                logout();
             }
         }
     };

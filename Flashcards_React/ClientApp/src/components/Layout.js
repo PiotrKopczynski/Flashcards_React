@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from 'reactstrap';
 import NavMenu from './NavMenu';
-import WaveAnimation from './WaveAnimation';
+import WaveAnimation from './animations/WaveAnimation';
 import Footer from './Footer';
 
 const Layout = ({ children }) => (

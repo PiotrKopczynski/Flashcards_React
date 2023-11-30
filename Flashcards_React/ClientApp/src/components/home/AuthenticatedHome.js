@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import SleepyCatAnimation from './SleepyCatAnimation';
-import BulbAnimation from './BulbAnimation';
+import SleepyCatAnimation from '../animations/SleepyCatAnimation';
+import BulbAnimation from '../animations/BulbAnimation';
 import './AuthenticatedHome.css';
 
   

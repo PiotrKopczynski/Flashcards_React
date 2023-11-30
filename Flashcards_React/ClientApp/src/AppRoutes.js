@@ -1,17 +1,17 @@
-import Home from "./components/Home";
+import Home from "./components/home/Home";
 import Login from "./components/authentication/Login";
 import Register from "./components/authentication/Register";
-import BrowseDecks from "./components/BrowseDecks";
-import UpdateDeck from "./components/UpdateDeck";
-import CreateDeck from "./components/CreateDeck";
-import DeleteDeck from "./components/DeleteDeck";
-import BrowseFlashcards from "./components/BrowseFlashcards";
-import CreateFlashcard from "./components/CreateFlashcard";
+import BrowseDecks from "./components/deck/BrowseDecks";
+import UpdateDeck from "./components/deck/UpdateDeck";
+import CreateDeck from "./components/deck/CreateDeck";
+import DeleteDeck from "./components/deck/DeleteDeck";
+import BrowseFlashcards from "./components/flashcard/BrowseFlashcards";
+import CreateFlashcard from "./components/flashcard/CreateFlashcard";
 import UserTable from "./components/admin/UserTable";
 import Unauthorized from "./components/admin/Unauthorized";
-import UpdateFlashcard from "./components/UpdateFlashcard";
-import DeleteFlashcard from "./components/DeleteFlashcard";
-import DetailFlashcard from "./components/DetailFlashcard";
+import UpdateFlashcard from "./components/flashcard/UpdateFlashcard";
+import DeleteFlashcard from "./components/flashcard/DeleteFlashcard";
+import DetailFlashcard from "./components/flashcard/DetailFlashcard";
 import Privacy from "./components/Privacy";
 
 
