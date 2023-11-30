@@ -1,4 +1,4 @@
-## CFlashcards
+## Flashcards_React
 
 ### Utilized Tools:
 
@@ -39,10 +39,6 @@ npm install axios
 
 1. **Choosing Flashcard Category**: Upon launching the web page, users can select between language and non-language flashcards.
 
-2. **Language Flashcards**: If you choose language flashcards, the text-to-speech feature allows you to hear pronunciations in the selected language. Simply click on the sound sign to have the text read aloud.
+2. **Language Flashcards**: If you choose language flashcards, the text-to-speech feature allows you to hear pronunciations in the selected language. Simply click on the sound sign to have the text read aloud. Adjust speed, volume and pitch according to your preferences. 
 
 3. **Non-Language Flashcards**: For non-language flashcards, you can interact with the content and test your knowledge.
-# Flashcards_React
-
-To use button icons in BrowseDeck: 
-npm install --save @fortawesome/fontawesome-free
