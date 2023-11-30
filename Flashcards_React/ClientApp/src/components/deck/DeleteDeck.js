@@ -1,22 +1,19 @@
 ﻿import React, { useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import api from '../api/axios';
-import AuthContext from '../context/AuthProvider';
+import api from '../../api/axios';
+import AuthContext from '../../context/AuthProvider';
 
 const DeleteDeck = () => {
     const location = useLocation();
     const { deck } = location.state;
     const navigate = useNavigate();
-    const { auth, setAuth } = useContext(AuthContext);
+    const { auth, logout } = useContext(AuthContext);
 
     const handleDelete = async () => {
         if (!auth.isLoggedIn) {
             // Navigate unauthenticated users out of the authenticated content
-            localStorage.removeItem('token');
-            localStorage.removeItem('refreshToken');
-            navigate('/login');
+            logout();
         }
-
         try {
             const response = await api.delete(`api/Deck/DeleteDeck?id=${deck.deckId}`);
             if (response.status === 200) {
@@ -27,10 +24,7 @@ const DeleteDeck = () => {
             console.log("Error in DeleteDeck:", e);
             if (e.isTokenRefreshError) {
                 // Navigate users with a invalid token pair out of the authenticated content
-                setAuth({ isLoggedIn: false });
-                localStorage.removeItem('token');
-                localStorage.removeItem('refreshToken');
-                navigate('/login');
+                logout();
             }
         }
     };

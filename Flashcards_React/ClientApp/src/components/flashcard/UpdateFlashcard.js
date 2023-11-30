@@ -1,13 +1,13 @@
 ﻿import React, { useState, useEffect, useContext, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import api from '../api/axios';
-import AuthContext from '../context/AuthProvider';
+import api from '../../api/axios';
+import AuthContext from '../../context/AuthProvider';
 import './UpdateFlashcard.css';
 
 const UpdateFlashcard = () => {
     const location = useLocation();
     const { flashcard, deck } = location.state || {};
-    const { auth, setAuth } = useContext(AuthContext);
+    const { auth, logout } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const [flashcardId, setFlashcardId] = useState(flashcard.flashcardId);
@@ -44,10 +44,7 @@ const UpdateFlashcard = () => {
             console.error('Error updating flashcard:', e);
             if (e.isTokenRefreshError) {
                 // Handle token refresh error
-                setAuth({ isLoggedIn: false });
-                localStorage.removeItem('token');
-                localStorage.removeItem('refreshToken');
-                navigate('/login');
+                logout();
             }
         } finally {
             setLoading(false);
@@ -60,9 +57,7 @@ const UpdateFlashcard = () => {
 
     useEffect(() => {
         if (!auth.isLoggedIn) {
-            localStorage.removeItem('token');
-            localStorage.removeItem('refreshToken');
-            navigate('/login');
+            logout();
         }
     }, [auth, navigate]);
 

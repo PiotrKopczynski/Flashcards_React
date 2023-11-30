@@ -1,14 +1,14 @@
 import React, { useState, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import api from '../api/axios';
-import AuthContext from '../context/AuthProvider';
+import api from '../../api/axios';
+import AuthContext from '../../context/AuthProvider';
 import './UpdateDeck.css';
 
 const UpdateDeck = () => {
     const location = useLocation();
     const { deck } = location.state;
     const navigate = useNavigate();
-    const { auth, setAuth } = useContext(AuthContext);
+    const { auth, logout } = useContext(AuthContext);
 
     const [title, setTitle] = useState(deck.title);
     const [description, setDescription] = useState(deck.description);
@@ -16,9 +16,7 @@ const UpdateDeck = () => {
     const handleSubmit = async () => {
         if (!auth.isLoggedIn) {
             // Navigate unauthenticated users out of the authenticated content
-            localStorage.removeItem('token');
-            localStorage.removeItem('refreshToken');
-            navigate('/login');
+            logout();
         }
         try {
             const response = await api.patch(`api/Deck/UpdateDeck`, { "DeckId": deck.deckId, "Title": title, "Description": description });
@@ -30,10 +28,7 @@ const UpdateDeck = () => {
         catch (e) {
             console.log("This is from the BrowseDecks catch block:", e);
             if (e.isTokenRefreshError) { // The refresh of the JWT token failed or the tokens were invalid.
-                setAuth({ isLoggedIn: false })
-                localStorage.removeItem('token');
-                localStorage.removeItem('refreshToken');
-                navigate('/login');
+                logout();
             }
         }
     };

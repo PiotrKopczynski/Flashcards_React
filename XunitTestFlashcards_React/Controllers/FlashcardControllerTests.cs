@@ -72,7 +72,8 @@ namespace XunitTestFlashcards_React.Controllers
             var testDeckId = 1;
             // Create and setup a deck repository for testing.
             var mockDeckRepository = new Mock<IDeckRepository>();
-            mockDeckRepository.Setup(repo => repo.GetDeckById(testDeckId)).ReturnsAsync(deck1); // Setup the deck repository such that deck1 is returned given the testDeckId.
+            // Setup the deck repository such that deck1 is returned given the testDeckId.
+            mockDeckRepository.Setup(repo => repo.GetDeckById(testDeckId)).ReturnsAsync(deck1); 
             // Create a mock logger
             var mockLogger = new Mock<ILogger<FlashcardController>>();
             return new FlashcardController(mockFlashcardRepository.Object, mockDeckRepository.Object, mockLogger.Object);
