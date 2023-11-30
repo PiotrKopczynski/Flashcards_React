@@ -44,11 +44,11 @@ const FlashcardsUsersTable = () => {
     }, []);
 
     return (
-        <>
-            <h1 className="fs-3 text-center mb-5">Table of Flashcards Users</h1><div className="admin-page">
+        <div className="admin-page">
+            <h1 className="fs-3 text-center mb-5">Table of Flashcards Users</h1>
             {loading ? (<p> Loading...</p>) : (
                     <>
-                    <div className="section-intro">
+                    
                             <table className='table table-striped'>
                                 <thead>
                                     <tr>
@@ -99,10 +99,10 @@ const FlashcardsUsersTable = () => {
                                     ))}
                                 </tbody>
                             </table>
-                    </div>
+                    
                 </>
             )}
-        </div></>
+        </div>
     );
 };
 

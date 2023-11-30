@@ -1,12 +1,15 @@
 ﻿.admin-page {
     overflow-x: auto;
-    margin-left: 2%;
-    margin-right: 2%;
-    width: 30vw;
+    margin-left: auto;
+    margin-right: auto;
+    width: 120%;
 }
 
     .admin-page .table {
         font-size: 12px;
+        margin-left: auto;
+        margin-right: auto;
+        width: auto;
     }
 
     .admin-page .table-striped > tbody {
