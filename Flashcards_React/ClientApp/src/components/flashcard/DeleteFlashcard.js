@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import api from '../api/axios';
-import AuthContext from '../context/AuthProvider';
+import api from '../../api/axios';
+import AuthContext from '../../context/AuthProvider';
 
 const DeleteFlashcard = () => {
     const location = useLocation();
     const { flashcard, deck } = location.state || {};
-    const { auth, setAuth } = useContext(AuthContext);
+    const { auth, logout } = useContext(AuthContext);
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
 
@@ -22,10 +22,7 @@ const DeleteFlashcard = () => {
             console.error('Error deleting flashcard:', e);
             if (e.isTokenRefreshError) {
                 // Handle token refresh error
-                setAuth({ isLoggedIn: false });
-                localStorage.removeItem('token');
-                localStorage.removeItem('refreshToken');
-                navigate('/login');
+                logout();
             }
         } finally {
             setLoading(false);
@@ -38,9 +35,7 @@ const DeleteFlashcard = () => {
 
     useEffect(() => {
         if (!auth.isLoggedIn) {
-            localStorage.removeItem('token');
-            localStorage.removeItem('refreshToken');
-            navigate('/login');
+            logout();
         }
     }, [auth, navigate]);
 

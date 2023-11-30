@@ -1,14 +1,14 @@
 ﻿import React, { useState, useContext, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import api from '../api/axios';
-import AuthContext from '../context/AuthProvider';
+import api from '../../api/axios';
+import AuthContext from '../../context/AuthProvider';
 import './CreateFlashcard.css';
 
 const CreateFlashcard = () => {
     const location = useLocation();
     const { deck } = location.state;
     const navigate = useNavigate();
-    const { auth, setAuth } = useContext(AuthContext);
+    const { auth, logout } = useContext(AuthContext);
 
     const [question, setQuestion] = useState('');
     const [answer, setAnswer] = useState('');
@@ -26,9 +26,7 @@ const CreateFlashcard = () => {
     const handleCreate = async () => {
         if (!auth.isLoggedIn) {
             // Navigate unauthenticated out of the authenticated content
-            localStorage.removeItem('token');
-            localStorage.removeItem('refreshToken');
-            navigate('/login');
+            logout();
         }
 
         try {
@@ -48,10 +46,7 @@ const CreateFlashcard = () => {
             console.log("This is from the CreateFlashcard catch block:", e);
             if (e.isTokenRefreshError) {
                 // Navigate users with a invalid token pair out of the authenticated content
-                setAuth({ isLoggedIn: false });
-                localStorage.removeItem('token');
-                localStorage.removeItem('refreshToken');
-                navigate('/login');
+                logout();
             }
         }
     };
